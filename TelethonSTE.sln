@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34024.191
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelethonSTE", "TelethonSTE\TelethonSTE.csproj", "{ACE0852A-B601-4045-BEAE-F6C3236036F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestionnaireSTE", "GestionnaireSTE\GestionnaireSTE.csproj", "{64FC5B6B-F427-46EC-AA99-AB4A26B7E395}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ACE0852A-B601-4045-BEAE-F6C3236036F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACE0852A-B601-4045-BEAE-F6C3236036F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACE0852A-B601-4045-BEAE-F6C3236036F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACE0852A-B601-4045-BEAE-F6C3236036F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64FC5B6B-F427-46EC-AA99-AB4A26B7E395}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64FC5B6B-F427-46EC-AA99-AB4A26B7E395}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64FC5B6B-F427-46EC-AA99-AB4A26B7E395}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64FC5B6B-F427-46EC-AA99-AB4A26B7E395}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A8C83178-A617-4B8F-8FFF-4965CC212742}
+	EndGlobalSection
+EndGlobal
