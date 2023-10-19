@@ -45,9 +45,11 @@ namespace TelethonSTE
         string surnom;
 
         public Gestionnaire gestionnaire = new Gestionnaire();
+        public Personne personne = new Personne("Emilie", "Echevin");
         public SystemeTelethonSTE()
         {
             InitializeComponent();
+            txtID.Text = personne.Surnom;
         }
 
         private void btnAffPrix_Click(object sender, EventArgs e)
