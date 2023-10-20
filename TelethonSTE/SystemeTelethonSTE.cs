@@ -50,7 +50,7 @@ namespace TelethonSTE
         public SystemeTelethonSTE()
         {
             InitializeComponent();
-            txtID.Text = personne.Surnom;
+            txtBoxMain.Text = personne.ToString();
         }
         // a regarder
         private void btnAffPrix_Click(object sender, EventArgs e)

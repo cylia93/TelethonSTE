@@ -9,6 +9,7 @@ namespace GestionnaireSTE
     public class Commanditaire : Personne
     {
         private string IDCommanditaire;
+
         public Commanditaire(string prenom, string surnom, string iDCommanditaire) : base(prenom, surnom)
         {
             IDCommanditaire = iDCommanditaire;
@@ -17,6 +18,7 @@ namespace GestionnaireSTE
         public string IDComm
         {
             get { return this.IDCommanditaire; }
+            set { this.IDCommanditaire = value; }
         }
 
         public override string ToString()
