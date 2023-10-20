@@ -9,14 +9,12 @@ namespace GestionnaireSTE
    
         public class Donateur : Personne
         {
-        String idDonateur;
-        String adresse;
-        String telephone;
-        char typeDeCarte;
-        String numeroCarte;
-        String dateExpiration; 
-        
-
+        private String idDonateur;
+        private String adresse;
+        private String telephone;
+        private char typeDeCarte;
+        private String numeroCarte;
+        private String dateExpiration; 
 
         public Donateur (String prenom, String surnom , String idDonateur , String adresse , String telephone ,
             char typeDeCarte , String numeroCarte ,String dateExpiration) : base(prenom , surnom)
@@ -33,8 +31,6 @@ namespace GestionnaireSTE
             get { return idDonateur; }
             set { this.idDonateur = value; }
         }
-
-        public string IDD { get; internal set; }
 
         public override string ToString()
         {

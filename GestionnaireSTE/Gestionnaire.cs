@@ -17,7 +17,7 @@ namespace GestionnaireSTE
         {
             for (int i = 0; i < donateurs.Count; i++)
             {
-                if (idDonateur == donateurs[i].IDD)
+                if (idDonateur == donateurs[i].ID)
                 {
                     throw new Exception("Un donateur avec cet ID existe deja");
                 }
@@ -163,7 +163,7 @@ namespace GestionnaireSTE
         public Donateur GetDonateur(string id)
         {
             for (int i = 0; i < donateurs.Count; i++)
-                if (id == donateurs[i].IDD)
+                if (id == donateurs[i].ID)
                     return donateurs[i];
             throw new Exception("ID du donateur inexistant.");
 

@@ -46,17 +46,18 @@ namespace TelethonSTE
         
 
         public Gestionnaire gestionnaire = new Gestionnaire();
-        public Personne personne = new Commanditaire("Emilie", "Echevin","EE45");
+        public Personne personne = new Donateur("Emilie", "Echevin","EE45","dsfds","4545455", 'A', "741258963","Mai 2026");
         public SystemeTelethonSTE()
         {
             string txt="";
             InitializeComponent();
             txt += personne.ToString();
 
-            txt += "ID comm: " + ((Commanditaire)personne).IDComm;
+            //txt += "ID comm: " + ((Commanditaire)personne).IDComm;
 
             txtBoxMain.Text = txt;
         }
+
         // a regarder
         private void btnAffPrix_Click(object sender, EventArgs e)
         {
