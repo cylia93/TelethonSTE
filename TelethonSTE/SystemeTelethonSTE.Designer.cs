@@ -46,7 +46,7 @@
             this.txtNumeroCarte = new System.Windows.Forms.TextBox();
             this.lblDateExpiration = new System.Windows.Forms.Label();
             this.lblNumero = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.gbTypeCarte = new System.Windows.Forms.GroupBox();
             this.rbtnAMEX = new System.Windows.Forms.RadioButton();
             this.rbtnMC = new System.Windows.Forms.RadioButton();
             this.rbtnVisa = new System.Windows.Forms.RadioButton();
@@ -58,8 +58,8 @@
             this.txtTelephone = new System.Windows.Forms.TextBox();
             this.txtAdresse = new System.Windows.Forms.TextBox();
             this.txtNom = new System.Windows.Forms.TextBox();
-            this.txtPrenom = new System.Windows.Forms.TextBox();
-            this.txtID = new System.Windows.Forms.TextBox();
+            this.txtPrenomDonateur = new System.Windows.Forms.TextBox();
+            this.txtIDDonateur = new System.Windows.Forms.TextBox();
             this.lblTelephone = new System.Windows.Forms.Label();
             this.lblAdresse = new System.Windows.Forms.Label();
             this.lblNom = new System.Windows.Forms.Label();
@@ -89,14 +89,14 @@
             this.lblIDCommanditaire = new System.Windows.Forms.Label();
             this.lblInfoCommanditaire = new System.Windows.Forms.Label();
             this.btnQuiter = new System.Windows.Forms.Button();
-            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.txtBoxMain = new System.Windows.Forms.TextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.tbDonateur.SuspendLayout();
             this.tabDonateur.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.gbTypeCarte.SuspendLayout();
             this.tabCommanditaire.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -138,8 +138,8 @@
             this.tabDonateur.Controls.Add(this.txtTelephone);
             this.tabDonateur.Controls.Add(this.txtAdresse);
             this.tabDonateur.Controls.Add(this.txtNom);
-            this.tabDonateur.Controls.Add(this.txtPrenom);
-            this.tabDonateur.Controls.Add(this.txtID);
+            this.tabDonateur.Controls.Add(this.txtPrenomDonateur);
+            this.tabDonateur.Controls.Add(this.txtIDDonateur);
             this.tabDonateur.Controls.Add(this.lblTelephone);
             this.tabDonateur.Controls.Add(this.lblAdresse);
             this.tabDonateur.Controls.Add(this.lblNom);
@@ -253,7 +253,7 @@
             this.groupBox1.Controls.Add(this.txtNumeroCarte);
             this.groupBox1.Controls.Add(this.lblDateExpiration);
             this.groupBox1.Controls.Add(this.lblNumero);
-            this.groupBox1.Controls.Add(this.groupBox2);
+            this.groupBox1.Controls.Add(this.gbTypeCarte);
             this.groupBox1.Location = new System.Drawing.Point(294, 30);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(389, 199);
@@ -293,17 +293,17 @@
             this.lblNumero.TabIndex = 1;
             this.lblNumero.Text = "Numéro:";
             // 
-            // groupBox2
+            // gbTypeCarte
             // 
-            this.groupBox2.Controls.Add(this.rbtnAMEX);
-            this.groupBox2.Controls.Add(this.rbtnMC);
-            this.groupBox2.Controls.Add(this.rbtnVisa);
-            this.groupBox2.Location = new System.Drawing.Point(21, 26);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(263, 54);
-            this.groupBox2.TabIndex = 0;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Type de carte";
+            this.gbTypeCarte.Controls.Add(this.rbtnAMEX);
+            this.gbTypeCarte.Controls.Add(this.rbtnMC);
+            this.gbTypeCarte.Controls.Add(this.rbtnVisa);
+            this.gbTypeCarte.Location = new System.Drawing.Point(21, 26);
+            this.gbTypeCarte.Name = "gbTypeCarte";
+            this.gbTypeCarte.Size = new System.Drawing.Size(263, 54);
+            this.gbTypeCarte.TabIndex = 0;
+            this.gbTypeCarte.TabStop = false;
+            this.gbTypeCarte.Text = "Type de carte";
             // 
             // rbtnAMEX
             // 
@@ -401,19 +401,19 @@
             this.txtNom.Size = new System.Drawing.Size(150, 27);
             this.txtNom.TabIndex = 8;
             // 
-            // txtPrenom
+            // txtPrenomDonateur
             // 
-            this.txtPrenom.Location = new System.Drawing.Point(121, 104);
-            this.txtPrenom.Name = "txtPrenom";
-            this.txtPrenom.Size = new System.Drawing.Size(150, 27);
-            this.txtPrenom.TabIndex = 7;
+            this.txtPrenomDonateur.Location = new System.Drawing.Point(121, 104);
+            this.txtPrenomDonateur.Name = "txtPrenomDonateur";
+            this.txtPrenomDonateur.Size = new System.Drawing.Size(150, 27);
+            this.txtPrenomDonateur.TabIndex = 7;
             // 
-            // txtID
+            // txtIDDonateur
             // 
-            this.txtID.Location = new System.Drawing.Point(121, 71);
-            this.txtID.Name = "txtID";
-            this.txtID.Size = new System.Drawing.Size(150, 27);
-            this.txtID.TabIndex = 6;
+            this.txtIDDonateur.Location = new System.Drawing.Point(121, 71);
+            this.txtIDDonateur.Name = "txtIDDonateur";
+            this.txtIDDonateur.Size = new System.Drawing.Size(150, 27);
+            this.txtIDDonateur.TabIndex = 6;
             // 
             // lblTelephone
             // 
@@ -687,13 +687,13 @@
             this.btnQuiter.Text = "Quitter";
             this.btnQuiter.UseVisualStyleBackColor = true;
             // 
-            // textBox7
+            // txtBoxMain
             // 
-            this.textBox7.Location = new System.Drawing.Point(12, 507);
-            this.textBox7.Multiline = true;
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(829, 149);
-            this.textBox7.TabIndex = 23;
+            this.txtBoxMain.Location = new System.Drawing.Point(12, 507);
+            this.txtBoxMain.Multiline = true;
+            this.txtBoxMain.Name = "txtBoxMain";
+            this.txtBoxMain.Size = new System.Drawing.Size(829, 149);
+            this.txtBoxMain.TabIndex = 23;
             // 
             // menuStrip1
             // 
@@ -718,7 +718,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Cornsilk;
             this.ClientSize = new System.Drawing.Size(865, 667);
-            this.Controls.Add(this.textBox7);
+            this.Controls.Add(this.txtBoxMain);
             this.Controls.Add(this.btnQuiter);
             this.Controls.Add(this.tbDonateur);
             this.Controls.Add(this.menuStrip1);
@@ -733,8 +733,8 @@
             this.groupBox3.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.gbTypeCarte.ResumeLayout(false);
+            this.gbTypeCarte.PerformLayout();
             this.tabCommanditaire.ResumeLayout(false);
             this.tabCommanditaire.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
@@ -764,7 +764,7 @@
         private System.Windows.Forms.TextBox txtNumeroCarte;
         private System.Windows.Forms.Label lblDateExpiration;
         private System.Windows.Forms.Label lblNumero;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox gbTypeCarte;
         private System.Windows.Forms.RadioButton rbtnAMEX;
         private System.Windows.Forms.RadioButton rbtnMC;
         private System.Windows.Forms.RadioButton rbtnVisa;
@@ -776,8 +776,8 @@
         private System.Windows.Forms.TextBox txtTelephone;
         private System.Windows.Forms.TextBox txtAdresse;
         private System.Windows.Forms.TextBox txtNom;
-        private System.Windows.Forms.TextBox txtPrenom;
-        private System.Windows.Forms.TextBox txtID;
+        private System.Windows.Forms.TextBox txtPrenomDonateur;
+        private System.Windows.Forms.TextBox txtIDDonateur;
         private System.Windows.Forms.Label lblTelephone;
         private System.Windows.Forms.Label lblAdresse;
         private System.Windows.Forms.Label lblNom;
@@ -807,7 +807,7 @@
         private System.Windows.Forms.Label lblIDCommanditaire;
         private System.Windows.Forms.Label lblInfoCommanditaire;
         private System.Windows.Forms.Button btnQuiter;
-        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.TextBox txtBoxMain;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
     }
