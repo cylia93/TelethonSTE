@@ -132,5 +132,15 @@ namespace TelethonSTE
                 MessageBox.Show(ex.Message, "Erreur lors de l'ajout du donateur");
             }
         }
+
+        private void BtnQuiter(object sender, FormClosedEventArgs e)
+        {
+            DialogResult reponse = MessageBox.Show("Desirez_vous réellement quitter cette application ?",
+                                                      "Attention", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (reponse == DialogResult.Yes)
+            {
+                System.Windows.Forms.Application.Exit();
+            }
+        }
     }
 }

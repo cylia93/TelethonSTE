@@ -432,14 +432,14 @@
             // 
             this.txtPrenomDonateur.Location = new System.Drawing.Point(121, 104);
             this.txtPrenomDonateur.Name = "txtPrenomDonateur";
-            this.txtPrenomDonateur.Size = new System.Drawing.Size(150, 27);
+            this.txtPrenomDonateur.Size = new System.Drawing.Size(150, 31);
             this.txtPrenomDonateur.TabIndex = 7;
             // 
             // txtIDDonateur
             // 
             this.txtIDDonateur.Location = new System.Drawing.Point(121, 71);
             this.txtIDDonateur.Name = "txtIDDonateur";
-            this.txtIDDonateur.Size = new System.Drawing.Size(150, 27);
+            this.txtIDDonateur.Size = new System.Drawing.Size(150, 31);
             this.txtIDDonateur.TabIndex = 6;
             // 
             // lblTelephone
@@ -719,6 +719,7 @@
             // 
             // btnQuiter
             // 
+            this.btnQuiter.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnQuiter.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnQuiter.Location = new System.Drawing.Point(839, 588);
             this.btnQuiter.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -746,7 +747,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(973, 33);
+            this.menuStrip1.Size = new System.Drawing.Size(865, 33);
             this.menuStrip1.TabIndex = 24;
             this.menuStrip1.Text = "Fichier";
             // 
@@ -808,6 +809,7 @@
             this.Name = "SystemeTelethonSTE";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Syteme Telethon STE";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.BtnQuiter);
             this.tbDonateur.ResumeLayout(false);
             this.tabDonateur.ResumeLayout(false);
             this.tabDonateur.PerformLayout();

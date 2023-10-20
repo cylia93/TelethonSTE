@@ -22,9 +22,8 @@ namespace TelethonSTE
         {
             if (txtUtilisateur.Text == "STE" && txtMotPasse.Text == "admin")
             {
-                SystemeTelethonSTE systemeTelethonSTE = new SystemeTelethonSTE();
-                systemeTelethonSTE.Visible = true;
-                systemeTelethonSTE.Activate();
+                this.Hide();
+                new SystemeTelethonSTE().Show();
             }
             else if (essai == 2)
                 Application.Exit();
@@ -38,7 +37,7 @@ namespace TelethonSTE
                                                       "Attention", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (reponse == DialogResult.Yes)
             {
-                Application.Exit();
+                System.Windows.Forms.Application.Exit();
             }
         }
     }
