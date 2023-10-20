@@ -13,6 +13,26 @@ namespace GestionnaireSTE
         List<Don> dons = new List<Don>();
         List<Prix> steprix = new List<Prix>();
 
+        public List<Donateur> ListDonateurs
+        {
+            get { return this.donateurs; }
+        }
+
+        public List<Commanditaire> ListCommanditaires
+        {
+            get { return this.commanditaires; }
+        }
+
+        public List<Don> ListDons
+        {
+            get { return this.dons; }
+        }
+
+        public List<Prix> ListPrix
+        {
+            get { return this.steprix; }
+        }
+
         public void AjouterDonateur(string prenom, string surnom, string idDonateur, string address, string phone, char carte, string numCarte, string exp)
         {
             for (int i = 0; i < donateurs.Count; i++)
@@ -21,17 +41,18 @@ namespace GestionnaireSTE
                 {
                     throw new Exception("Un donateur avec cet ID existe deja");
                 }
-                if (prenom == "" || surnom == "" || idDonateur == "" || address == "" || phone == "" || carte == ' ' || numCarte == "" || exp == "")
-                {
-                    throw new FormatException("Un champ est vide, veuillez completer tous les champs");
-                }
-                if (prenom.Contains(',') || surnom.Contains(',') || idDonateur.Contains(',') || address.Contains(',') || phone.Contains(',') || numCarte.Contains(',') || exp.Contains(','))
-                {
-                    throw new FormatException(" Vous ne pouvez pas utiliser de virgules dans les champs");
-                }
-                Donateur donateur = new Donateur(prenom, surnom, idDonateur, address, phone, carte, numCarte, exp);
-                donateurs.Add(donateur);
             }
+
+            if (prenom == "" || surnom == "" || idDonateur == "" || address == "" || phone == "" || carte == ' ' || numCarte == "" || exp == "")
+            {
+                throw new FormatException("Un champ est vide, veuillez completer tous les champs");
+            }
+            if (prenom.Contains(',') || surnom.Contains(',') || idDonateur.Contains(',') || address.Contains(',') || phone.Contains(',') || numCarte.Contains(',') || exp.Contains(','))
+            {
+                throw new FormatException(" Vous ne pouvez pas utiliser de virgules dans les champs");
+            }
+            Donateur donateur = new Donateur(prenom, surnom, idDonateur, address, phone, carte, numCarte, exp);
+            donateurs.Add(donateur);
         }
 
         public void AjouterCommenditaire(string prenom, string surnom, string idComm)
@@ -63,16 +84,12 @@ namespace GestionnaireSTE
                 {
                     throw new Exception("Un prix avec cet ID existe deja");
                 }
-#pragma warning disable CS0472 // The result of the expression is always the same since a value of this type is never equal to 'null'
-#pragma warning disable CS0472 // The result of the expression is always the same since a value of this type is never equal to 'null'
-#pragma warning disable CS0472 // The result of the expression is always the same since a value of this type is never equal to 'null'
+
                 if (idP == "" || desc == "" || val == null || donMin == null || qteOr == null || idC == "")
                 {
                     throw new FormatException("Un champ est vide, veuillez completer tous les champs");
                 }
-#pragma warning restore CS0472 // The result of the expression is always the same since a value of this type is never equal to 'null'
-#pragma warning restore CS0472 // The result of the expression is always the same since a value of this type is never equal to 'null'
-#pragma warning restore CS0472 // The result of the expression is always the same since a value of this type is never equal to 'null'
+
                 if (idP.Contains(',') || idC.Contains(','))
                 {
                     throw new FormatException(" Vous ne pouvez pas utiliser de virgules dans les champs ID");
@@ -91,12 +108,10 @@ namespace GestionnaireSTE
                 {
                     throw new Exception("Un don avec cet ID existe deja");
                 }
-#pragma warning disable CS0472 // The result of the expression is always the same since a value of this type is never equal to 'null'
                 if (idDon == "" || dateDuDon == "" || idDonateur == "" || montantDuDon == null || idPrix == "")
                 {
                     throw new FormatException("Un champ est vide, veuillez completer tous les champs");
                 }
-#pragma warning restore CS0472 // The result of the expression is always the same since a value of this type is never equal to 'null'
                 if (idDon.Contains(',') || dateDuDon.Contains(',') || idDonateur.Contains(',') || idPrix.Contains(','))
                 {
                     throw new FormatException(" Vous ne pouvez pas utiliser de virgules dans les champs");
@@ -148,15 +163,11 @@ namespace GestionnaireSTE
 
         public Boolean AttribuerPrix(double donMin)
         {
-
-
             return false;
         }
 
         public Boolean EnregistrerDonateur()
         {
-
-
             return true;
         }
 
