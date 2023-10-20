@@ -270,7 +270,7 @@
             this.groupBox1.Controls.Add(this.lblDateExpiration);
             this.groupBox1.Controls.Add(this.lblNumero);
             this.groupBox1.Controls.Add(this.gbTypeCarte);
-            this.groupBox1.Location = new System.Drawing.Point(294, 30);
+            this.groupBox1.Location = new System.Drawing.Point(353, 28);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox1.Size = new System.Drawing.Size(438, 249);
@@ -319,7 +319,7 @@
             this.gbTypeCarte.Controls.Add(this.rbtnVisa);
             this.gbTypeCarte.Location = new System.Drawing.Point(21, 26);
             this.gbTypeCarte.Name = "gbTypeCarte";
-            this.gbTypeCarte.Size = new System.Drawing.Size(263, 54);
+            this.gbTypeCarte.Size = new System.Drawing.Size(302, 81);
             this.gbTypeCarte.TabIndex = 0;
             this.gbTypeCarte.TabStop = false;
             this.gbTypeCarte.Text = "Type de carte";
@@ -359,6 +359,7 @@
             this.rbtnVisa.TabStop = true;
             this.rbtnVisa.Text = "Visa";
             this.rbtnVisa.UseVisualStyleBackColor = true;
+            this.rbtnVisa.CheckedChanged += new System.EventHandler(this.rbtnVisa_CheckedChanged);
             // 
             // txtMntDon
             // 
@@ -721,7 +722,7 @@
             // 
             this.btnQuiter.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnQuiter.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnQuiter.Location = new System.Drawing.Point(839, 588);
+            this.btnQuiter.Location = new System.Drawing.Point(849, 591);
             this.btnQuiter.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnQuiter.Name = "btnQuiter";
             this.btnQuiter.Size = new System.Drawing.Size(107, 34);
@@ -731,11 +732,11 @@
             // 
             // txtBoxMain
             // 
-            this.txtBoxMain.Location = new System.Drawing.Point(12, 507);
+            this.txtBoxMain.Location = new System.Drawing.Point(12, 655);
             this.txtBoxMain.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtBoxMain.Multiline = true;
             this.txtBoxMain.Name = "txtBoxMain";
-            this.txtBoxMain.Size = new System.Drawing.Size(829, 149);
+            this.txtBoxMain.Size = new System.Drawing.Size(944, 149);
             this.txtBoxMain.TabIndex = 23;
             // 
             // menuStrip1
@@ -747,7 +748,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(865, 33);
+            this.menuStrip1.Size = new System.Drawing.Size(974, 33);
             this.menuStrip1.TabIndex = 24;
             this.menuStrip1.Text = "Fichier";
             // 
@@ -767,7 +768,7 @@
             this.nouveauCommanditaireToolStripMenuItem,
             this.nouveauPrixToolStripMenuItem});
             this.ajouterToolStripMenuItem.Name = "ajouterToolStripMenuItem";
-            this.ajouterToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.ajouterToolStripMenuItem.Size = new System.Drawing.Size(172, 34);
             this.ajouterToolStripMenuItem.Text = "Ajouter";
             // 
             // nouveauDonateurToolStripMenuItem
@@ -791,7 +792,7 @@
             // quitterToolStripMenuItem
             // 
             this.quitterToolStripMenuItem.Name = "quitterToolStripMenuItem";
-            this.quitterToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.quitterToolStripMenuItem.Size = new System.Drawing.Size(172, 34);
             this.quitterToolStripMenuItem.Text = "Quitter";
             // 
             // SystemeTelethonSTE
@@ -799,7 +800,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Cornsilk;
-            this.ClientSize = new System.Drawing.Size(865, 667);
+            this.ClientSize = new System.Drawing.Size(974, 815);
             this.Controls.Add(this.txtBoxMain);
             this.Controls.Add(this.btnQuiter);
             this.Controls.Add(this.tbDonateur);

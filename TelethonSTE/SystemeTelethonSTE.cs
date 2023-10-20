@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using GestionnaireSTE;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 namespace TelethonSTE
 {
@@ -46,16 +47,11 @@ namespace TelethonSTE
         
 
         public Gestionnaire gestionnaire = new Gestionnaire();
-        public Personne personne = new Donateur("Emilie", "Echevin","EE45","dsfds","4545455", 'A', "741258963","Mai 2026");
+        public Prix calendrier = new Prix("4","calendrier", 30, 50, 5,5,"45");
+
         public SystemeTelethonSTE()
         {
-            string txt="";
             InitializeComponent();
-            txt += personne.ToString();
-
-            //txt += "ID comm: " + ((Commanditaire)personne).IDComm;
-
-            txtBoxMain.Text = txt;
         }
 
         // a regarder
@@ -109,28 +105,40 @@ namespace TelethonSTE
         {
             try
             {
-               
+                string txt = "";
+
                 this.prenom = txtPrenomDonateur.Text;
                 this.surnom = txtNom.Text;
                 this.idDonateur = txtIDDonateur.Text;
                 this.adresse = txtAdresse.Text;
                 this.telephone = txtTelephone.Text;
-                this.typeDeCarte = char.Parse(gbTypeCarte.Text);
-                this.numeroCarte = txtNumeroCarte.Text;
-                this.dateExpiration = dateTimeExpiration.Text;
-                gestionnaire.AjouterDonateur(prenom, surnom, idDonateur, adresse, telephone, typeDeCarte, numeroCarte, dateExpiration);
-                MessageBox.Show("Donateur ajouter avec succes.", "Ajout Concervateur");
-                txtBoxMain.Text = gestionnaire.GetDonateur(idDonateur).ToString();
 
+                foreach (System.Windows.Forms.RadioButton item in gbTypeCarte.Controls.OfType<System.Windows.Forms.RadioButton>())
+                {
+                    // Pour selectionner uniquement le type de carte actif :
+                    if ((item).Checked == true)
+                    {
+                        // Pour selectionner uniquement la premiere lettre du type de carte :
+                        this.typeDeCarte = item.Text.ToCharArray()[0];
+                    }
+                }
+                this.numeroCarte = txtNumeroCarte.Text;
+                this.dateExpiration = dateTimeExpiration.Value.ToShortDateString();
+
+                gestionnaire.AjouterDonateur(prenom, surnom, idDonateur, adresse, telephone, typeDeCarte, numeroCarte, dateExpiration);
+
+                txtBoxMain.Text = gestionnaire.ListDonateurs.Last().ToString();
+
+                MessageBox.Show("Donateur ajouter avec succes.", "Ajout Donateur");
             }
            
             catch (FormatException ex)
             {
-                MessageBox.Show(ex.Message,"Erreur lors de l'ajout du donateur");
+                MessageBox.Show(ex.Message, "FormatException lors de l'ajout du donateur");
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Erreur lors de l'ajout du donateur");
+                MessageBox.Show(ex.Message, "Exception lors de l'ajout du donateur");
             }
         }
 
@@ -142,6 +150,11 @@ namespace TelethonSTE
             {
                 System.Windows.Forms.Application.Exit();
             }
+        }
+
+        private void rbtnVisa_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
