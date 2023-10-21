@@ -63,17 +63,17 @@ namespace GestionnaireSTE
                 {
                     throw new Exception("Un commanditaire avec cet ID existe deja");
                 }
-                if (prenom == "" || surnom == "" || idComm == "")
-                {
-                    throw new FormatException("Un champ est vide, veuillez completer tous les champs");
-                }
-                if (prenom.Contains(',') || surnom.Contains(',') || idComm.Contains(','))
-                {
-                    throw new FormatException(" Vous ne pouvez pas utiliser de virgules dans les champs");
-                }
-                Commanditaire commanditaire = new Commanditaire(prenom, surnom, idComm);
-                commanditaires.Add(commanditaire);
             }
+            if (prenom == "" || surnom == "" || idComm == "")
+            {
+                throw new FormatException("Un champ est vide, veuillez completer tous les champs");
+            }
+            if (prenom.Contains(',') || surnom.Contains(',') || idComm.Contains(','))
+            {
+                throw new FormatException(" Vous ne pouvez pas utiliser de virgules dans les champs");
+            }
+            Commanditaire commanditaire = new Commanditaire(prenom, surnom, idComm);
+            commanditaires.Add(commanditaire);
         }
 
         public void AjouterPrix(string idP, string desc, double val, double donMin, int qteOr, int qteDisp, string idC)
@@ -84,20 +84,20 @@ namespace GestionnaireSTE
                 {
                     throw new Exception("Un prix avec cet ID existe deja");
                 }
-
-                if (idP == "" || desc == "" || val == null || donMin == null || qteOr == null || idC == "")
-                {
-                    throw new FormatException("Un champ est vide, veuillez completer tous les champs");
-                }
-
-                if (idP.Contains(',') || idC.Contains(','))
-                {
-                    throw new FormatException(" Vous ne pouvez pas utiliser de virgules dans les champs ID");
-                }
-
-                Prix prix = new Prix(idP, desc, val, donMin, qteOr, qteDisp, idC);
-                steprix.Add(prix);
             }
+
+            if (idP == "" || desc == "" || val == null || donMin == null || qteOr == null || idC == "")
+            {
+                throw new FormatException("Un champ est vide, veuillez completer tous les champs");
+            }
+
+            if (idP.Contains(',') || idC.Contains(','))
+            {
+                throw new FormatException(" Vous ne pouvez pas utiliser de virgules dans les champs ID");
+            }
+
+            Prix prix = new Prix(idP, desc, val, donMin, qteOr, qteDisp, idC);
+            steprix.Add(prix);
         }
 
         public void AjouterDon(string idDon, string dateDuDon, string idDonateur, double montantDuDon, string idPrix)
@@ -108,17 +108,18 @@ namespace GestionnaireSTE
                 {
                     throw new Exception("Un don avec cet ID existe deja");
                 }
-                if (idDon == "" || dateDuDon == "" || idDonateur == "" || montantDuDon == null || idPrix == "")
-                {
-                    throw new FormatException("Un champ est vide, veuillez completer tous les champs");
-                }
-                if (idDon.Contains(',') || dateDuDon.Contains(',') || idDonateur.Contains(',') || idPrix.Contains(','))
-                {
-                    throw new FormatException(" Vous ne pouvez pas utiliser de virgules dans les champs");
-                }
-                Don don = new Don(idDon, dateDuDon, idDonateur, montantDuDon, idPrix);
-                dons.Add(don);
             }
+
+            if (idDon == "" || dateDuDon == "" || idDonateur == "" || montantDuDon == null || idPrix == "")
+            {
+                throw new FormatException("Un champ est vide, veuillez completer tous les champs");
+            }
+            if (idDon.Contains(',') || dateDuDon.Contains(',') || idDonateur.Contains(',') || idPrix.Contains(','))
+            {
+                throw new FormatException(" Vous ne pouvez pas utiliser de virgules dans les champs");
+            }
+            Don don = new Don(idDon, dateDuDon, idDonateur, montantDuDon, idPrix);
+            dons.Add(don);
         }
 
         public string AfficherDonateurs()
