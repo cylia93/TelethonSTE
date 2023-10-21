@@ -135,9 +135,9 @@ namespace GestionnaireSTE
         public string AfficherCommenditaires()
         {
             string listeCommanditaires = "";
-            foreach (Commanditaire commenditaire in commanditaires)
+            foreach (Commanditaire commanditaire in commanditaires)
             {
-                listeCommanditaires = listeCommanditaires + commenditaire.ToString();
+                listeCommanditaires = listeCommanditaires + commanditaire.ToString();
             }
             return listeCommanditaires;
         }
