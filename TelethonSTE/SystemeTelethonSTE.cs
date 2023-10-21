@@ -170,6 +170,7 @@ namespace TelethonSTE
                 txtBoxMain.Text = gestionnaire.ListCommanditaires.Last().ToString();
 
                 MessageBox.Show("Commanditaire ajouter avec succes.", "Ajout commanditaire");
+                resetFieldsCommanditaire();
             }
 
             catch (FormatException ex)
@@ -209,6 +210,7 @@ namespace TelethonSTE
                 if (commanditaireCourant == null)
                 {
                     MessageBox.Show("Ce commanditaire n'a pas ete trouve.");
+                    resetFieldsCommanditaire();
                     return;
                 }
 
@@ -235,11 +237,11 @@ namespace TelethonSTE
                 }
 
                 // On recupere les informations des champs "Informations Prix" :
-                idPrix = txtIDPrix.Text.Trim().ToLower();
-                description = txtIDInfoPrix.Text.Trim().ToLower();
+                idPrix = txtIDInfoPrix.Text.Trim().ToLower();
+                description = txtDescriptionPrix.Text.Trim().ToLower();
                 valeur = Double.Parse(txtValPrix.Text.Trim().ToLower());
                 donMinimum = Double.Parse(txtMinDonPrix.Text.Trim().ToLower());
-                qnte_Originale = Int32.Parse(txtQtePrix.Text.Trim().ToLower());
+                qnte_Originale = Int32.Parse(txtQteInfoPrix.Text.Trim().ToLower());
                 qnte_Disponible = qnte_Originale;
                 idCommenditaire = commanditaireCourant.IDComm;
 
@@ -247,16 +249,28 @@ namespace TelethonSTE
                 Prix nouveauPrix = new Prix(idPrix, description, valeur, donMinimum, qnte_Originale, qnte_Disponible, idCommenditaire);
                 gestionnaire.ListPrix.Add(nouveauPrix);
                 txtBoxMain.Text = "Prix ajoute avec succes.";
+                resetFieldsPrix();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Commanditaire non trouve");
+                resetFieldsCommanditaire();
             }
         }
 
         private void btnAfficherPrix_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void resetFieldsCommanditaire()
+        {
+            txtIDCommanditaire.Text = txtNomCommanditaire.Text = txtPrenomCommanditaire.Text = "";
+        }
+
+        private void resetFieldsPrix()
+        {
+            txtIDInfoPrix.Text = txtDescriptionPrix.Text = txtValPrix.Text = txtQteInfoPrix.Text = txtMinDonPrix.Text = "";
         }
     }
 }
