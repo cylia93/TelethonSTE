@@ -12,7 +12,8 @@ namespace TelethonSTE
 {
     public partial class Login : Form
     {
-        private int essai;
+        int nbrTentatives = 3;
+
         public Login()
         {
             InitializeComponent();
@@ -20,15 +21,48 @@ namespace TelethonSTE
 
         private void bTnOK_Click(object sender, EventArgs e)
         {
-            if (txtUtilisateur.Text == "STE" && txtMotPasse.Text == "admin")
+            // Récupération des valeurs saisies par l'utilisateur en lettres minuscules.
+            string utilisateur = txtUtilisateur.Text.Trim().ToLower();
+            string motPasse = txtMotPasse.Text.Trim().ToLower();
+            // On vérifie si les valeurs saisies sont vides ou des valeurs nulles.
+            // S'il y a des valeurs dans nos éléments TextBox....
+            if (!String.IsNullOrEmpty(utilisateur) &&
+            !String.IsNullOrEmpty(motPasse))
             {
-                this.Hide();
-                new SystemeTelethonSTE().Show();
+                // Si les variables contiennent des valeurs, comparaison avec les valeurs attendues.
+                if (utilisateur == "admin" && motPasse == "admin")
+                {
+                    // Si les valeurs saisies sont valides, nous souhaitons la bienvenue à l'utilisateur.
+                    MessageBox.Show("Bienvenue utilisateur. Les informations saisies sont valides.", "Bienvenue", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Hide();
+                    new SystemeTelethonSTE().Show();
+
+                    // On reintialise le nombre de tentatives pour le prochain utilisateur :
+                    nbrTentatives = 3;
+                }
+                else
+                {
+                    nbrTentatives--;
+
+                    string msg = "Les informations saisies ne sont pas valides. ";
+
+                    if (nbrTentatives > 0) msg += "(encore " + nbrTentatives + " tentative(s)";
+
+                    MessageBox.Show(msg, "Attention", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    txtUtilisateur.Text = String.Empty; txtMotPasse.Text = String.Empty; txtUtilisateur.Focus();
+
+                    if (nbrTentatives == 0)
+                    {
+                        Environment.Exit(0);
+                    }
+                }
             }
-            else if (essai == 2)
-                Application.Exit();
             else
-                essai++;
+            {
+                MessageBox.Show("Vous devez saisir votre nom d'utilisateur et votre mot de passe.", "Attention", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // Nous redonnons le focus à l'élément txtUtilisateur. txtUtilisateur.Focus();
+            }
         }
 
         private void btnAnnuler_Click(object sender, EventArgs e)
