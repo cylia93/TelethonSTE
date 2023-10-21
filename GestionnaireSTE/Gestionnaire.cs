@@ -208,5 +208,44 @@ namespace GestionnaireSTE
             throw new Exception("ID du prix inexistant.");
 
         }
+
+        public T trouverID<T>(Func<T, int> getID, int id, List<T> values) where T : class
+        {
+            int cnt = 0;
+
+            while (values.Count > 0 && cnt < values.Count)
+            {
+                int refValue = getID(values[cnt]);
+                if (refValue == id)
+                {
+                    return values[cnt];
+                }
+                cnt++;
+            }
+            return null;
+        }
+
+        public List<T> trouverPersonne<T>(Func<T, string> getNom, Func<T, string> getPrenom, string nom, string prenom, List<T> values) where T : class
+        {
+            List<T> resultats = new List<T>();
+            int cnt = 0;
+
+            while (values.Count > 0 && cnt < values.Count)
+            {
+                string refNom = getNom(values[cnt]);
+                string refPrenom = getPrenom(values[cnt]);
+
+                if (refNom != null && refPrenom != null &&
+                refNom.IndexOf(nom, StringComparison.OrdinalIgnoreCase) >= 0
+                &&
+                refPrenom.IndexOf(prenom, StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    resultats.Add(values[cnt]);
+                }
+                cnt++;
+            }
+            return resultats;
+        }
+
     }
 }
