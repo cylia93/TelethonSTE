@@ -172,51 +172,14 @@ namespace GestionnaireSTE
             return true;
         }
 
-        public Donateur GetDonateur(string id)
-        {
-            for (int i = 0; i < donateurs.Count; i++)
-                if (id == donateurs[i].ID)
-                    return donateurs[i];
-            throw new Exception("ID du donateur inexistant.");
-
-        }
-
-
-        public Commanditaire GetCommanditaire(string id)
-        {
-            for (int i = 0; i < commanditaires.Count; i++)
-                if (id == commanditaires[i].IDComm)
-                    return commanditaires[i];
-            throw new Exception("ID du commanditaire inexistant.");
-
-        }
-
-        public Don GetDon(string id)
-        {
-            for (int i = 0; i < dons.Count; i++)
-                if (id == dons[i].IDDon)
-                    return dons[i];
-            throw new Exception("ID du don inexistant.");
-
-        }
-
-        public Prix GetPrix(string id)
-        {
-            for (int i = 0; i < steprix.Count; i++)
-                if (id == steprix[i].IdPrix)
-                    return steprix[i];
-            throw new Exception("ID du prix inexistant.");
-
-        }
-
-        public T trouverID<T>(Func<T, int> getID, int id, List<T> values) where T : class
+        public T trouverID<T>(Func<T, string> getID, string id, List<T> values) where T : class
         {
             int cnt = 0;
 
             while (values.Count > 0 && cnt < values.Count)
             {
-                int refValue = getID(values[cnt]);
-                if (refValue == id)
+                string refValue = getID(values[cnt]);
+                if (refValue.IndexOf(id, StringComparison.OrdinalIgnoreCase) >= 0)
                 {
                     return values[cnt];
                 }
@@ -225,9 +188,8 @@ namespace GestionnaireSTE
             return null;
         }
 
-        public List<T> trouverPersonne<T>(Func<T, string> getNom, Func<T, string> getPrenom, string nom, string prenom, List<T> values) where T : class
+        public T trouverPersonne<T>(Func<T, string> getNom, Func<T, string> getPrenom, string nom, string prenom, List<T> values) where T : class
         {
-            List<T> resultats = new List<T>();
             int cnt = 0;
 
             while (values.Count > 0 && cnt < values.Count)
@@ -240,11 +202,11 @@ namespace GestionnaireSTE
                 &&
                 refPrenom.IndexOf(prenom, StringComparison.OrdinalIgnoreCase) >= 0)
                 {
-                    resultats.Add(values[cnt]);
+                    return values[cnt];
                 }
                 cnt++;
             }
-            return resultats;
+            return null;
         }
 
     }

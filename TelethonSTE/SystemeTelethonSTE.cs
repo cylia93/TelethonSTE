@@ -33,6 +33,7 @@ namespace TelethonSTE
         String dateExpiration;
         string prenom;
         string surnom;
+
         //prix 
         string idPrix;
         string description;
@@ -44,7 +45,7 @@ namespace TelethonSTE
 
         //Commanditaire
         string IDCommanditaire;
-        
+        Commanditaire commanditaireCourant = null;
 
         public Gestionnaire gestionnaire = new Gestionnaire();
         public Prix calendrier = new Prix("4","calendrier", 30, 50, 5,5,"45");
@@ -144,8 +145,7 @@ namespace TelethonSTE
 
         private void BtnQuiter(object sender, FormClosedEventArgs e)
         {
-            DialogResult reponse = MessageBox.Show("Desirez_vous réellement quitter cette application ?",
-                                                      "Attention", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult reponse = MessageBox.Show("Desirez_vous réellement quitter cette application ?", "Attention", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (reponse == DialogResult.Yes)
             {
                 System.Windows.Forms.Application.Exit();
@@ -161,7 +161,6 @@ namespace TelethonSTE
         {
             try
             {         
-
                 this.prenom = txtPrenomCommanditaire.Text;
                 this.surnom = txtNomCommanditaire.Text;
                 this.IDCommanditaire = txtIDCommanditaire.Text;              
@@ -170,35 +169,94 @@ namespace TelethonSTE
 
                 txtBoxMain.Text = gestionnaire.ListCommanditaires.Last().ToString();
 
-                MessageBox.Show("commanditaire ajouter avec succes.", "Ajout commanditaire");
+                MessageBox.Show("Commanditaire ajouter avec succes.", "Ajout commanditaire");
             }
 
             catch (FormatException ex)
             {
-                MessageBox.Show(ex.Message, "FormatException lors de l'ajout du commanditaire");
+                MessageBox.Show(ex.Message, "Erreur lors de l'ajout du commanditaire");
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Exception lors de l'ajout du commanditaire");
+                MessageBox.Show(ex.Message, "Erreur lors de l'ajout du commanditaire");
             }
         }
 
         private void btnAfficherCommanditaire_Click(object sender, EventArgs e)
         {
+            String idCommanditaire = txtIDCommanditaire.Text.Trim().ToLower();
+            String nom = txtNomCommanditaire.Text.Trim().ToLower();
+            String prenom = txtPrenomCommanditaire.Text.Trim().ToLower();
+
             try
             {
-                txtBoxMain.Clear();
-                txtBoxMain.Paste(gestionnaire.AfficherCommenditaires());
-
-                if (string.IsNullOrEmpty(txtBoxMain.Text))
+                if (!String.IsNullOrEmpty(idCommanditaire))
                 {
-                    MessageBox.Show("Aucun commandaitaire n'est disponible");
+                    // Trouver le commanditaire par son ID :
+                    Func<Commanditaire, string> getIDCommanditaire = commanditaire => commanditaire.IDComm;
+
+                    commanditaireCourant = gestionnaire.trouverID(getIDCommanditaire, idCommanditaire, gestionnaire.ListCommanditaires);
                 }
+                else if (!String.IsNullOrEmpty(nom) && !String.IsNullOrEmpty(prenom))
+                {
+                    // Trouver le commanditaire par son nom et prenom :
+                    Func<Commanditaire, string> getNomCommanditaire = commanditaire => commanditaire.Surnom;
+                    Func<Commanditaire, string> getPrenomCommanditaire = commanditaire => commanditaire.Prenom;
+
+                    commanditaireCourant = gestionnaire.trouverPersonne(getNomCommanditaire, getPrenomCommanditaire, nom, prenom, gestionnaire.ListCommanditaires);
+                }
+
+                if (commanditaireCourant == null)
+                {
+                    MessageBox.Show("Ce commanditaire n'a pas ete trouve.");
+                    return;
+                }
+
+                txtIDCommanditaire.Text = commanditaireCourant.IDComm;
+                txtNomCommanditaire.Text = commanditaireCourant.Surnom;
+                txtPrenomCommanditaire.Text = commanditaireCourant.Prenom;
+
+                txtBoxMain.Text = "Commanditaire trouve: " + commanditaireCourant.ToString();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erreur lors de l'affichage des commanditaires");
+                MessageBox.Show("Commanditaire non trouve");
             }
+        }
+
+        private void btnAjoutPrix_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (commanditaireCourant == null)
+                {
+                    MessageBox.Show("Ajout impossible: commanditaire non trouve.", "Ajout prix");
+                    return;
+                }
+
+                // On recupere les informations des champs "Informations Prix" :
+                idPrix = txtIDPrix.Text.Trim().ToLower();
+                description = txtIDInfoPrix.Text.Trim().ToLower();
+                valeur = Double.Parse(txtValPrix.Text.Trim().ToLower());
+                donMinimum = Double.Parse(txtMinDonPrix.Text.Trim().ToLower());
+                qnte_Originale = Int32.Parse(txtQtePrix.Text.Trim().ToLower());
+                qnte_Disponible = qnte_Originale;
+                idCommenditaire = commanditaireCourant.IDComm;
+
+                // On creer le prix et on l'ajoute a la liste des prix courants :
+                Prix nouveauPrix = new Prix(idPrix, description, valeur, donMinimum, qnte_Originale, qnte_Disponible, idCommenditaire);
+                gestionnaire.ListPrix.Add(nouveauPrix);
+                txtBoxMain.Text = "Prix ajoute avec succes.";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Commanditaire non trouve");
+            }
+        }
+
+        private void btnAfficherPrix_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

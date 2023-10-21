@@ -22,7 +22,7 @@ namespace TelethonSTE
         private void bTnOK_Click(object sender, EventArgs e)
         {
             // Récupération des valeurs saisies par l'utilisateur en lettres minuscules.
-            string utilisateur = txtUtilisateur.Text.Trim().ToLower();
+            string utilisateur = txtUtilisateur.Text.Trim();
             string motPasse = txtMotPasse.Text.Trim().ToLower();
             // On vérifie si les valeurs saisies sont vides ou des valeurs nulles.
             // S'il y a des valeurs dans nos éléments TextBox....
@@ -30,7 +30,7 @@ namespace TelethonSTE
             !String.IsNullOrEmpty(motPasse))
             {
                 // Si les variables contiennent des valeurs, comparaison avec les valeurs attendues.
-                if (utilisateur == "admin" && motPasse == "admin")
+                if (utilisateur == "STE" && motPasse == "admin")
                 {
                     // Si les valeurs saisies sont valides, nous souhaitons la bienvenue à l'utilisateur.
                     MessageBox.Show("Bienvenue utilisateur. Les informations saisies sont valides.", "Bienvenue", MessageBoxButtons.OK, MessageBoxIcon.Information);

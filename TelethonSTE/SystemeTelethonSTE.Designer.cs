@@ -661,6 +661,7 @@
             this.btnAjoutPrix.TabIndex = 6;
             this.btnAjoutPrix.Text = "Ajouter Prix";
             this.btnAjoutPrix.UseVisualStyleBackColor = true;
+            this.btnAjoutPrix.Click += new System.EventHandler(this.btnAjoutPrix_Click);
             // 
             // btnAfficherPrix
             // 
@@ -671,6 +672,7 @@
             this.btnAfficherPrix.TabIndex = 5;
             this.btnAfficherPrix.Text = "Afficher Prix";
             this.btnAfficherPrix.UseVisualStyleBackColor = true;
+            this.btnAfficherPrix.Click += new System.EventHandler(this.btnAfficherPrix_Click);
             // 
             // btnAjoutCommanditaire
             // 
@@ -738,6 +740,7 @@
             this.txtBoxMain.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtBoxMain.Multiline = true;
             this.txtBoxMain.Name = "txtBoxMain";
+            this.txtBoxMain.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtBoxMain.Size = new System.Drawing.Size(944, 149);
             this.txtBoxMain.TabIndex = 23;
             // 
@@ -750,7 +753,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(974, 33);
+            this.menuStrip1.Size = new System.Drawing.Size(974, 36);
             this.menuStrip1.TabIndex = 24;
             this.menuStrip1.Text = "Fichier";
             // 
@@ -760,7 +763,7 @@
             this.ajouterToolStripMenuItem,
             this.quitterToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(74, 29);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(74, 32);
             this.toolStripMenuItem1.Text = "Ficher";
             // 
             // ajouterToolStripMenuItem
