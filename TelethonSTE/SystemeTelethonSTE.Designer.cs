@@ -650,6 +650,7 @@
             this.btnAfficherCommanditaire.TabIndex = 7;
             this.btnAfficherCommanditaire.Text = "Afficher Commanditaire";
             this.btnAfficherCommanditaire.UseVisualStyleBackColor = true;
+            this.btnAfficherCommanditaire.Click += new System.EventHandler(this.btnAfficherCommanditaire_Click);
             // 
             // btnAjoutPrix
             // 

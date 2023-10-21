@@ -182,5 +182,23 @@ namespace TelethonSTE
                 MessageBox.Show(ex.Message, "Exception lors de l'ajout du commanditaire");
             }
         }
+
+        private void btnAfficherCommanditaire_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                txtBoxMain.Clear();
+                txtBoxMain.Paste(gestionnaire.AfficherCommenditaires());
+
+                if (string.IsNullOrEmpty(txtBoxMain.Text))
+                {
+                    MessageBox.Show("Aucun commandaitaire n'est disponible");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erreur lors de l'affichage des commanditaires");
+            }
+        }
     }
 }
