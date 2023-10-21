@@ -11,6 +11,7 @@ using System.Text.RegularExpressions;
 using GestionnaireSTE;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace TelethonSTE
 {
@@ -48,7 +49,7 @@ namespace TelethonSTE
         Commanditaire commanditaireCourant = null;
 
         public Gestionnaire gestionnaire = new Gestionnaire();
-        public Prix calendrier = new Prix("4","calendrier", 30, 50, 5,5,"45");
+        public Prix calendrier = new Prix("4", "calendrier", 30, 50, 5, 5, "45");
 
         public SystemeTelethonSTE()
         {
@@ -68,16 +69,16 @@ namespace TelethonSTE
                     MessageBox.Show("Aucun prix n'est disponible");
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Erreur lors de l'affichage des prix");
             }
-               
-                
-            
-            
+
+
+
+
         }
-       //pas encore fini
+        //pas encore fini
         private void btnAjoutDon_Click(object sender, EventArgs e)
         {
             try
@@ -87,20 +88,20 @@ namespace TelethonSTE
                 this.idDonateurDon = txtIDDonateur.Text;
                 this.montantDuDon = double.Parse(txtMntDon.Text);
                 this.idPrixDon = txtIDPrix.Text;
-            gestionnaire.AjouterDon(idDon, dateDuDon, idDonateur, montantDuDon, idPrix);
-            MessageBox.Show("Don ajoute avec succes", "Ajout Don");
+                gestionnaire.AjouterDon(idDon, dateDuDon, idDonateur, montantDuDon, idPrix);
+                MessageBox.Show("Don ajoute avec succes", "Ajout Don");
             }
             catch (FormatException ex)
             {
                 MessageBox.Show(ex.Message, " Erreur lors de l'ajout du don");
             }
-           
+
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Erreur lors de l'ajout du don");
             }
         }
-       
+
 
         private void btnAjoutDonateur_Click(object sender, EventArgs e)
         {
@@ -132,7 +133,7 @@ namespace TelethonSTE
 
                 MessageBox.Show("Donateur ajouter avec succes.", "Ajout Donateur");
             }
-           
+
             catch (FormatException ex)
             {
                 MessageBox.Show(ex.Message, "FormatException lors de l'ajout du donateur");
@@ -148,7 +149,7 @@ namespace TelethonSTE
             DialogResult reponse = MessageBox.Show("Desirez_vous réellement quitter cette application ?", "Attention", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (reponse == DialogResult.Yes)
             {
-                System.Windows.Forms.Application.Exit();
+                Environment.Exit(0); 
             }
         }
 
@@ -160,10 +161,10 @@ namespace TelethonSTE
         private void btnAjoutCommanditaire_Click(object sender, EventArgs e)
         {
             try
-            {         
+            {
                 this.prenom = txtPrenomCommanditaire.Text;
                 this.surnom = txtNomCommanditaire.Text;
-                this.IDCommanditaire = txtIDCommanditaire.Text;              
+                this.IDCommanditaire = txtIDCommanditaire.Text;
 
                 gestionnaire.AjouterCommanditaire(prenom, surnom, IDCommanditaire);
 
@@ -258,5 +259,16 @@ namespace TelethonSTE
         {
 
         }
+
+        private void btnQuiter_Click(object sender, EventArgs e)
+        {
+            DialogResult repons = MessageBox.Show("Desirez_vous réellement quitter cette application ?",
+                                                       "Attention", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (repons == DialogResult.Yes)
+            {
+                Environment.Exit(0);
+            }
+        }
     }
+
 }

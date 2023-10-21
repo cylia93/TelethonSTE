@@ -71,7 +71,8 @@ namespace TelethonSTE
                                                       "Attention", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (reponse == DialogResult.Yes)
             {
-                System.Windows.Forms.Application.Exit();
+                
+                Environment.Exit(0);
             }
         }
     }
