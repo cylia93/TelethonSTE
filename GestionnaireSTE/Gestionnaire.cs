@@ -55,7 +55,7 @@ namespace GestionnaireSTE
             donateurs.Add(donateur);
         }
 
-        public void AjouterCommenditaire(string prenom, string surnom, string idComm)
+        public void AjouterCommanditaire(string prenom, string surnom, string idComm)
         {
             for (int i = 0; i < commanditaires.Count; i++)
             {

@@ -156,5 +156,31 @@ namespace TelethonSTE
         {
 
         }
+
+        private void btnAjoutCommanditaire_Click(object sender, EventArgs e)
+        {
+            try
+            {         
+
+                this.prenom = txtPrenomCommanditaire.Text;
+                this.surnom = txtNomCommanditaire.Text;
+                this.IDCommanditaire = txtIDCommanditaire.Text;              
+
+                gestionnaire.AjouterCommanditaire(prenom, surnom, IDCommanditaire);
+
+                txtBoxMain.Text = gestionnaire.ListCommanditaires.Last().ToString();
+
+                MessageBox.Show("commanditaire ajouter avec succes.", "Ajout commanditaire");
+            }
+
+            catch (FormatException ex)
+            {
+                MessageBox.Show(ex.Message, "FormatException lors de l'ajout du commanditaire");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Exception lors de l'ajout du commanditaire");
+            }
+        }
     }
 }

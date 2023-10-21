@@ -680,6 +680,7 @@
             this.btnAjoutCommanditaire.TabIndex = 4;
             this.btnAjoutCommanditaire.Text = "Ajouter Commanditaire";
             this.btnAjoutCommanditaire.UseVisualStyleBackColor = true;
+            this.btnAjoutCommanditaire.Click += new System.EventHandler(this.btnAjoutCommanditaire_Click);
             // 
             // lblNomCommanditaire
             // 
