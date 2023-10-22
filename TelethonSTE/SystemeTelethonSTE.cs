@@ -319,6 +319,16 @@ namespace TelethonSTE
             dateTimeExpiration.Value = DateTime.Now;
         }
 
+        private void resetInfoDon()
+        {
+            txtIDDon.Text = txtMntDon.Text = "";
+        }
+
+        private void resetInfoAttrPrix()
+        {
+            txtIDPrix.Text = txtQtePrix.Text = "";
+        }
+
         private void btnQuiter_Click(object sender, EventArgs e)
         {
             DialogResult repons = MessageBox.Show("Desirez_vous réellement quitter cette application ?", "Attention", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
