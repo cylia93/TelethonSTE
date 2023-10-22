@@ -195,8 +195,13 @@ namespace GestionnaireSTE
             return listeDons;
         }
 
-        public Boolean AttribuerPrix(double donMin)
+        public Boolean AttribuerPrix(double montant)
         {
+            foreach (Prix prix in steprix)
+            {
+                if (montant >= prix.DonMinimum)
+                    return true;
+            }
             return false;
         }
 
