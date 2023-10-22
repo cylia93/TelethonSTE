@@ -12,6 +12,7 @@ using GestionnaireSTE;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 using static System.Net.Mime.MediaTypeNames;
+using System.Globalization;
 
 namespace TelethonSTE
 {
@@ -126,16 +127,6 @@ namespace TelethonSTE
                     }
                 }
                 this.numeroCarte = txtNumeroCarte.Text.Trim().ToLower();
-
-                // On valide que la carte de credit proposee est valide :
-                int monthsDifference = (dateTimeExpiration.Value.Year - DateTime.Now.Year) * 12 + dateTimeExpiration.Value.Month - DateTime.Now.Month;
-
-                if (monthsDifference < 7)
-                {
-                    MessageBox.Show("La date d'expiration de votre carte de credit doit etre d'au moins 6 mois apres la date d'aujourd'hui.", "Erreur Ajout Donateur");
-                    return;
-                }
-
                 this.dateExpiration = dateTimeExpiration.Value.ToShortDateString();
 
                 gestionnaire.AjouterDonateur(prenom, surnom, idDonateur, adresse, telephone, typeDeCarte, numeroCarte, dateExpiration);
@@ -334,6 +325,71 @@ namespace TelethonSTE
             if (repons == DialogResult.Yes)
             {
                 Environment.Exit(0);
+            }
+        }
+
+        private void btnAfficherDonateur_Click(object sender, EventArgs e)
+        {
+            donateurCourant = null;
+
+            txtBoxMain.Text = "";
+            txtBoxMain.Text += gestionnaire.AfficherDonateurs()+ "\n----------------------------\r\n";
+
+            String idDonateur = txtIDDonateur.Text.Trim().ToLower();
+            String nom = txtNom.Text.Trim().ToLower();
+            String prenom = txtPrenomDonateur.Text.Trim().ToLower();
+
+
+            try
+            {
+                if (!String.IsNullOrEmpty(idDonateur) && String.IsNullOrEmpty(nom) && String.IsNullOrEmpty(prenom))
+            {
+                // Trouver le donateur par son ID :
+                Func<Donateur, string> getIDDonateur = donateur => donateur.ID;
+
+                donateurCourant = gestionnaire.trouverID(getIDDonateur, idDonateur, gestionnaire.ListDonateurs);
+            }
+            if (String.IsNullOrEmpty(idDonateur) && !String.IsNullOrEmpty(nom) && !String.IsNullOrEmpty(prenom))
+            {
+                // Trouver le donateur par son nom et prenom :
+                Func<Donateur, string> getNomDonateur = donateur => donateur.Surnom;
+                Func<Donateur, string> getPrenomDonateur = donateur => donateur.Prenom;
+
+                donateurCourant = gestionnaire.trouverPersonne(getNomDonateur, getPrenomDonateur, nom, prenom, gestionnaire.ListDonateurs);
+            }
+
+            if (donateurCourant == null)
+            {
+                MessageBox.Show("Donateur non trouve");
+                resetInfoDonateur();
+                return;
+            }
+
+                txtIDDonateur.Text = donateurCourant.ID;
+                txtNom.Text = donateurCourant.Surnom;
+                txtPrenomDonateur.Text = donateurCourant.Prenom;
+                txtAdresse.Text = donateurCourant.Adresse;
+                txtTelephone.Text = donateurCourant.Telephone;
+
+                foreach (System.Windows.Forms.RadioButton item in gbTypeCarte.Controls.OfType<System.Windows.Forms.RadioButton>())
+                {
+                    // Pour selectionner le type de carte :
+                    if (donateurCourant.TypeDeCarte == item.Text.ToCharArray()[0])
+                    {
+                        item.Checked = true;
+                    }
+                }
+
+                txtNumeroCarte.Text = donateurCourant.NumeroDeCarte;
+                dateTimeExpiration.Value =
+  DateTime.ParseExact(donateurCourant.DateExpiration, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+
+                txtBoxMain.Text += "Donateur trouve: " + donateurCourant.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Erreur lors de l'ajout du commanditaire");
+                resetInfoDonateur();
             }
         }
     }
