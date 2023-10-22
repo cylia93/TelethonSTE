@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,17 +40,39 @@ namespace GestionnaireSTE
             {
                 if (idDonateur == donateurs[i].ID)
                 {
-                    throw new Exception("Un donateur avec cet ID existe deja");
+                    throw new Exception("Un donateur avec cet ID existe deja.");
                 }
             }
 
             if (prenom == "" || surnom == "" || idDonateur == "" || address == "" || phone == "" || carte == ' ' || numCarte == "" || exp == "")
             {
-                throw new FormatException("Un champ est vide, veuillez completer tous les champs");
+                throw new FormatException("Un champ est vide, veuillez completer tous les champs.");
             }
+            if (numCarte.Length != 16)
+            {
+                throw new FormatException("Le numero de la carte doit contenir 16 chiffres.");
+            }
+            if (!Double.TryParse(numCarte, out double numeroDeCarte))
+            {
+                throw new FormatException("La carte de credit doit etre une valeur numerique.");
+            }
+
+            // On valide que la carte de credit proposee est valide :
+
+            DateTime dateExpiration =  DateTime.ParseExact(exp, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+            DateTime dateActuelle = DateTime.Now;
+
+            int monthsDifference = (dateExpiration.Year - dateActuelle.Year) * 12 + dateExpiration.Month - dateActuelle.Month;
+
+            if (monthsDifference < 7)
+            {
+                throw new FormatException("La date d'expiration de votre carte de credit doit etre d'au moins 6 mois apres la date d'aujourd'hui.");
+            }
+
+
             if (prenom.Contains(',') || surnom.Contains(',') || idDonateur.Contains(',') || address.Contains(',') || phone.Contains(',') || numCarte.Contains(',') || exp.Contains(','))
             {
-                throw new FormatException(" Vous ne pouvez pas utiliser de virgules dans les champs");
+                throw new FormatException(" Vous ne pouvez pas utiliser de virgules dans les champs.");
             }
             Donateur donateur = new Donateur(prenom, surnom, idDonateur, address, phone, carte, numCarte, exp);
             donateurs.Add(donateur);
@@ -134,10 +157,10 @@ namespace GestionnaireSTE
 
         public string AfficherDonateurs()
         {
-            string listeDonateurs = "";
+            string listeDonateurs = "La liste des donateurs actuels:\r\n\r\n";
             foreach (Donateur donateur in donateurs)
             {
-                listeDonateurs = listeDonateurs + donateur.ToString();
+                listeDonateurs += donateur.ToString();
             }
             return listeDonateurs;
         }
