@@ -82,18 +82,28 @@ namespace GestionnaireSTE
             {
                 if (idP == steprix[i].IdPrix)
                 {
-                    throw new Exception("Un prix avec cet ID existe deja");
+                    throw new Exception("Un prix avec cet ID existe deja.");
                 }
             }
 
-            if (idP == "" || desc == "" || val == null || donMin == null || qteOr == null || idC == "")
+            if (idP == "" || desc == "" ||  idC == "")
             {
-                throw new FormatException("Un champ est vide, veuillez completer tous les champs");
+                throw new FormatException("Un champ est vide, veuillez completer tous les champs.");
             }
+
+            if ( val <= 0 || donMin <= 0)
+            {
+                throw new FormatException("Vous devez donner une valeur positive.");
+            }
+            if (qteOr <= 0)
+            {
+                throw new FormatException("Vous devez donne au moins 1 prix - quantite invalide.");
+            }
+
 
             if (idP.Contains(',') || idC.Contains(','))
             {
-                throw new FormatException(" Vous ne pouvez pas utiliser de virgules dans les champs ID");
+                throw new FormatException(" Vous ne pouvez pas utiliser de virgules dans les champs ID.");
             }
 
             Prix prix = new Prix(idP, desc, val, donMin, qteOr, qteDisp, idC);
@@ -134,17 +144,17 @@ namespace GestionnaireSTE
 
         public string AfficherCommenditaires()
         {
-            string listeCommanditaires = "";
+            string listeCommanditaires = "La liste des commanditaires actuels:\r\n\r\n";
             foreach (Commanditaire commanditaire in commanditaires)
             {
-                listeCommanditaires = listeCommanditaires + commanditaire.ToString();
+                listeCommanditaires += commanditaire.ToString();
             }
             return listeCommanditaires;
         }
 
         public string AfficherPrix()
         {
-            string listePrix = "";
+            string listePrix = "La liste des prix actuels:\r\n\r\n";
             foreach (Prix prix in steprix)
             {
                 listePrix = listePrix + prix.ToString();
@@ -154,7 +164,7 @@ namespace GestionnaireSTE
 
         public string AfficherDons()
         {
-            string listeDons = "";
+            string listeDons = "La liste des dons actuels:\r\n\r\n";
             foreach (Don don in dons)
             {
                 listeDons = listeDons + don.ToString();
@@ -178,8 +188,10 @@ namespace GestionnaireSTE
 
             while (values.Count > 0 && cnt < values.Count)
             {
-                string refValue = getID(values[cnt]);
-                if (refValue.IndexOf(id, StringComparison.OrdinalIgnoreCase) >= 0)
+                string refValue = getID(values[cnt]).ToLower();
+
+                //Pour une correspondance exacte :
+                if (refValue.Equals(id.ToLower()))
                 {
                     return values[cnt];
                 }
@@ -197,6 +209,7 @@ namespace GestionnaireSTE
                 string refNom = getNom(values[cnt]);
                 string refPrenom = getPrenom(values[cnt]);
 
+                //Pour une correspondance partielle sur les nom et prenom :
                 if (refNom != null && refPrenom != null &&
                 refNom.IndexOf(nom, StringComparison.OrdinalIgnoreCase) >= 0
                 &&
