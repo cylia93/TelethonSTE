@@ -733,6 +733,7 @@
             this.btnQuiter.TabIndex = 22;
             this.btnQuiter.Text = "Quitter";
             this.btnQuiter.UseVisualStyleBackColor = true;
+            this.btnQuiter.Click += new System.EventHandler(this.btnQuiter_Click);
             // 
             // txtBoxMain
             // 
@@ -753,7 +754,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(974, 36);
+            this.menuStrip1.Size = new System.Drawing.Size(974, 33);
             this.menuStrip1.TabIndex = 24;
             this.menuStrip1.Text = "Fichier";
             // 
@@ -763,7 +764,7 @@
             this.ajouterToolStripMenuItem,
             this.quitterToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(74, 32);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(74, 29);
             this.toolStripMenuItem1.Text = "Ficher";
             // 
             // ajouterToolStripMenuItem
