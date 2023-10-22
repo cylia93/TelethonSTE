@@ -80,18 +80,21 @@ namespace TelethonSTE
 
 
         }
-        //pas encore fini
+        
+
         private void btnAjoutDon_Click(object sender, EventArgs e)
         {
             try
             {
-                this.idDon = txtIDDon.Text;
-                this.dateDuDon = // ???
-                this.idDonateurDon = txtIDDonateur.Text;
-                this.montantDuDon = double.Parse(txtMntDon.Text);
-                this.idPrixDon = txtIDPrix.Text;
-                gestionnaire.AjouterDon(idDon, dateDuDon, idDonateur, montantDuDon, idPrix);
-                MessageBox.Show("Don ajoute avec succes", "Ajout Don");
+                if(donateurCourant != null) {
+                    afficherInfoDonateur();
+                    gestionnaire.AjouterDon(idDon, dateDuDon, idDonateur, montantDuDon, idPrix);
+                    MessageBox.Show("Don ajoute avec succes", "Ajout Don");
+                }
+                else
+                {
+                    MessageBox.Show("Veuillez renseigner les informations du donateur.", "Erreur Ajout Don");
+                }
             }
             catch (FormatException ex)
             {
@@ -365,24 +368,7 @@ namespace TelethonSTE
                 return;
             }
 
-                txtIDDonateur.Text = donateurCourant.ID;
-                txtNom.Text = donateurCourant.Surnom;
-                txtPrenomDonateur.Text = donateurCourant.Prenom;
-                txtAdresse.Text = donateurCourant.Adresse;
-                txtTelephone.Text = donateurCourant.Telephone;
-
-                foreach (System.Windows.Forms.RadioButton item in gbTypeCarte.Controls.OfType<System.Windows.Forms.RadioButton>())
-                {
-                    // Pour selectionner le type de carte :
-                    if (donateurCourant.TypeDeCarte == item.Text.ToCharArray()[0])
-                    {
-                        item.Checked = true;
-                    }
-                }
-
-                txtNumeroCarte.Text = donateurCourant.NumeroDeCarte;
-                dateTimeExpiration.Value =
-  DateTime.ParseExact(donateurCourant.DateExpiration, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                afficherInfoDonateur();
 
                 txtBoxMain.Text += "Donateur trouve: " + donateurCourant.ToString();
             }
@@ -391,6 +377,28 @@ namespace TelethonSTE
                 MessageBox.Show(ex.Message, "Erreur lors de l'ajout du commanditaire");
                 resetInfoDonateur();
             }
+        }
+
+        public void afficherInfoDonateur()
+        {
+            txtIDDonateur.Text = donateurCourant.ID;
+            txtNom.Text = donateurCourant.Surnom;
+            txtPrenomDonateur.Text = donateurCourant.Prenom;
+            txtAdresse.Text = donateurCourant.Adresse;
+            txtTelephone.Text = donateurCourant.Telephone;
+
+            foreach (System.Windows.Forms.RadioButton item in gbTypeCarte.Controls.OfType<System.Windows.Forms.RadioButton>())
+            {
+                // Pour selectionner le type de carte :
+                if (donateurCourant.TypeDeCarte == item.Text.ToCharArray()[0])
+                {
+                    item.Checked = true;
+                }
+            }
+
+            txtNumeroCarte.Text = donateurCourant.NumeroDeCarte;
+            dateTimeExpiration.Value =
+    DateTime.ParseExact(donateurCourant.DateExpiration, "yyyy-MM-dd", CultureInfo.InvariantCulture);
         }
     }
 }
