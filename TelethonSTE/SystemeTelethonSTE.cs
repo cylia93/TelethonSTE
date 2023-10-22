@@ -307,6 +307,18 @@ namespace TelethonSTE
             txtIDInfoPrix.Text = txtDescriptionPrix.Text = txtValPrix.Text = txtQteInfoPrix.Text = txtMinDonPrix.Text = "";
         }
 
+        private void resetInfoDonateur()
+        {
+            txtIDDonateur.Text = txtPrenomDonateur.Text = txtNom.Text = txtAdresse.Text = txtTelephone.Text = txtNumeroCarte.Text = "";
+
+            foreach(System.Windows.Forms.RadioButton item in gbTypeCarte.Controls)
+            {
+                if (item.Checked) { item.Checked = false; }
+            }
+
+            dateTimeExpiration.Value = DateTime.Now;
+        }
+
         private void btnQuiter_Click(object sender, EventArgs e)
         {
             DialogResult repons = MessageBox.Show("Desirez_vous réellement quitter cette application ?", "Attention", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
