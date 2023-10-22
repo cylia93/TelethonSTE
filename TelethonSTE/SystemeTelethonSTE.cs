@@ -58,27 +58,35 @@ namespace TelethonSTE
             InitializeComponent();
         }
 
-        // a regarder
         private void btnAffPrix_Click(object sender, EventArgs e)
         {
             try
             {
-                txtBoxMain.Clear();
-                txtBoxMain.Paste(gestionnaire.AfficherPrix());
-
-                if (string.IsNullOrEmpty(txtBoxMain.Text))
+                if(Double.TryParse(txtMntDon.Text, out double montantDuDon) && montantDuDon > 0)
                 {
-                    MessageBox.Show("Aucun prix n'est disponible");
-                }
+                    if (gestionnaire.AttribuerPrix(montantDuDon))
+                    {
+                        txtBoxMain.Clear();
+                        txtBoxMain.Paste(gestionnaire.AfficherPrix(montantDuDon));
+
+                        txtQtePrix.Text = gestionnaire.determinerNbrPrix(montantDuDon).ToString();
+
+                        txtIDPrix.Text = Microsoft.VisualBasic.Interaction.InputBox("Choissississez un prix parmis la liste proposee (Renseignez l'ID)", "Choix du prix", "Default", 0, 0);
+                    } else
+                    {
+                        txtIDPrix.Text = txtQtePrix.Text = "N/A";
+                        txtBoxMain.Clear();
+                        txtBoxMain.Text = "Pas de prix disponible pour ce don.";
+                    }
+                } else
+                {
+                    MessageBox.Show("Le montant renseigne doit etre une valeur positive","Erreur Afficher Prix");
+                }               
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erreur lors de l'affichage des prix");
+                MessageBox.Show(ex.Message, "Erreur Afficher Prix");
             }
-
-
-
-
         }
         
 
@@ -86,10 +94,29 @@ namespace TelethonSTE
         {
             try
             {
-                if(donateurCourant != null) {
+                if (donateurCourant != null) {
+
                     afficherInfoDonateur();
+
+                    this.idDon = txtIDDon.Text.Trim().ToLower();
+                    this.dateDuDon = DateTime.Now.ToShortDateString();
+                    this.idDonateur = donateurCourant.ID;
+
+                    if (!Double.TryParse(txtMntDon.Text.Trim().ToLower(), out montantDuDon))
+                    {
+                        MessageBox.Show("Le montant doit etre specifie", "Ajout Don");
+                        return;
+                    }
+
+                    //this.idDon = txt.Text.Trim().ToLower();
+                    this.surnom = txtNom.Text.Trim().ToLower();
+                    this.idDonateur = txtIDDonateur.Text.Trim().ToLower();
+                    this.adresse = txtAdresse.Text.Trim().ToLower(); ;
+                    this.telephone = txtTelephone.Text.Trim().ToLower();
+
                     gestionnaire.AjouterDon(idDon, dateDuDon, idDonateur, montantDuDon, idPrix);
                     MessageBox.Show("Don ajoute avec succes", "Ajout Don");
+
                 }
                 else
                 {
