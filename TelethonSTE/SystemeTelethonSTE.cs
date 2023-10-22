@@ -23,6 +23,7 @@ namespace TelethonSTE
         string idDonateurDon;
         double montantDuDon;
         string idPrixDon;
+        Donateur donateurCourant = null;
 
 
         // Donateur
@@ -107,13 +108,13 @@ namespace TelethonSTE
         {
             try
             {
-                string txt = "";
+                donateurCourant = null;
 
-                this.prenom = txtPrenomDonateur.Text;
-                this.surnom = txtNom.Text;
-                this.idDonateur = txtIDDonateur.Text;
-                this.adresse = txtAdresse.Text;
-                this.telephone = txtTelephone.Text;
+                this.prenom = txtPrenomDonateur.Text.Trim().ToLower();
+                this.surnom = txtNom.Text.Trim().ToLower();
+                this.idDonateur = txtIDDonateur.Text.Trim().ToLower();
+                this.adresse = txtAdresse.Text.Trim().ToLower(); ;
+                this.telephone = txtTelephone.Text.Trim().ToLower();
 
                 foreach (System.Windows.Forms.RadioButton item in gbTypeCarte.Controls.OfType<System.Windows.Forms.RadioButton>())
                 {
@@ -124,32 +125,30 @@ namespace TelethonSTE
                         this.typeDeCarte = item.Text.ToCharArray()[0];
                     }
                 }
-                this.numeroCarte = txtNumeroCarte.Text;
+                this.numeroCarte = txtNumeroCarte.Text.Trim().ToLower();
+
+                // On valide que la carte de credit proposee est valide :
+                int monthsDifference = (dateTimeExpiration.Value.Year - DateTime.Now.Year) * 12 + dateTimeExpiration.Value.Month - DateTime.Now.Month;
+
+                if (monthsDifference < 7)
+                {
+                    MessageBox.Show("La date d'expiration de votre carte de credit doit etre d'au moins 6 mois apres la date d'aujourd'hui.", "Erreur Ajout Donateur");
+                    return;
+                }
+
                 this.dateExpiration = dateTimeExpiration.Value.ToShortDateString();
 
                 gestionnaire.AjouterDonateur(prenom, surnom, idDonateur, adresse, telephone, typeDeCarte, numeroCarte, dateExpiration);
+                donateurCourant = gestionnaire.ListDonateurs.Last();
 
                 txtBoxMain.Text = gestionnaire.ListDonateurs.Last().ToString();
 
-                MessageBox.Show("Donateur ajouter avec succes.", "Ajout Donateur");
-            }
-
-            catch (FormatException ex)
-            {
-                MessageBox.Show(ex.Message, "FormatException lors de l'ajout du donateur");
+                MessageBox.Show("Donateur ajouter avec succes.", "Ajout Info Donateur");
+                resetInfoDonateur();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Exception lors de l'ajout du donateur");
-            }
-        }
-
-        private void BtnQuiter(object sender, FormClosedEventArgs e)
-        {
-            DialogResult reponse = MessageBox.Show("Desirez_vous réellement quitter cette application ?", "Attention", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (reponse == DialogResult.Yes)
-            {
-                Environment.Exit(0);
+                MessageBox.Show(ex.Message, "Erreur Ajout Donateur");
             }
         }
 
@@ -331,7 +330,7 @@ namespace TelethonSTE
 
         private void btnQuiter_Click(object sender, EventArgs e)
         {
-            DialogResult repons = MessageBox.Show("Desirez_vous réellement quitter cette application ?", "Attention", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult repons = MessageBox.Show("Desirez-vous réellement quitter cette application ?", "Attention", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (repons == DialogResult.Yes)
             {
                 Environment.Exit(0);
