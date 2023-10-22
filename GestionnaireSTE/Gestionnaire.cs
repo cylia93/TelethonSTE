@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -183,6 +184,43 @@ namespace GestionnaireSTE
                 listePrix = listePrix + prix.ToString();
             }
             return listePrix;
+        }
+
+
+        public string AfficherPrix(double montant)
+        {
+            string listePrix = "La liste des prix alligibles pour ce don :\r\n\r\n";
+            foreach (Prix prix in steprix)
+            {
+                if(montant >= prix.DonMinimum)
+                {
+                    listePrix += listePrix + prix.ToString();
+                }
+            }
+            return listePrix;
+        }
+
+        public int determinerNbrPrix (double montant)
+        {
+            if(montant < 50)
+            {
+                return 0;
+            } 
+            else if( montant < 200 && montant >= 50)
+            {
+                return 1;
+            }            
+            else if( montant < 350 && montant >= 200)
+            {
+                return 2;
+            }            
+            else if( montant < 500 && montant >= 350)
+            {
+                return 3;
+            } else
+            {
+                return 4;
+            }
         }
 
         public string AfficherDons()
