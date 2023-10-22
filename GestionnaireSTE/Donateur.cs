@@ -14,7 +14,7 @@ namespace GestionnaireSTE
         private String telephone;
         private char typeDeCarte;
         private String numeroCarte;
-        private String dateExpiration; 
+        private String dateExpiration;
 
         public Donateur (String prenom, String surnom , String idDonateur , String adresse , String telephone ,
             char typeDeCarte , String numeroCarte ,String dateExpiration) : base(prenom , surnom)
@@ -32,11 +32,41 @@ namespace GestionnaireSTE
             set { this.idDonateur = value; }
         }
 
+        public String Adresse
+        {
+            get { return adresse; }
+            set { this.adresse = value; }
+        }
+
+        public String Telephone
+        {
+            get { return telephone; }
+            set { this.telephone = value; }
+        }
+
+        public String NumeroDeCarte
+        {
+            get { return numeroCarte; }
+            set { this.numeroCarte = value; }
+        }
+
+        public char TypeDeCarte
+        {
+            get { return typeDeCarte; }
+        }
+
+
+        public String DateExpiration
+        {
+            get { return dateExpiration; }
+            set { this.dateExpiration = value; }
+        }
+
         public override string ToString()
         {
-            return " Identification " + this.idDonateur + ", " + base.ToString() + ",\r\n Adresse: " + this.adresse +
-                " , \r\n Telephone: " + this.telephone + " , \r\n Type de carte de credit: " + this.typeDeCarte +
-                " , numero de carte: " + this.numeroCarte + " , Date d'expiration: " + this.dateExpiration;
+            return " Identification " + this.idDonateur + ", " + base.ToString() + ", Adresse: " + this.adresse +
+                " , Telephone: " + this.telephone + " , Type de carte de credit: " + this.typeDeCarte +
+                " , numero de carte: " + this.numeroCarte + " , Date d'expiration: " + this.dateExpiration + "\r\n";
         }
 
 
