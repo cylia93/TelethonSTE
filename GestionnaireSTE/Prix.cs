@@ -18,19 +18,27 @@ namespace GestionnaireSTE
 
         public Prix() { }
 
-        public Prix(string idP, string desc, double val, double donMin, int qteOr, int qteDisp, string idC)
+        public Prix(string idPrix, string description, double valeur, double donMinimum, int qnte_Originale, int qnte_Disponible, string idCommenditaire)
         {
-            this.idPrix = idP;
-            this.description = desc;
-            this.valeur = 0;
-            this.donMinimum = donMin;
-            this.qnte_Originale = 0;
-            this.qnte_Disponible = 0;
-            this.idCommenditaire = idC;
+            this.idPrix = idPrix;
+            this.description = description;
+            this.valeur = valeur;
+            this.donMinimum = donMinimum;
+            this.qnte_Originale = qnte_Originale;
+            this.qnte_Disponible = qnte_Disponible;
+            this.idCommenditaire = idCommenditaire;
         }
 
         public void Deduire(int qte)
         {
+            if(this.qnte_Disponible == 0)
+            {
+                throw new Exception("Ce prix est epuise.");
+            }
+            if (this.qnte_Disponible - qte < 0)
+            {
+                throw new Exception("Il n'y a pas assez de ce prix disponible.");
+            }
             this.qnte_Disponible -= qte;
         }
 
@@ -79,7 +87,7 @@ namespace GestionnaireSTE
         {
             return " Le prix numero " + this.idPrix + " ," + this.description + "de valeur " + this.valeur +
                 " de quantite initiale de " + this.qnte_Originale + " a ete fourni par " + this.idCommenditaire +
-                " , il reste desormais " + this.qnte_Disponible + " a gagne pour un don minimum de " + this.donMinimum;
+                " , il reste desormais " + this.qnte_Disponible + " a gagne pour un don minimum de " + this.donMinimum + "$.";
         }
     }
 }

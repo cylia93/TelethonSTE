@@ -11,6 +11,8 @@ using System.Text.RegularExpressions;
 using GestionnaireSTE;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
+using static System.Net.Mime.MediaTypeNames;
+using System.Globalization;
 
 namespace TelethonSTE
 {
@@ -22,6 +24,7 @@ namespace TelethonSTE
         string idDonateurDon;
         double montantDuDon;
         string idPrixDon;
+        Donateur donateurCourant = null;
 
 
         // Donateur
@@ -37,10 +40,10 @@ namespace TelethonSTE
         //prix 
         string idPrix;
         string description;
-        double valeur;
-        double donMinimum;
-        int qnte_Originale;
-        int qnte_Disponible;
+        string valeur_str;
+        string donMinimum_str;
+        string qnte_Originale_str;
+        string qnte_Disponible_str;
         string idCommenditaire;
 
         //Commanditaire
@@ -48,71 +51,101 @@ namespace TelethonSTE
         Commanditaire commanditaireCourant = null;
 
         public Gestionnaire gestionnaire = new Gestionnaire();
-        public Prix calendrier = new Prix("4","calendrier", 30, 50, 5,5,"45");
+        public Prix calendrier = new Prix("4", "calendrier", 30, 50, 5, 5, "45");
 
         public SystemeTelethonSTE()
         {
             InitializeComponent();
         }
 
-        // a regarder
         private void btnAffPrix_Click(object sender, EventArgs e)
         {
             try
             {
-                txtBoxMain.Clear();
-                txtBoxMain.Paste(gestionnaire.AfficherPrix());
-
-                if (string.IsNullOrEmpty(txtBoxMain.Text))
+                if(Double.TryParse(txtMntDon.Text, out double montantDuDon) && montantDuDon > 0)
                 {
-                    MessageBox.Show("Aucun prix n'est disponible");
-                }
+                    if (gestionnaire.AttribuerPrix(montantDuDon))
+                    {
+                        txtBoxMain.Clear();
+                        txtBoxMain.Paste(gestionnaire.AfficherPrix(montantDuDon));
+
+                        txtQtePrix.Text = gestionnaire.determinerNbrPrix(montantDuDon).ToString();
+
+                        txtIDPrix.Text = Microsoft.VisualBasic.Interaction.InputBox("Choissississez un prix parmis la liste proposee (Renseignez l'ID)", "Choix du prix", "Default", 0, 0);
+                    } else
+                    {
+                        txtIDPrix.Text = txtQtePrix.Text = "N/A";
+                        txtBoxMain.Clear();
+                        txtBoxMain.Text = "Pas de prix disponible pour ce don.";
+                    }
+                } else
+                {
+                    MessageBox.Show("Le montant renseigne doit etre une valeur positive","Erreur Afficher Prix");
+                }               
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                MessageBox.Show("Erreur lors de l'affichage des prix");
+                MessageBox.Show(ex.Message, "Erreur Afficher Prix");
             }
-               
-                
-            
-            
         }
-       //pas encore fini
+        
+
         private void btnAjoutDon_Click(object sender, EventArgs e)
         {
             try
             {
-                this.idDon = txtIDDon.Text;
-                this.dateDuDon = // ???
-                this.idDonateurDon = txtIDDonateur.Text;
-                this.montantDuDon = double.Parse(txtMntDon.Text);
-                this.idPrixDon = txtIDPrix.Text;
-            gestionnaire.AjouterDon(idDon, dateDuDon, idDonateur, montantDuDon, idPrix);
-            MessageBox.Show("Don ajoute avec succes", "Ajout Don");
+                if (donateurCourant != null) {
+
+                    afficherInfoDonateur();
+
+                    this.idDon = txtIDDon.Text.Trim().ToLower();
+                    this.dateDuDon = DateTime.Now.ToShortDateString();
+                    this.idDonateur = donateurCourant.ID;
+
+                    if (!Double.TryParse(txtMntDon.Text.Trim().ToLower(), out montantDuDon))
+                    {
+                        MessageBox.Show("Le montant doit etre specifie", "Ajout Don");
+                        return;
+                    }
+
+                    //this.idDon = txt.Text.Trim().ToLower();
+                    this.surnom = txtNom.Text.Trim().ToLower();
+                    this.idDonateur = txtIDDonateur.Text.Trim().ToLower();
+                    this.adresse = txtAdresse.Text.Trim().ToLower(); ;
+                    this.telephone = txtTelephone.Text.Trim().ToLower();
+
+                    gestionnaire.AjouterDon(idDon, dateDuDon, idDonateur, montantDuDon, idPrix);
+                    MessageBox.Show("Don ajoute avec succes", "Ajout Don");
+
+                }
+                else
+                {
+                    MessageBox.Show("Veuillez renseigner les informations du donateur.", "Erreur Ajout Don");
+                }
             }
             catch (FormatException ex)
             {
                 MessageBox.Show(ex.Message, " Erreur lors de l'ajout du don");
             }
-           
+
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Erreur lors de l'ajout du don");
             }
         }
-       
+
 
         private void btnAjoutDonateur_Click(object sender, EventArgs e)
         {
             try
             {
-                string txt = "";
+                donateurCourant = null;
 
-                this.prenom = txtPrenomDonateur.Text;
-                this.surnom = txtNom.Text;
-                this.idDonateur = txtIDDonateur.Text;
-                this.adresse = txtAdresse.Text;
-                this.telephone = txtTelephone.Text;
+                this.prenom = txtPrenomDonateur.Text.Trim().ToLower();
+                this.surnom = txtNom.Text.Trim().ToLower();
+                this.idDonateur = txtIDDonateur.Text.Trim().ToLower();
+                this.adresse = txtAdresse.Text.Trim().ToLower(); ;
+                this.telephone = txtTelephone.Text.Trim().ToLower();
 
                 foreach (System.Windows.Forms.RadioButton item in gbTypeCarte.Controls.OfType<System.Windows.Forms.RadioButton>())
                 {
@@ -123,32 +156,20 @@ namespace TelethonSTE
                         this.typeDeCarte = item.Text.ToCharArray()[0];
                     }
                 }
-                this.numeroCarte = txtNumeroCarte.Text;
+                this.numeroCarte = txtNumeroCarte.Text.Trim().ToLower();
                 this.dateExpiration = dateTimeExpiration.Value.ToShortDateString();
 
                 gestionnaire.AjouterDonateur(prenom, surnom, idDonateur, adresse, telephone, typeDeCarte, numeroCarte, dateExpiration);
+                donateurCourant = gestionnaire.ListDonateurs.Last();
 
                 txtBoxMain.Text = gestionnaire.ListDonateurs.Last().ToString();
 
-                MessageBox.Show("Donateur ajouter avec succes.", "Ajout Donateur");
-            }
-           
-            catch (FormatException ex)
-            {
-                MessageBox.Show(ex.Message, "FormatException lors de l'ajout du donateur");
+                MessageBox.Show("Donateur ajouter avec succes.", "Ajout Info Donateur");
+                resetInfoDonateur();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Exception lors de l'ajout du donateur");
-            }
-        }
-
-        private void BtnQuiter(object sender, FormClosedEventArgs e)
-        {
-            DialogResult reponse = MessageBox.Show("Desirez_vous réellement quitter cette application ?", "Attention", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (reponse == DialogResult.Yes)
-            {
-                System.Windows.Forms.Application.Exit();
+                MessageBox.Show(ex.Message, "Erreur Ajout Donateur");
             }
         }
 
@@ -160,16 +181,29 @@ namespace TelethonSTE
         private void btnAjoutCommanditaire_Click(object sender, EventArgs e)
         {
             try
-            {         
+            {
+                commanditaireCourant = null;
+
                 this.prenom = txtPrenomCommanditaire.Text;
                 this.surnom = txtNomCommanditaire.Text;
-                this.IDCommanditaire = txtIDCommanditaire.Text;              
+                this.IDCommanditaire = txtIDCommanditaire.Text;
+
+                Func<Commanditaire, string> getIDCommanditaire = commanditaire => commanditaire.IDComm;
+                commanditaireCourant = gestionnaire.trouverID(getIDCommanditaire, IDCommanditaire, gestionnaire.ListCommanditaires);
+
+                if (commanditaireCourant != null)
+                {
+                    MessageBox.Show("Ajout impossible: ce commanditaire existe deja.", "Ajout commanditaire");
+                    return;
+                }
 
                 gestionnaire.AjouterCommanditaire(prenom, surnom, IDCommanditaire);
+                commanditaireCourant = gestionnaire.ListCommanditaires.Last();
 
                 txtBoxMain.Text = gestionnaire.ListCommanditaires.Last().ToString();
 
                 MessageBox.Show("Commanditaire ajouter avec succes.", "Ajout commanditaire");
+                resetFieldsPrix();
                 resetFieldsCommanditaire();
             }
 
@@ -180,25 +214,34 @@ namespace TelethonSTE
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Erreur lors de l'ajout du commanditaire");
+            } 
+            finally
+            { 
+                resetFieldsCommanditaire(); 
             }
         }
 
         private void btnAfficherCommanditaire_Click(object sender, EventArgs e)
         {
+            commanditaireCourant = null;
+
+            txtBoxMain.Text = "";
+            txtBoxMain.Text += gestionnaire.AfficherCommenditaires() + "\n----------------------------\r\n";
+
             String idCommanditaire = txtIDCommanditaire.Text.Trim().ToLower();
             String nom = txtNomCommanditaire.Text.Trim().ToLower();
             String prenom = txtPrenomCommanditaire.Text.Trim().ToLower();
 
             try
             {
-                if (!String.IsNullOrEmpty(idCommanditaire))
+                if (!String.IsNullOrEmpty(idCommanditaire) && String.IsNullOrEmpty(nom) && String.IsNullOrEmpty(prenom))
                 {
                     // Trouver le commanditaire par son ID :
                     Func<Commanditaire, string> getIDCommanditaire = commanditaire => commanditaire.IDComm;
 
                     commanditaireCourant = gestionnaire.trouverID(getIDCommanditaire, idCommanditaire, gestionnaire.ListCommanditaires);
                 }
-                else if (!String.IsNullOrEmpty(nom) && !String.IsNullOrEmpty(prenom))
+                if (String.IsNullOrEmpty(idCommanditaire) && !String.IsNullOrEmpty(nom) && !String.IsNullOrEmpty(prenom))
                 {
                     // Trouver le commanditaire par son nom et prenom :
                     Func<Commanditaire, string> getNomCommanditaire = commanditaire => commanditaire.Surnom;
@@ -209,7 +252,7 @@ namespace TelethonSTE
 
                 if (commanditaireCourant == null)
                 {
-                    MessageBox.Show("Ce commanditaire n'a pas ete trouve.");
+                    txtBoxMain.Text += "Aucun commanditaire selectionne actuellement.";
                     resetFieldsCommanditaire();
                     return;
                 }
@@ -218,38 +261,7 @@ namespace TelethonSTE
                 txtNomCommanditaire.Text = commanditaireCourant.Surnom;
                 txtPrenomCommanditaire.Text = commanditaireCourant.Prenom;
 
-                txtBoxMain.Text = "Commanditaire trouve: " + commanditaireCourant.ToString();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Commanditaire non trouve");
-            }
-        }
-
-        private void btnAjoutPrix_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (commanditaireCourant == null)
-                {
-                    MessageBox.Show("Ajout impossible: commanditaire non trouve.", "Ajout prix");
-                    return;
-                }
-
-                // On recupere les informations des champs "Informations Prix" :
-                idPrix = txtIDInfoPrix.Text.Trim().ToLower();
-                description = txtDescriptionPrix.Text.Trim().ToLower();
-                valeur = Double.Parse(txtValPrix.Text.Trim().ToLower());
-                donMinimum = Double.Parse(txtMinDonPrix.Text.Trim().ToLower());
-                qnte_Originale = Int32.Parse(txtQteInfoPrix.Text.Trim().ToLower());
-                qnte_Disponible = qnte_Originale;
-                idCommenditaire = commanditaireCourant.IDComm;
-
-                // On creer le prix et on l'ajoute a la liste des prix courants :
-                Prix nouveauPrix = new Prix(idPrix, description, valeur, donMinimum, qnte_Originale, qnte_Disponible, idCommenditaire);
-                gestionnaire.ListPrix.Add(nouveauPrix);
-                txtBoxMain.Text = "Prix ajoute avec succes.";
-                resetFieldsPrix();
+                txtBoxMain.Text += "Commanditaire trouve: " + commanditaireCourant.ToString();
             }
             catch (Exception ex)
             {
@@ -258,9 +270,51 @@ namespace TelethonSTE
             }
         }
 
+        private void btnAjoutPrix_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (this.commanditaireCourant == null)
+                {
+                    MessageBox.Show("Ajout impossible: commanditaire non trouve.", "Ajout prix");
+                    return;
+                }
+
+                // On indique les informations du commanditaire courant :
+                txtIDCommanditaire.Text = commanditaireCourant.IDComm;
+                txtNomCommanditaire.Text = commanditaireCourant.Surnom;
+                txtPrenomCommanditaire.Text = commanditaireCourant.Prenom;
+
+                // On recupere les informations des champs "Informations Prix" :
+                idPrix = txtIDInfoPrix.Text.Trim().ToLower();
+                description = txtDescriptionPrix.Text.Trim().ToLower();
+                idCommenditaire = commanditaireCourant.IDComm;
+                valeur_str = txtValPrix.Text.Trim().ToLower();
+                donMinimum_str = txtMinDonPrix.Text.Trim().ToLower();
+                qnte_Originale_str = txtQteInfoPrix.Text.Trim().ToLower();
+                qnte_Disponible_str = qnte_Originale_str;
+
+
+                // On creer le prix et on l'ajoute a la liste des prix courants :
+                gestionnaire.AjouterPrix(idPrix, description,
+                    Double.TryParse(valeur_str, out double valeur) ? valeur : 0,
+                    Double.TryParse(donMinimum_str, out double donMinimum) ? donMinimum : 0, Int32.TryParse(qnte_Originale_str, out int qnte_Originale) ? qnte_Originale : 0,
+                    Int32.TryParse(qnte_Disponible_str, out int qnte_Disponible) ? qnte_Disponible : 0,
+                     idCommenditaire);
+
+                txtBoxMain.Text = "Prix ajoute avec succes.";
+                resetFieldsPrix();
+                resetFieldsCommanditaire();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Erreur Ajout Prix");
+            }
+        }
+
         private void btnAfficherPrix_Click(object sender, EventArgs e)
         {
-
+            txtBoxMain.Text = gestionnaire.AfficherPrix();
         }
 
         private void resetFieldsCommanditaire()
@@ -271,6 +325,107 @@ namespace TelethonSTE
         private void resetFieldsPrix()
         {
             txtIDInfoPrix.Text = txtDescriptionPrix.Text = txtValPrix.Text = txtQteInfoPrix.Text = txtMinDonPrix.Text = "";
+        }
+
+        private void resetInfoDonateur()
+        {
+            txtIDDonateur.Text = txtPrenomDonateur.Text = txtNom.Text = txtAdresse.Text = txtTelephone.Text = txtNumeroCarte.Text = "";
+
+            foreach(System.Windows.Forms.RadioButton item in gbTypeCarte.Controls)
+            {
+                if (item.Checked) { item.Checked = false; }
+            }
+
+            dateTimeExpiration.Value = DateTime.Now;
+        }
+
+        private void resetInfoDon()
+        {
+            txtIDDon.Text = txtMntDon.Text = "";
+        }
+
+        private void resetInfoAttrPrix()
+        {
+            txtIDPrix.Text = txtQtePrix.Text = "";
+        }
+
+        private void btnQuiter_Click(object sender, EventArgs e)
+        {
+            DialogResult repons = MessageBox.Show("Desirez-vous réellement quitter cette application ?", "Attention", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (repons == DialogResult.Yes)
+            {
+                Environment.Exit(0);
+            }
+        }
+
+        private void btnAfficherDonateur_Click(object sender, EventArgs e)
+        {
+            donateurCourant = null;
+
+            txtBoxMain.Text = "";
+            txtBoxMain.Text += gestionnaire.AfficherDonateurs()+ "\n----------------------------\r\n";
+
+            String idDonateur = txtIDDonateur.Text.Trim().ToLower();
+            String nom = txtNom.Text.Trim().ToLower();
+            String prenom = txtPrenomDonateur.Text.Trim().ToLower();
+
+
+            try
+            {
+                if (!String.IsNullOrEmpty(idDonateur) && String.IsNullOrEmpty(nom) && String.IsNullOrEmpty(prenom))
+            {
+                // Trouver le donateur par son ID :
+                Func<Donateur, string> getIDDonateur = donateur => donateur.ID;
+
+                donateurCourant = gestionnaire.trouverID(getIDDonateur, idDonateur, gestionnaire.ListDonateurs);
+            }
+            if (String.IsNullOrEmpty(idDonateur) && !String.IsNullOrEmpty(nom) && !String.IsNullOrEmpty(prenom))
+            {
+                // Trouver le donateur par son nom et prenom :
+                Func<Donateur, string> getNomDonateur = donateur => donateur.Surnom;
+                Func<Donateur, string> getPrenomDonateur = donateur => donateur.Prenom;
+
+                donateurCourant = gestionnaire.trouverPersonne(getNomDonateur, getPrenomDonateur, nom, prenom, gestionnaire.ListDonateurs);
+            }
+
+            if (donateurCourant == null)
+            {
+                MessageBox.Show("Donateur non trouve");
+                resetInfoDonateur();
+                return;
+            }
+
+                afficherInfoDonateur();
+
+                txtBoxMain.Text += "Donateur trouve: " + donateurCourant.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Erreur lors de l'ajout du commanditaire");
+                resetInfoDonateur();
+            }
+        }
+
+        public void afficherInfoDonateur()
+        {
+            txtIDDonateur.Text = donateurCourant.ID;
+            txtNom.Text = donateurCourant.Surnom;
+            txtPrenomDonateur.Text = donateurCourant.Prenom;
+            txtAdresse.Text = donateurCourant.Adresse;
+            txtTelephone.Text = donateurCourant.Telephone;
+
+            foreach (System.Windows.Forms.RadioButton item in gbTypeCarte.Controls.OfType<System.Windows.Forms.RadioButton>())
+            {
+                // Pour selectionner le type de carte :
+                if (donateurCourant.TypeDeCarte == item.Text.ToCharArray()[0])
+                {
+                    item.Checked = true;
+                }
+            }
+
+            txtNumeroCarte.Text = donateurCourant.NumeroDeCarte;
+            dateTimeExpiration.Value =
+    DateTime.ParseExact(donateurCourant.DateExpiration, "yyyy-MM-dd", CultureInfo.InvariantCulture);
         }
     }
 }
