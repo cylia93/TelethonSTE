@@ -53,6 +53,12 @@
     <Compile Include="Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reponse_Prix.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reponse_Prix.Designer.cs">
+      <DependentUpon>Reponse_Prix.cs</DependentUpon>
+    </Compile>
     <Compile Include="SystemeTelethonSTE.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -63,6 +69,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reponse_Prix.resx">
+      <DependentUpon>Reponse_Prix.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SystemeTelethonSTE.resx">
       <DependentUpon>SystemeTelethonSTE.cs</DependentUpon>

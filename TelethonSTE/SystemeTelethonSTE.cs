@@ -64,14 +64,28 @@ namespace TelethonSTE
             {
                 if(Double.TryParse(txtMntDon.Text, out double montantDuDon) && montantDuDon > 0)
                 {
-                    if (gestionnaire.AttribuerPrix(montantDuDon))
+                    if (gestionnaire.determinerNbrPrix(montantDuDon) > 0 && gestionnaire.AttribuerPrix(montantDuDon))
                     {
+                        String infoSurlesPrix = "";
+
                         txtBoxMain.Clear();
                         txtBoxMain.Paste(gestionnaire.AfficherPrix(montantDuDon));
 
                         txtQtePrix.Text = gestionnaire.determinerNbrPrix(montantDuDon).ToString();
 
-                        txtIDPrix.Text = Microsoft.VisualBasic.Interaction.InputBox("Choissississez un prix parmis la liste proposee (Renseignez l'ID)", "Choix du prix", "Default", 0, 0);
+                        foreach (Prix item in gestionnaire.ListPrix)
+                        {
+                            if (item.DonMinimum <= montantDuDon)
+                                infoSurlesPrix += "ID: " + item.IdPrix + " , Description: " + item.Description + " , quantite disponible : " + item.Qnte_Disponible + " unites\r\n";
+                        }
+
+                        Reponse_Prix customDialog = new Reponse_Prix();
+                        customDialog.InfoSurlesPrix = "Choissississez un prix parmis la liste proposee (Renseignez l'ID uniquement puis fermez la fenetre). Si le donateur ne veut pas de prix, ne rien renseignez:\r\n\r\n" + infoSurlesPrix;
+                        customDialog.ShowDialog();
+
+                        txtIDPrix.Text = customDialog.TxtReponsePrix.Length == 0 ? "N/A" : customDialog.TxtReponsePrix;
+
+                        customDialog.Dispose();                    
                     } else
                     {
                         txtIDPrix.Text = txtQtePrix.Text = "N/A";
@@ -80,7 +94,7 @@ namespace TelethonSTE
                     }
                 } else
                 {
-                    MessageBox.Show("Le montant renseigne doit etre une valeur positive","Erreur Afficher Prix");
+                    MessageBox.Show("Le montant du don renseigne doit etre une valeur positive.","Erreur Afficher Prix");
                 }               
             }
             catch (Exception ex)
@@ -92,6 +106,10 @@ namespace TelethonSTE
 
         private void btnAjoutDon_Click(object sender, EventArgs e)
         {
+            String idPrixCourant = "";
+            Prix prixPropose = null;
+            int quantiteDemandee = 0;
+
             try
             {
                 if (donateurCourant != null) {
@@ -104,19 +122,46 @@ namespace TelethonSTE
 
                     if (!Double.TryParse(txtMntDon.Text.Trim().ToLower(), out montantDuDon))
                     {
-                        MessageBox.Show("Le montant doit etre specifie", "Ajout Don");
+                        MessageBox.Show("Le montant doit etre specifie", "Erreur Ajout Don");
                         return;
                     }
 
-                    //this.idDon = txt.Text.Trim().ToLower();
-                    this.surnom = txtNom.Text.Trim().ToLower();
-                    this.idDonateur = txtIDDonateur.Text.Trim().ToLower();
-                    this.adresse = txtAdresse.Text.Trim().ToLower(); ;
-                    this.telephone = txtTelephone.Text.Trim().ToLower();
+                    idPrixCourant = txtIDPrix.Text.Trim();
 
-                    gestionnaire.AjouterDon(idDon, dateDuDon, idDonateur, montantDuDon, idPrix);
+                    if(!idPrixCourant.Equals("N/A"))
+                    {
+                        txtBoxMain.Clear();
+                        txtBoxMain.Text = "idPrix : " + idPrix;
+
+                        // Validation sur l'elligibilite au prix :
+
+                        Func<Prix, string> getIDPrix = prix => prix.IdPrix;
+                        prixPropose = gestionnaire.trouverID(getIDPrix, idPrixCourant, gestionnaire.ListPrix);
+
+                        if (montantDuDon < prixPropose.DonMinimum)
+                        {
+                            throw new FormatException("Ce don n'est pas elligible pour ce prix.");
+                        }
+
+                        if (!Int32.TryParse(txtQtePrix.Text.Trim().ToLower(), out quantiteDemandee))
+                        {
+                            throw new FormatException("Vous devez saisir une quantite valide.");
+                        }
+
+                        if (prixPropose.Qnte_Disponible - quantiteDemandee < 0)
+                        {
+                            throw new FormatException("Il n'y a pas assez d'unites pour ce prix.");
+                        }
+                    }
+
+                    gestionnaire.AjouterDon(idDon, dateDuDon, idDonateur, montantDuDon, idPrixCourant);
+                    if (!idPrixCourant.Equals("N/A")) prixPropose.Deduire(quantiteDemandee);
+
                     MessageBox.Show("Don ajoute avec succes", "Ajout Don");
-
+                    resetInfoDon();
+                    resetInfoDonateur();
+                    resetInfoAttrPrix();
+                    txtBoxMain.Clear();
                 }
                 else
                 {
@@ -125,7 +170,7 @@ namespace TelethonSTE
             }
             catch (FormatException ex)
             {
-                MessageBox.Show(ex.Message, " Erreur lors de l'ajout du don");
+                MessageBox.Show(ex.Message, "Erreur Ajout Don");
             }
 
             catch (Exception ex)
@@ -171,11 +216,6 @@ namespace TelethonSTE
             {
                 MessageBox.Show(ex.Message, "Erreur Ajout Donateur");
             }
-        }
-
-        private void rbtnVisa_CheckedChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void btnAjoutCommanditaire_Click(object sender, EventArgs e)
@@ -265,7 +305,7 @@ namespace TelethonSTE
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Commanditaire non trouve");
+                MessageBox.Show(ex.Message, "Erreur Ajout Commanditaire");
                 resetFieldsCommanditaire();
             }
         }
@@ -426,6 +466,35 @@ namespace TelethonSTE
             txtNumeroCarte.Text = donateurCourant.NumeroDeCarte;
             dateTimeExpiration.Value =
     DateTime.ParseExact(donateurCourant.DateExpiration, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+        }
+
+        private void btnAfficherDon_Click(object sender, EventArgs e)
+        {
+            txtBoxMain.Clear();
+            txtBoxMain.Text += gestionnaire.AfficherDons() + "\r\n----------------------------\r\n";
+
+            try
+            {
+                if (donateurCourant == null)
+                {
+                    return;
+                }
+
+                txtBoxMain.Text += "Don du donateur courant (" + donateurCourant.Prenom + "," + donateurCourant.Surnom +" ) :\r\n";
+
+                String donsDonateurCourant = "";
+
+                foreach (Don item in gestionnaire.ListDons)
+                {
+                    if (item.IdDonateurDon.Equals(donateurCourant.ID))
+                        donsDonateurCourant += item.ToString() + "\r\n";
+                }
+                txtBoxMain.Text += String.IsNullOrEmpty(donsDonateurCourant) ? "Aucun don pour ce donateur." : donsDonateurCourant;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Erreur Affichage Don");
+            }
         }
     }
 }

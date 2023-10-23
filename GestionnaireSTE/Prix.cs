@@ -23,7 +23,7 @@ namespace GestionnaireSTE
             this.idPrix = idPrix;
             this.description = description;
             this.valeur = valeur;
-            this.donMinimum = donMinimum;
+            this.donMinimum = donMinimum < 50 ? 50 : donMinimum;
             this.qnte_Originale = qnte_Originale;
             this.qnte_Disponible = qnte_Disponible;
             this.idCommenditaire = idCommenditaire;
@@ -31,6 +31,8 @@ namespace GestionnaireSTE
 
         public void Deduire(int qte)
         {
+            if (this.IdPrix.Equals("N/A")) return;
+
             if(this.qnte_Disponible == 0)
             {
                 throw new Exception("Ce prix est epuise.");
@@ -86,8 +88,8 @@ namespace GestionnaireSTE
         public override string ToString()
         {
             return " Le prix numero " + this.idPrix + " ," + this.description + "de valeur " + this.valeur +
-                " de quantite initiale de " + this.qnte_Originale + " a ete fourni par " + this.idCommenditaire +
-                " , il reste desormais " + this.qnte_Disponible + " a gagne pour un don minimum de " + this.donMinimum + "$.";
+                " de quantite initiale de " + this.qnte_Originale + " a ete fourni par le commanditaire #" + this.idCommenditaire +
+                " , il reste desormais " + this.qnte_Disponible + " a gagne pour un don minimum de " + this.donMinimum + "$.\n\n";
         }
     }
 }

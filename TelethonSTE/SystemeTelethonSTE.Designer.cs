@@ -169,6 +169,7 @@
             this.btnAffichDonateur.TabIndex = 21;
             this.btnAffichDonateur.Text = "Afficher Donateur";
             this.btnAffichDonateur.UseVisualStyleBackColor = true;
+            this.btnAffichDonateur.Click += new System.EventHandler(this.btnAfficherDonateur_Click);
             // 
             // btnAjoutDonateur
             // 
@@ -190,6 +191,7 @@
             this.btnAfficherDon.TabIndex = 19;
             this.btnAfficherDon.Text = "Afficher Don";
             this.btnAfficherDon.UseVisualStyleBackColor = true;
+            this.btnAfficherDon.Click += new System.EventHandler(this.btnAfficherDon_Click);
             // 
             // btnAjoutDon
             // 
@@ -359,7 +361,6 @@
             this.rbtnVisa.TabStop = true;
             this.rbtnVisa.Text = "Visa";
             this.rbtnVisa.UseVisualStyleBackColor = true;
-            this.rbtnVisa.CheckedChanged += new System.EventHandler(this.rbtnVisa_CheckedChanged);
             // 
             // txtMntDon
             // 
@@ -816,7 +817,6 @@
             this.Name = "SystemeTelethonSTE";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Syteme Telethon STE";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.BtnQuiter);
             this.tbDonateur.ResumeLayout(false);
             this.tabDonateur.ResumeLayout(false);
             this.tabDonateur.PerformLayout();
