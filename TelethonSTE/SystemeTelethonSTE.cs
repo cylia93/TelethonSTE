@@ -66,12 +66,26 @@ namespace TelethonSTE
                 {
                     if (gestionnaire.AttribuerPrix(montantDuDon))
                     {
+                        String infoSurlesPrix = "";
+
                         txtBoxMain.Clear();
                         txtBoxMain.Paste(gestionnaire.AfficherPrix(montantDuDon));
 
                         txtQtePrix.Text = gestionnaire.determinerNbrPrix(montantDuDon).ToString();
 
-                        txtIDPrix.Text = Microsoft.VisualBasic.Interaction.InputBox("Choissississez un prix parmis la liste proposee (Renseignez l'ID)", "Choix du prix", "Default", 0, 0);
+                        foreach (Prix item in gestionnaire.ListPrix)
+                        {
+                            if(item.DonMinimum <= montantDuDon)
+                            infoSurlesPrix += "ID: " + item.IdPrix + " , Description: " + item.Description + " , quantite disponible : " + item.Qnte_Disponible + " unites\r\n";
+                        }
+
+                        Reponse_Prix customDialog = new Reponse_Prix();
+                        customDialog.InfoSurlesPrix = "Choissississez un prix parmis la liste proposee (Renseignez l'ID uniquement puis fermez la fenetre). Si le donateur ne veut pas de prix, faites \"N\\A\":\r\n\r\n" + infoSurlesPrix; 
+                        customDialog.ShowDialog();
+
+                        txtIDPrix.Text = customDialog.TxtReponsePrix;
+
+                        customDialog.Dispose();
                     } else
                     {
                         txtIDPrix.Text = txtQtePrix.Text = "N/A";
@@ -116,7 +130,9 @@ namespace TelethonSTE
 
                     gestionnaire.AjouterDon(idDon, dateDuDon, idDonateur, montantDuDon, idPrix);
                     MessageBox.Show("Don ajoute avec succes", "Ajout Don");
-
+                    resetInfoDon();
+                    resetInfoDonateur();
+                    resetInfoAttrPrix();
                 }
                 else
                 {
@@ -265,7 +281,7 @@ namespace TelethonSTE
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Commanditaire non trouve");
+                MessageBox.Show(ex.Message, "Erreur Ajout Commanditaire");
                 resetFieldsCommanditaire();
             }
         }
