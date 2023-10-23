@@ -189,7 +189,7 @@ namespace GestionnaireSTE
 
         public string AfficherPrix(double montant)
         {
-            string listePrix = "La liste des prix alligibles pour ce don :\r\n\r\n";
+            string listePrix = "La liste des prix elligibles pour ce don :\r\n\r\n";
             foreach (Prix prix in steprix)
             {
                 if(montant >= prix.DonMinimum)

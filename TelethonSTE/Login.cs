@@ -68,10 +68,9 @@ namespace TelethonSTE
         private void btnAnnuler_Click(object sender, EventArgs e)
         {
             DialogResult reponse = MessageBox.Show("Desirez_vous réellement quitter cette application ?",
-                                                      "Attention", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            "Attention", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (reponse == DialogResult.Yes)
             {
-                
                 Environment.Exit(0);
             }
         }

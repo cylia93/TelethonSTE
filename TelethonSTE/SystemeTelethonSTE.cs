@@ -189,11 +189,6 @@ namespace TelethonSTE
             }
         }
 
-        private void rbtnVisa_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnAjoutCommanditaire_Click(object sender, EventArgs e)
         {
             try

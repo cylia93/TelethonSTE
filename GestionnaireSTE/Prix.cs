@@ -86,8 +86,8 @@ namespace GestionnaireSTE
         public override string ToString()
         {
             return " Le prix numero " + this.idPrix + " ," + this.description + "de valeur " + this.valeur +
-                " de quantite initiale de " + this.qnte_Originale + " a ete fourni par " + this.idCommenditaire +
-                " , il reste desormais " + this.qnte_Disponible + " a gagne pour un don minimum de " + this.donMinimum + "$.";
+                " de quantite initiale de " + this.qnte_Originale + " a ete fourni par le commanditaire #" + this.idCommenditaire +
+                " , il reste desormais " + this.qnte_Disponible + " a gagne pour un don minimum de " + this.donMinimum + "$.\n\n";
         }
     }
 }
