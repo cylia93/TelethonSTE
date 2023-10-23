@@ -467,5 +467,34 @@ namespace TelethonSTE
             dateTimeExpiration.Value =
     DateTime.ParseExact(donateurCourant.DateExpiration, "yyyy-MM-dd", CultureInfo.InvariantCulture);
         }
+
+        private void btnAfficherDon_Click(object sender, EventArgs e)
+        {
+            txtBoxMain.Clear();
+            txtBoxMain.Text += gestionnaire.AfficherDons() + "\r\n----------------------------\r\n";
+
+            try
+            {
+                if (donateurCourant == null)
+                {
+                    return;
+                }
+
+                txtBoxMain.Text += "Don du donateur courant (" + donateurCourant.Prenom + "," + donateurCourant.Surnom +" ) :\r\n";
+
+                String donsDonateurCourant = "";
+
+                foreach (Don item in gestionnaire.ListDons)
+                {
+                    if (item.IdDonateurDon.Equals(donateurCourant.ID))
+                        donsDonateurCourant += item.ToString() + "\r\n";
+                }
+                txtBoxMain.Text += String.IsNullOrEmpty(donsDonateurCourant) ? "Aucun don pour ce donateur." : donsDonateurCourant;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Erreur Affichage Don");
+            }
+        }
     }
 }

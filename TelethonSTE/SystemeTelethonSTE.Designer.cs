@@ -191,6 +191,7 @@
             this.btnAfficherDon.TabIndex = 19;
             this.btnAfficherDon.Text = "Afficher Don";
             this.btnAfficherDon.UseVisualStyleBackColor = true;
+            this.btnAfficherDon.Click += new System.EventHandler(this.btnAfficherDon_Click);
             // 
             // btnAjoutDon
             // 
