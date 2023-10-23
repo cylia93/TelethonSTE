@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Net;
+using System.Security.Cryptography;
+using System.Security.Policy;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace GestionnaireSTE
@@ -49,6 +53,11 @@ namespace GestionnaireSTE
             {
                 throw new FormatException("Un champ est vide, veuillez completer tous les champs.");
             }
+
+            if (ContientCharacteresSpeciaux(prenom) || ContientCharacteresSpeciaux(surnom) || ContientCharacteresSpeciaux(idDonateur) || ContientCharacteresSpeciaux(address) || ContientCharacteresSpeciaux(phone) || ContientCharacteresSpeciaux(numCarte))
+            {
+                throw new FormatException("Les caracteres speciaux ne sont pas permis.");
+            }
             if (numCarte.Length != 16)
             {
                 throw new FormatException("Le numero de la carte doit contenir 16 chiffres.");
@@ -92,9 +101,9 @@ namespace GestionnaireSTE
             {
                 throw new FormatException("Un champ est vide, veuillez completer tous les champs");
             }
-            if (prenom.Contains(',') || surnom.Contains(',') || idComm.Contains(','))
+            if (ContientCharacteresSpeciaux(prenom) || ContientCharacteresSpeciaux(surnom) || ContientCharacteresSpeciaux(idComm))
             {
-                throw new FormatException(" Vous ne pouvez pas utiliser de virgules dans les champs");
+                throw new FormatException("Les caracteres speciaux ne sont pas permis.");
             }
             Commanditaire commanditaire = new Commanditaire(prenom, surnom, idComm);
             commanditaires.Add(commanditaire);
@@ -114,6 +123,10 @@ namespace GestionnaireSTE
             {
                 throw new FormatException("Un champ est vide, veuillez completer tous les champs.");
             }
+            if (ContientCharacteresSpeciaux(idP) || ContientCharacteresSpeciaux(desc) || ContientCharacteresSpeciaux(idC))
+            {
+                throw new FormatException("Les caracteres speciaux ne sont pas permis.");
+            }
 
             if ( val <= 0 || donMin <= 0)
             {
@@ -122,12 +135,6 @@ namespace GestionnaireSTE
             if (qteOr <= 0)
             {
                 throw new FormatException("Vous devez donne au moins 1 prix - quantite invalide.");
-            }
-
-
-            if (idP.Contains(',') || idC.Contains(','))
-            {
-                throw new FormatException(" Vous ne pouvez pas utiliser de virgules dans les champs ID.");
             }
 
             Prix prix = new Prix(idP, desc, val, donMin, qteOr, qteDisp, idC);
@@ -143,15 +150,15 @@ namespace GestionnaireSTE
                     throw new Exception("Un don avec cet ID existe deja");
                 }
             }
-
-            if (idDon == "" || dateDuDon == "" || idDonateur == "" || montantDuDon == null || idPrix == "")
+            if (idDon == "" || dateDuDon == "" || idDonateur == "" || montantDuDon < 0 || idPrix == "")
             {
                 throw new FormatException("Un champ est vide, veuillez completer tous les champs");
             }
-            if (idDon.Contains(',') || dateDuDon.Contains(',') || idDonateur.Contains(',') || idPrix.Contains(','))
+            if (ContientCharacteresSpeciaux(idDon) || ContientCharacteresSpeciaux(idDonateur))
             {
-                throw new FormatException(" Vous ne pouvez pas utiliser de virgules dans les champs");
+                throw new FormatException("Les caracteres speciaux ne sont pas permis.");
             }
+
             Don don = new Don(idDon, dateDuDon, idDonateur, montantDuDon, idPrix);
             dons.Add(don);
         }
@@ -192,7 +199,7 @@ namespace GestionnaireSTE
             string listePrix = "La liste des prix elligibles pour ce don :\r\n\r\n";
             foreach (Prix prix in steprix)
             {
-                if(montant >= prix.DonMinimum)
+                if(montant >= prix.DonMinimum && prix.Qnte_Disponible > 0)
                 {
                     listePrix += listePrix + prix.ToString();
                 }
@@ -248,6 +255,8 @@ namespace GestionnaireSTE
             return true;
         }
 
+        // Methodes utilitaires :
+
         public T trouverID<T>(Func<T, string> getID, string id, List<T> values) where T : class
         {
             int cnt = 0;
@@ -286,6 +295,11 @@ namespace GestionnaireSTE
                 cnt++;
             }
             return null;
+        }
+
+        public bool ContientCharacteresSpeciaux(string input)
+        {
+            return Regex.IsMatch(input, @"[^a-zA-Z0-9\s]");
         }
 
     }
