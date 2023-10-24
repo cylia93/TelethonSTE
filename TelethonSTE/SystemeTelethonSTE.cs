@@ -22,6 +22,8 @@ namespace TelethonSTE
 {
     public partial class SystemeTelethonSTE : Form
     {
+        TextInfo convMajuscule = new CultureInfo("en-US", false).TextInfo;
+
         // Acces aux .csv dans le dossier Resources :
 
         static string RunningPath = AppDomain.CurrentDomain.BaseDirectory;
@@ -198,11 +200,11 @@ namespace TelethonSTE
                     }
 
                     idPrixCourant = txtIDPrix.Text.Trim();
+                    idPrixCourant = !String.IsNullOrEmpty(idPrixCourant) ? idPrixCourant : "N/A";
 
                     if(!idPrixCourant.Equals("N/A"))
                     {
                         txtBoxMain.Clear();
-                        txtBoxMain.Text = "idPrix : " + idPrix;
 
                         // Validation sur l'elligibilite au prix :
 
@@ -225,7 +227,9 @@ namespace TelethonSTE
                         }
                     }
 
-                    gestionnaire.AjouterDon(idDon, dateDuDon, idDonateur, montantDuDon, idPrixCourant);
+                    gestionnaire.AjouterDon(idDon.ToUpper(), dateDuDon, idDonateur.ToUpper(), montantDuDon, idPrixCourant.ToUpper());
+
+                    // Si l'ajout est reussi, alors on deduit le nombre de prix attribues :
                     if (!idPrixCourant.Equals("N/A")) prixPropose.Deduire(quantiteDemandee);
 
                     MessageBox.Show("Don ajoute avec succes", "Ajout Don");
@@ -260,8 +264,8 @@ namespace TelethonSTE
                 this.prenom = txtPrenomDonateur.Text.Trim().ToLower();
                 this.surnom = txtNom.Text.Trim().ToLower();
                 this.idDonateur = txtIDDonateur.Text.Trim().ToLower();
-                this.adresse = txtAdresse.Text.Trim().ToLower(); ;
-                this.telephone = txtTelephone.Text.Trim().ToLower();
+                this.adresse = txtAdresse.Text.Trim();
+                this.telephone = txtTelephone.Text.Trim();
 
                 foreach (System.Windows.Forms.RadioButton item in gbTypeCarte.Controls.OfType<System.Windows.Forms.RadioButton>())
                 {
@@ -275,7 +279,8 @@ namespace TelethonSTE
                 this.numeroCarte = txtNumeroCarte.Text.Trim().ToLower();
                 this.dateExpiration = dateTimeExpiration.Value.ToShortDateString();
 
-                gestionnaire.AjouterDonateur(prenom, surnom, idDonateur, adresse, telephone, typeDeCarte, numeroCarte, dateExpiration);
+                gestionnaire.AjouterDonateur(convMajuscule.ToTitleCase(prenom), convMajuscule.ToTitleCase(surnom), idDonateur.ToUpper(), adresse, telephone, typeDeCarte, numeroCarte, dateExpiration);
+
                 donateurCourant = gestionnaire.ListDonateurs.Last();
 
                 txtBoxMain.Text = gestionnaire.ListDonateurs.Last().ToString();
@@ -308,7 +313,8 @@ namespace TelethonSTE
                     return;
                 }
 
-                gestionnaire.AjouterCommanditaire(prenom, surnom, IDCommanditaire);
+                gestionnaire.AjouterCommanditaire(convMajuscule.ToTitleCase(prenom), convMajuscule.ToTitleCase(surnom), IDCommanditaire.ToUpper());
+
                 commanditaireCourant = gestionnaire.ListCommanditaires.Last();
 
                 txtBoxMain.Text = gestionnaire.ListCommanditaires.Last().ToString();
@@ -407,11 +413,11 @@ namespace TelethonSTE
 
 
                 // On creer le prix et on l'ajoute a la liste des prix courants :
-                gestionnaire.AjouterPrix(idPrix, description,
+                gestionnaire.AjouterPrix(idPrix.ToUpper(), description,
                     Double.TryParse(valeur_str, out double valeur) ? valeur : 0,
                     Double.TryParse(donMinimum_str, out double donMinimum) ? donMinimum : 0, Int32.TryParse(qnte_Originale_str, out int qnte_Originale) ? qnte_Originale : 0,
                     Int32.TryParse(qnte_Disponible_str, out int qnte_Disponible) ? qnte_Disponible : 0,
-                     idCommenditaire);
+                     idCommenditaire.ToUpper());
 
                 MessageBox.Show("Prix ajoute avec succes.", "Ajout prix");
                 resetFieldsPrix();
@@ -479,7 +485,6 @@ namespace TelethonSTE
             String idDonateur = txtIDDonateur.Text.Trim().ToLower();
             String nom = txtNom.Text.Trim().ToLower();
             String prenom = txtPrenomDonateur.Text.Trim().ToLower();
-
 
             try
             {

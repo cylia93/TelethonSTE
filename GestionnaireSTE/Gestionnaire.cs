@@ -268,10 +268,10 @@ namespace GestionnaireSTE
 
             while (values.Count > 0 && cnt < values.Count)
             {
-                string refValue = getID(values[cnt]).ToLower();
+                string refValue = getID(values[cnt]).ToLower().Trim();
 
                 //Pour une correspondance exacte :
-                if (refValue.Equals(id.ToLower()))
+                if (refValue.Equals(id.ToLower().Trim()))
                 {
                     return values[cnt];
                 }
