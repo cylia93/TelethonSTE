@@ -64,9 +64,16 @@ namespace GestionnaireSTE
 
         public override string ToString()
         {
-            return "ID numero " + this.idPrixDon + " a ete gagne par " + this.idDonateurDon + " grace au don " + idDon +
-                "d'un montant de " + this.montantDuDon + " fait en date du " + this.dateDuDon;
+            String str = "";
+            str += "#" + this.idDon + ", Montant: " + this.montantDuDon + ", Date: " + this.dateDuDon +
+                ", Donateur: #" + this.idDonateurDon;
 
+            if (!this.idPrixDon.Equals("N/A")) 
+                str += ", [Prix #" + this.idPrixDon + "]";
+            else str += ", [Prix: " + this.idPrixDon + "]";
+
+            str += "\r\n\r\n";
+            return str;
         }
 
     }

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -71,9 +72,16 @@ namespace GestionnaireSTE
 
         public override string ToString()
         {
-            return " Identification " + this.idDonateur + ", " + base.ToString() + ", Adresse: " + this.adresse +
-                " , Telephone: " + this.telephone + " , Type de carte de credit: " + this.typeDeCarte +
-                " , numero de carte: " + this.numeroCarte + " , Date d'expiration: " + this.dateExpiration + "\r\n";
+            String str = "";
+            str += "#" + this.idDonateur + ", " + base.ToString() + ", Adresse: " + this.adresse +
+                ", Téléphone: " + this.telephone + ", Type de carte de crédit: ";
+
+            if (this.typeDeCarte == 'A') str += "AMEX";
+            if (this.typeDeCarte == 'V') str += "VISA";
+            if (this.typeDeCarte == 'M') str += "MC";
+            
+               str += ", Numéro de carte: " + this.numeroCarte + ", Date d'expiration: " + this.dateExpiration + "\r\n\r\n";
+            return str;
         }
 
 
