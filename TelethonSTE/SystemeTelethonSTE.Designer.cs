@@ -97,6 +97,7 @@
             this.nouveauCommanditaireToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nouveauPrixToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quitterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rafraichirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tbDonateur.SuspendLayout();
             this.tabDonateur.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -762,6 +763,7 @@
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.rafraichirToolStripMenuItem,
             this.ajouterToolStripMenuItem,
             this.quitterToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
@@ -775,32 +777,43 @@
             this.nouveauCommanditaireToolStripMenuItem,
             this.nouveauPrixToolStripMenuItem});
             this.ajouterToolStripMenuItem.Name = "ajouterToolStripMenuItem";
-            this.ajouterToolStripMenuItem.Size = new System.Drawing.Size(172, 34);
-            this.ajouterToolStripMenuItem.Text = "Ajouter";
+            this.ajouterToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.ajouterToolStripMenuItem.Text = "&Supprimer...";
+            this.ajouterToolStripMenuItem.Click += new System.EventHandler(this.ajouterToolStripMenuItem_Click);
             // 
             // nouveauDonateurToolStripMenuItem
             // 
             this.nouveauDonateurToolStripMenuItem.Name = "nouveauDonateurToolStripMenuItem";
-            this.nouveauDonateurToolStripMenuItem.Size = new System.Drawing.Size(321, 34);
-            this.nouveauDonateurToolStripMenuItem.Text = "Nouveau donateur...";
+            this.nouveauDonateurToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.D)));
+            this.nouveauDonateurToolStripMenuItem.Size = new System.Drawing.Size(352, 34);
+            this.nouveauDonateurToolStripMenuItem.Text = "Dernier donateur";
             // 
             // nouveauCommanditaireToolStripMenuItem
             // 
             this.nouveauCommanditaireToolStripMenuItem.Name = "nouveauCommanditaireToolStripMenuItem";
-            this.nouveauCommanditaireToolStripMenuItem.Size = new System.Drawing.Size(321, 34);
-            this.nouveauCommanditaireToolStripMenuItem.Text = "Nouveau commanditaire...";
+            this.nouveauCommanditaireToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.C)));
+            this.nouveauCommanditaireToolStripMenuItem.Size = new System.Drawing.Size(352, 34);
+            this.nouveauCommanditaireToolStripMenuItem.Text = "Dernier commanditaire";
             // 
             // nouveauPrixToolStripMenuItem
             // 
             this.nouveauPrixToolStripMenuItem.Name = "nouveauPrixToolStripMenuItem";
-            this.nouveauPrixToolStripMenuItem.Size = new System.Drawing.Size(321, 34);
-            this.nouveauPrixToolStripMenuItem.Text = "Nouveau prix...";
+            this.nouveauPrixToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.P)));
+            this.nouveauPrixToolStripMenuItem.Size = new System.Drawing.Size(352, 34);
+            this.nouveauPrixToolStripMenuItem.Text = "Dernier prix";
             // 
             // quitterToolStripMenuItem
             // 
             this.quitterToolStripMenuItem.Name = "quitterToolStripMenuItem";
-            this.quitterToolStripMenuItem.Size = new System.Drawing.Size(172, 34);
-            this.quitterToolStripMenuItem.Text = "Quitter";
+            this.quitterToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.quitterToolStripMenuItem.Text = "&Quitter";
+            this.quitterToolStripMenuItem.Click += new System.EventHandler(this.btnQuiter_Click);
+            // 
+            // rafraichirToolStripMenuItem
+            // 
+            this.rafraichirToolStripMenuItem.Name = "rafraichirToolStripMenuItem";
+            this.rafraichirToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.rafraichirToolStripMenuItem.Text = "&Rafraichir";
             // 
             // SystemeTelethonSTE
             // 
@@ -906,5 +919,6 @@
         private System.Windows.Forms.ToolStripMenuItem nouveauCommanditaireToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem nouveauPrixToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem quitterToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rafraichirToolStripMenuItem;
     }
 }
