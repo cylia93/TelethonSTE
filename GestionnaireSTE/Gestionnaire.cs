@@ -74,9 +74,9 @@ namespace GestionnaireSTE
 
             int monthsDifference = (dateExpiration.Year - dateActuelle.Year) * 12 + dateExpiration.Month - dateActuelle.Month;
 
-            if (monthsDifference < 7)
+            if (monthsDifference < 1)
             {
-                throw new FormatException("La date d'expiration de votre carte de credit doit etre d'au moins 6 mois apres la date d'aujourd'hui.");
+                throw new FormatException("La date d'expiration de votre carte de credit doit etre d'au moins 1 mois apres la date d'aujourd'hui.");
             }
 
 
