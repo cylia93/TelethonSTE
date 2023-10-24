@@ -16,17 +16,21 @@ using System.Globalization;
 using CsvHelper;
 using System.IO;
 using CsvHelper.Configuration;
+using CsvHelper.Configuration.Attributes;
 
 namespace TelethonSTE
 {
     public partial class SystemeTelethonSTE : Form
     {
-        // Acces aux .csv dans les Resources :
+        // Acces aux .csv dans le dossier Resources :
+
         static string RunningPath = AppDomain.CurrentDomain.BaseDirectory;
-        string fichier_Commanditaire = string.Format("{0}Resources\\Liste_Commanditaires.csv", Path.GetFullPath(Path.Combine(RunningPath, @"..\..\")));
 
-        private List<dynamic> csvRecordsCommanditaire;
-
+        string fichier_Commanditaires = string.Format("{0}Resources\\Liste_Commanditaires.csv", Path.GetFullPath(Path.Combine(RunningPath, @"..\..\")));
+        string fichier_Donateurs= string.Format("{0}Resources\\Liste_Donateurs.csv", Path.GetFullPath(Path.Combine(RunningPath, @"..\..\")));
+        string fichier_Dons= string.Format("{0}Resources\\Liste_Dons.csv", Path.GetFullPath(Path.Combine(RunningPath, @"..\..\")));
+        string fichier_Prix= string.Format("{0}Resources\\Liste_Prix.csv", Path.GetFullPath(Path.Combine(RunningPath, @"..\..\")));
+             
         // Don
         string idDon;
         string dateDuDon;
@@ -56,7 +60,6 @@ namespace TelethonSTE
         string idCommenditaire;
 
         //Commanditaire
-        string IDCommanditaire;
         Commanditaire commanditaireCourant = null;
 
         public Gestionnaire gestionnaire = new Gestionnaire();
@@ -65,35 +68,64 @@ namespace TelethonSTE
         {
             InitializeComponent();
 
+            // On popule toutes les listes de l'instance gestionnaire :
 
-            // Test Lecture :
-            using (var streamReader = new StreamReader(fichier_Commanditaire))
+            using (var streamReader = new StreamReader(fichier_Commanditaires))
             {
                 using (var csvReader = new CsvReader(streamReader, CultureInfo.InvariantCulture))
                 {
-                    csvRecordsCommanditaire = csvReader.GetRecords<dynamic>().ToList();
+                    foreach (var ligne in csvReader.GetRecords<Commanditaire>().ToList())
+                    {
+                        gestionnaire.ListCommanditaires.Add(ligne);
+                    }
                 }
             }
-            txtBoxMain.Clear();
 
-            foreach (var record in csvRecordsCommanditaire)
+            using (var streamReader = new StreamReader(fichier_Donateurs))
             {
-                foreach (var property in ((IDictionary<string, object>)record))
+                using (var csvReader = new CsvReader(streamReader, CultureInfo.InvariantCulture))
                 {
-                    txtBoxMain.Text += $"{property.Key}: {property.Value}\t"; // Display property name and value
+                    foreach (var ligne in csvReader.GetRecords<Donateur>().ToList())
+                    {
+                        gestionnaire.ListDonateurs.Add(ligne);
+                    }
                 }
-                txtBoxMain.Text += Environment.NewLine; // Add a newline to separate records
             }
 
-            // Test Ecriture :
-            Commanditaire newCommanditaire = new Commanditaire("NewFirstName", "NewLastName", "NewID");
-
-            using (var writer = new StreamWriter(fichier_Commanditaire, true)) // 'true' for appending to an existing file
-            using (var csv = new CsvWriter(writer, new CsvConfiguration(CultureInfo.InvariantCulture)))
+            using (var streamReader = new StreamReader(fichier_Dons))
             {
-                // Write the new Commanditaire to the CSV file
-                csv.WriteRecord(newCommanditaire);
+                using (var csvReader = new CsvReader(streamReader, CultureInfo.InvariantCulture))
+                {
+                    foreach (var ligne in csvReader.GetRecords<Don>().ToList())
+                    {
+                        gestionnaire.ListDons.Add(ligne);
+                    }
+                }
             }
+
+            using (var streamReader = new StreamReader(fichier_Prix))
+            {
+                using (var csvReader = new CsvReader(streamReader, CultureInfo.InvariantCulture))
+                {
+                    foreach (var ligne in csvReader.GetRecords<Prix>().ToList())
+                    {
+                        gestionnaire.ListPrix.Add(ligne);
+                    }
+                }
+            }
+
+            //// Test Ecriture :
+            //Commanditaire newCommanditaire = new Commanditaire("NewFirstName", "NewLastName", "NewID");
+
+            //using (var writer = new StreamWriter(fichier_Commanditaires, true)) // 'true' for appending to an existing file
+            //using (var csv = new CsvWriter(writer, new CsvConfiguration(CultureInfo.InvariantCulture)))
+            //{
+            //    // Write the new Commanditaire to the CSV file
+            //    csv.WriteRecord(newCommanditaire);
+            //    csv.NextRecord(); // add a newline caracter;
+            //    csv.WriteRecord(newCommanditaire);
+            //    csv.NextRecord(); // add a newline caracter;
+            //}
 
         }
 
@@ -265,7 +297,7 @@ namespace TelethonSTE
 
                 this.prenom = txtPrenomCommanditaire.Text;
                 this.surnom = txtNomCommanditaire.Text;
-                this.IDCommanditaire = txtIDCommanditaire.Text;
+                string IDCommanditaire = txtIDCommanditaire.Text;
 
                 Func<Commanditaire, string> getIDCommanditaire = commanditaire => commanditaire.IDComm;
                 commanditaireCourant = gestionnaire.trouverID(getIDCommanditaire, IDCommanditaire, gestionnaire.ListCommanditaires);
