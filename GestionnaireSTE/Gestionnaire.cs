@@ -128,7 +128,12 @@ namespace GestionnaireSTE
                 throw new FormatException("Les caracteres speciaux ne sont pas permis.");
             }
 
-            if ( val <= 0 || donMin <= 0)
+            if ( val == 0 || donMin == 0 || qteOr == 0)
+            {
+                throw new FormatException("Vous devez saisir une chiffre pour la valeur du prix, le don minimum pour l'obtention de ce prix, et son nombre d'unite (quantite).");
+            }
+
+            if ( val < 0 || donMin < 0)
             {
                 throw new FormatException("Vous devez donner une valeur positive.");
             }
