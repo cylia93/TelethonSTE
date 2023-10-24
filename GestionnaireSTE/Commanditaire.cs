@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CsvHelper.Configuration;
+using CsvHelper.Configuration.Attributes;
 
 namespace GestionnaireSTE
 {
@@ -10,11 +12,12 @@ namespace GestionnaireSTE
     {
         private string IDCommanditaire;
 
-        public Commanditaire(string prenom, string surnom, string iDCommanditaire) : base(prenom, surnom)
+        public Commanditaire(string prenom, string surnom, string IDCommanditaire) : base(prenom, surnom)
         {
-            IDCommanditaire = iDCommanditaire;
+            this.IDCommanditaire = IDCommanditaire;
         }
 
+        [Name("IDCommanditaire")]
         public string IDComm
         {
             get { return this.IDCommanditaire; }

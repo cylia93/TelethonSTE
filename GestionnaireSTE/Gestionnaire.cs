@@ -74,9 +74,9 @@ namespace GestionnaireSTE
 
             int monthsDifference = (dateExpiration.Year - dateActuelle.Year) * 12 + dateExpiration.Month - dateActuelle.Month;
 
-            if (monthsDifference < 7)
+            if (monthsDifference < 1)
             {
-                throw new FormatException("La date d'expiration de votre carte de credit doit etre d'au moins 6 mois apres la date d'aujourd'hui.");
+                throw new FormatException("La date d'expiration de votre carte de credit doit etre d'au moins 1 mois apres la date d'aujourd'hui.");
             }
 
 
@@ -128,7 +128,12 @@ namespace GestionnaireSTE
                 throw new FormatException("Les caracteres speciaux ne sont pas permis.");
             }
 
-            if ( val <= 0 || donMin <= 0)
+            if ( val == 0 || donMin == 0 || qteOr == 0)
+            {
+                throw new FormatException("Vous devez saisir une chiffre pour la valeur du prix, le don minimum pour l'obtention de ce prix, et son nombre d'unite (quantite).");
+            }
+
+            if ( val < 0 || donMin < 0)
             {
                 throw new FormatException("Vous devez donner une valeur positive.");
             }
@@ -263,10 +268,10 @@ namespace GestionnaireSTE
 
             while (values.Count > 0 && cnt < values.Count)
             {
-                string refValue = getID(values[cnt]).ToLower();
+                string refValue = getID(values[cnt]).ToLower().Trim();
 
                 //Pour une correspondance exacte :
-                if (refValue.Equals(id.ToLower()))
+                if (refValue.Equals(id.ToLower().Trim()))
                 {
                     return values[cnt];
                 }

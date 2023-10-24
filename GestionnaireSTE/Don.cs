@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CsvHelper.Configuration.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,30 +26,36 @@ namespace GestionnaireSTE
             this.idPrixDon = idPrixDon;
         }
 
+        [Name("idDon")]
         public string IDDon
         {
             get { return idDon; }
             set { idDon = value; }
         }
 
+        [Name("dateDuDon")]
         public string DateDuDon
         {
             get { return dateDuDon; }
             set { dateDuDon = value; }
         }
 
+        [Name("idDonateurDon")]
         public string IdDonateurDon
         {
             get { return idDonateurDon; }
             set { idDonateurDon = value; }
         }
 
+
+        [Name("montantDuDon")]
         public double MontantDuDon
         {
             get { return montantDuDon; }
             set { this.montantDuDon = value; }
         }
 
+        [Name("idPrixDon")]
         public string IdPrixDon
         {
             get { return this.idPrixDon; }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CsvHelper.Configuration;
+using CsvHelper.Configuration.Attributes;
 
 namespace GestionnaireSTE
 {
@@ -17,12 +19,14 @@ namespace GestionnaireSTE
             this.surnom = surnom;
         }
 
+        [Name("prenom")]
         public string Prenom
         {
             get { return this.prenom; }
             set { this.prenom = value; }
         }
 
+        [Name("surnom")]
         public string Surnom
         {
             get { return this.surnom; }
