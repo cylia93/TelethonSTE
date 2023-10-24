@@ -13,11 +13,20 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 using static System.Net.Mime.MediaTypeNames;
 using System.Globalization;
+using CsvHelper;
+using System.IO;
+using CsvHelper.Configuration;
 
 namespace TelethonSTE
 {
     public partial class SystemeTelethonSTE : Form
     {
+        // Acces aux .csv dans les Resources :
+        static string RunningPath = AppDomain.CurrentDomain.BaseDirectory;
+        string fichier_Commanditaire = string.Format("{0}Resources\\Liste_Commanditaires.csv", Path.GetFullPath(Path.Combine(RunningPath, @"..\..\")));
+
+        private List<dynamic> csvRecordsCommanditaire;
+
         // Don
         string idDon;
         string dateDuDon;
@@ -51,11 +60,41 @@ namespace TelethonSTE
         Commanditaire commanditaireCourant = null;
 
         public Gestionnaire gestionnaire = new Gestionnaire();
-        public Prix calendrier = new Prix("4", "calendrier", 30, 50, 5, 5, "45");
 
         public SystemeTelethonSTE()
         {
             InitializeComponent();
+
+
+            // Test Lecture :
+            using (var streamReader = new StreamReader(fichier_Commanditaire))
+            {
+                using (var csvReader = new CsvReader(streamReader, CultureInfo.InvariantCulture))
+                {
+                    csvRecordsCommanditaire = csvReader.GetRecords<dynamic>().ToList();
+                }
+            }
+            txtBoxMain.Clear();
+
+            foreach (var record in csvRecordsCommanditaire)
+            {
+                foreach (var property in ((IDictionary<string, object>)record))
+                {
+                    txtBoxMain.Text += $"{property.Key}: {property.Value}\t"; // Display property name and value
+                }
+                txtBoxMain.Text += Environment.NewLine; // Add a newline to separate records
+            }
+
+            // Test Ecriture :
+            Commanditaire newCommanditaire = new Commanditaire("NewFirstName", "NewLastName", "NewID");
+
+            using (var writer = new StreamWriter(fichier_Commanditaire, true)) // 'true' for appending to an existing file
+            using (var csv = new CsvWriter(writer, new CsvConfiguration(CultureInfo.InvariantCulture)))
+            {
+                // Write the new Commanditaire to the CSV file
+                csv.WriteRecord(newCommanditaire);
+            }
+
         }
 
         private void btnAffPrix_Click(object sender, EventArgs e)
