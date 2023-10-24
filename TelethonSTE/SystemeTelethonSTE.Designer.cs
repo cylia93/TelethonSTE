@@ -126,7 +126,7 @@
             this.tbDonateur.Name = "tbDonateur";
             this.tbDonateur.SelectedIndex = 0;
             this.tbDonateur.Size = new System.Drawing.Size(824, 561);
-            this.tbDonateur.TabIndex = 19;
+            this.tbDonateur.TabIndex = 20;
             // 
             // tabDonateur
             // 
@@ -166,7 +166,7 @@
             this.btnAffichDonateur.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnAffichDonateur.Name = "btnAffichDonateur";
             this.btnAffichDonateur.Size = new System.Drawing.Size(181, 34);
-            this.btnAffichDonateur.TabIndex = 21;
+            this.btnAffichDonateur.TabIndex = 19;
             this.btnAffichDonateur.Text = "Afficher Donateur";
             this.btnAffichDonateur.UseVisualStyleBackColor = true;
             this.btnAffichDonateur.Click += new System.EventHandler(this.btnAfficherDonateur_Click);
@@ -177,7 +177,7 @@
             this.btnAjoutDonateur.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnAjoutDonateur.Name = "btnAjoutDonateur";
             this.btnAjoutDonateur.Size = new System.Drawing.Size(181, 34);
-            this.btnAjoutDonateur.TabIndex = 20;
+            this.btnAjoutDonateur.TabIndex = 18;
             this.btnAjoutDonateur.Text = "Ajouter Donateur";
             this.btnAjoutDonateur.UseVisualStyleBackColor = true;
             this.btnAjoutDonateur.Click += new System.EventHandler(this.btnAjoutDonateur_Click);
@@ -188,7 +188,7 @@
             this.btnAfficherDon.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnAfficherDon.Name = "btnAfficherDon";
             this.btnAfficherDon.Size = new System.Drawing.Size(181, 34);
-            this.btnAfficherDon.TabIndex = 19;
+            this.btnAfficherDon.TabIndex = 17;
             this.btnAfficherDon.Text = "Afficher Don";
             this.btnAfficherDon.UseVisualStyleBackColor = true;
             this.btnAfficherDon.Click += new System.EventHandler(this.btnAfficherDon_Click);
@@ -199,7 +199,7 @@
             this.btnAjoutDon.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnAjoutDon.Name = "btnAjoutDon";
             this.btnAjoutDon.Size = new System.Drawing.Size(181, 34);
-            this.btnAjoutDon.TabIndex = 18;
+            this.btnAjoutDon.TabIndex = 16;
             this.btnAjoutDon.Text = "Ajouter Don";
             this.btnAjoutDon.UseVisualStyleBackColor = true;
             this.btnAjoutDon.Click += new System.EventHandler(this.btnAjoutDon_Click);
@@ -226,7 +226,7 @@
             this.txtQtePrix.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtQtePrix.Name = "txtQtePrix";
             this.txtQtePrix.Size = new System.Drawing.Size(112, 31);
-            this.txtQtePrix.TabIndex = 4;
+            this.txtQtePrix.TabIndex = 15;
             // 
             // txtIDPrix
             // 
@@ -234,7 +234,7 @@
             this.txtIDPrix.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtIDPrix.Name = "txtIDPrix";
             this.txtIDPrix.Size = new System.Drawing.Size(112, 31);
-            this.txtIDPrix.TabIndex = 3;
+            this.txtIDPrix.TabIndex = 14;
             // 
             // lblQuantite
             // 
@@ -260,7 +260,7 @@
             this.btnAffPrix.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnAffPrix.Name = "btnAffPrix";
             this.btnAffPrix.Size = new System.Drawing.Size(202, 34);
-            this.btnAffPrix.TabIndex = 0;
+            this.btnAffPrix.TabIndex = 13;
             this.btnAffPrix.Text = "Afficher Prix";
             this.btnAffPrix.UseVisualStyleBackColor = true;
             this.btnAffPrix.Click += new System.EventHandler(this.btnAffPrix_Click);
@@ -286,7 +286,7 @@
             this.dateTimeExpiration.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dateTimeExpiration.Name = "dateTimeExpiration";
             this.dateTimeExpiration.Size = new System.Drawing.Size(224, 31);
-            this.dateTimeExpiration.TabIndex = 4;
+            this.dateTimeExpiration.TabIndex = 10;
             // 
             // txtNumeroCarte
             // 
@@ -294,7 +294,7 @@
             this.txtNumeroCarte.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtNumeroCarte.Name = "txtNumeroCarte";
             this.txtNumeroCarte.Size = new System.Drawing.Size(224, 31);
-            this.txtNumeroCarte.TabIndex = 3;
+            this.txtNumeroCarte.TabIndex = 9;
             // 
             // lblDateExpiration
             // 
@@ -333,7 +333,7 @@
             this.rbtnAMEX.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.rbtnAMEX.Name = "rbtnAMEX";
             this.rbtnAMEX.Size = new System.Drawing.Size(94, 27);
-            this.rbtnAMEX.TabIndex = 2;
+            this.rbtnAMEX.TabIndex = 8;
             this.rbtnAMEX.TabStop = true;
             this.rbtnAMEX.Text = "AMEX";
             this.rbtnAMEX.UseVisualStyleBackColor = true;
@@ -345,7 +345,7 @@
             this.rbtnMC.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.rbtnMC.Name = "rbtnMC";
             this.rbtnMC.Size = new System.Drawing.Size(67, 27);
-            this.rbtnMC.TabIndex = 1;
+            this.rbtnMC.TabIndex = 7;
             this.rbtnMC.TabStop = true;
             this.rbtnMC.Text = "MC";
             this.rbtnMC.UseVisualStyleBackColor = true;
@@ -357,7 +357,7 @@
             this.rbtnVisa.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.rbtnVisa.Name = "rbtnVisa";
             this.rbtnVisa.Size = new System.Drawing.Size(72, 27);
-            this.rbtnVisa.TabIndex = 0;
+            this.rbtnVisa.TabIndex = 6;
             this.rbtnVisa.TabStop = true;
             this.rbtnVisa.Text = "Visa";
             this.rbtnVisa.UseVisualStyleBackColor = true;
@@ -368,7 +368,7 @@
             this.txtMntDon.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtMntDon.Name = "txtMntDon";
             this.txtMntDon.Size = new System.Drawing.Size(168, 31);
-            this.txtMntDon.TabIndex = 15;
+            this.txtMntDon.TabIndex = 12;
             // 
             // txtIDDon
             // 
@@ -376,7 +376,7 @@
             this.txtIDDon.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtIDDon.Name = "txtIDDon";
             this.txtIDDon.Size = new System.Drawing.Size(168, 31);
-            this.txtIDDon.TabIndex = 14;
+            this.txtIDDon.TabIndex = 11;
             // 
             // lblMontant
             // 
@@ -412,7 +412,7 @@
             this.txtTelephone.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtTelephone.Name = "txtTelephone";
             this.txtTelephone.Size = new System.Drawing.Size(168, 31);
-            this.txtTelephone.TabIndex = 10;
+            this.txtTelephone.TabIndex = 5;
             // 
             // txtAdresse
             // 
@@ -420,7 +420,7 @@
             this.txtAdresse.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtAdresse.Name = "txtAdresse";
             this.txtAdresse.Size = new System.Drawing.Size(168, 31);
-            this.txtAdresse.TabIndex = 9;
+            this.txtAdresse.TabIndex = 4;
             // 
             // txtNom
             // 
@@ -428,21 +428,21 @@
             this.txtNom.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtNom.Name = "txtNom";
             this.txtNom.Size = new System.Drawing.Size(168, 31);
-            this.txtNom.TabIndex = 8;
+            this.txtNom.TabIndex = 3;
             // 
             // txtPrenomDonateur
             // 
             this.txtPrenomDonateur.Location = new System.Drawing.Point(121, 104);
             this.txtPrenomDonateur.Name = "txtPrenomDonateur";
             this.txtPrenomDonateur.Size = new System.Drawing.Size(150, 31);
-            this.txtPrenomDonateur.TabIndex = 7;
+            this.txtPrenomDonateur.TabIndex = 2;
             // 
             // txtIDDonateur
             // 
             this.txtIDDonateur.Location = new System.Drawing.Point(121, 71);
             this.txtIDDonateur.Name = "txtIDDonateur";
             this.txtIDDonateur.Size = new System.Drawing.Size(150, 31);
-            this.txtIDDonateur.TabIndex = 6;
+            this.txtIDDonateur.TabIndex = 1;
             // 
             // lblTelephone
             // 
@@ -529,7 +529,7 @@
             this.txtDescriptionPrix.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtDescriptionPrix.Name = "txtDescriptionPrix";
             this.txtDescriptionPrix.Size = new System.Drawing.Size(163, 31);
-            this.txtDescriptionPrix.TabIndex = 21;
+            this.txtDescriptionPrix.TabIndex = 25;
             // 
             // txtValPrix
             // 
@@ -537,7 +537,7 @@
             this.txtValPrix.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtValPrix.Name = "txtValPrix";
             this.txtValPrix.Size = new System.Drawing.Size(163, 31);
-            this.txtValPrix.TabIndex = 20;
+            this.txtValPrix.TabIndex = 26;
             // 
             // txtQteInfoPrix
             // 
@@ -545,7 +545,7 @@
             this.txtQteInfoPrix.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtQteInfoPrix.Name = "txtQteInfoPrix";
             this.txtQteInfoPrix.Size = new System.Drawing.Size(163, 31);
-            this.txtQteInfoPrix.TabIndex = 19;
+            this.txtQteInfoPrix.TabIndex = 27;
             // 
             // txtMinDonPrix
             // 
@@ -553,7 +553,7 @@
             this.txtMinDonPrix.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtMinDonPrix.Name = "txtMinDonPrix";
             this.txtMinDonPrix.Size = new System.Drawing.Size(163, 31);
-            this.txtMinDonPrix.TabIndex = 18;
+            this.txtMinDonPrix.TabIndex = 28;
             // 
             // txtIDInfoPrix
             // 
@@ -561,7 +561,7 @@
             this.txtIDInfoPrix.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtIDInfoPrix.Name = "txtIDInfoPrix";
             this.txtIDInfoPrix.Size = new System.Drawing.Size(163, 31);
-            this.txtIDInfoPrix.TabIndex = 17;
+            this.txtIDInfoPrix.TabIndex = 24;
             // 
             // lblInfoPrix
             // 
@@ -579,7 +579,7 @@
             this.txtNomCommanditaire.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtNomCommanditaire.Name = "txtNomCommanditaire";
             this.txtNomCommanditaire.Size = new System.Drawing.Size(163, 31);
-            this.txtNomCommanditaire.TabIndex = 15;
+            this.txtNomCommanditaire.TabIndex = 23;
             // 
             // txtPrenomCommanditaire
             // 
@@ -587,7 +587,7 @@
             this.txtPrenomCommanditaire.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtPrenomCommanditaire.Name = "txtPrenomCommanditaire";
             this.txtPrenomCommanditaire.Size = new System.Drawing.Size(163, 31);
-            this.txtPrenomCommanditaire.TabIndex = 14;
+            this.txtPrenomCommanditaire.TabIndex = 22;
             // 
             // txtIDCommanditaire
             // 
@@ -595,7 +595,7 @@
             this.txtIDCommanditaire.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtIDCommanditaire.Name = "txtIDCommanditaire";
             this.txtIDCommanditaire.Size = new System.Drawing.Size(163, 31);
-            this.txtIDCommanditaire.TabIndex = 13;
+            this.txtIDCommanditaire.TabIndex = 21;
             // 
             // lblDescription
             // 
@@ -648,7 +648,7 @@
             this.btnAfficherCommanditaire.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnAfficherCommanditaire.Name = "btnAfficherCommanditaire";
             this.btnAfficherCommanditaire.Size = new System.Drawing.Size(161, 64);
-            this.btnAfficherCommanditaire.TabIndex = 7;
+            this.btnAfficherCommanditaire.TabIndex = 30;
             this.btnAfficherCommanditaire.Text = "Afficher Commanditaire";
             this.btnAfficherCommanditaire.UseVisualStyleBackColor = true;
             this.btnAfficherCommanditaire.Click += new System.EventHandler(this.btnAfficherCommanditaire_Click);
@@ -659,7 +659,7 @@
             this.btnAjoutPrix.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnAjoutPrix.Name = "btnAjoutPrix";
             this.btnAjoutPrix.Size = new System.Drawing.Size(161, 64);
-            this.btnAjoutPrix.TabIndex = 6;
+            this.btnAjoutPrix.TabIndex = 31;
             this.btnAjoutPrix.Text = "Ajouter Prix";
             this.btnAjoutPrix.UseVisualStyleBackColor = true;
             this.btnAjoutPrix.Click += new System.EventHandler(this.btnAjoutPrix_Click);
@@ -670,7 +670,7 @@
             this.btnAfficherPrix.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnAfficherPrix.Name = "btnAfficherPrix";
             this.btnAfficherPrix.Size = new System.Drawing.Size(161, 64);
-            this.btnAfficherPrix.TabIndex = 5;
+            this.btnAfficherPrix.TabIndex = 32;
             this.btnAfficherPrix.Text = "Afficher Prix";
             this.btnAfficherPrix.UseVisualStyleBackColor = true;
             this.btnAfficherPrix.Click += new System.EventHandler(this.btnAfficherPrix_Click);
@@ -681,7 +681,7 @@
             this.btnAjoutCommanditaire.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnAjoutCommanditaire.Name = "btnAjoutCommanditaire";
             this.btnAjoutCommanditaire.Size = new System.Drawing.Size(161, 64);
-            this.btnAjoutCommanditaire.TabIndex = 4;
+            this.btnAjoutCommanditaire.TabIndex = 29;
             this.btnAjoutCommanditaire.Text = "Ajouter Commanditaire";
             this.btnAjoutCommanditaire.UseVisualStyleBackColor = true;
             this.btnAjoutCommanditaire.Click += new System.EventHandler(this.btnAjoutCommanditaire_Click);
@@ -731,7 +731,7 @@
             this.btnQuiter.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnQuiter.Name = "btnQuiter";
             this.btnQuiter.Size = new System.Drawing.Size(107, 34);
-            this.btnQuiter.TabIndex = 22;
+            this.btnQuiter.TabIndex = 33;
             this.btnQuiter.Text = "Quitter";
             this.btnQuiter.UseVisualStyleBackColor = true;
             this.btnQuiter.Click += new System.EventHandler(this.btnQuiter_Click);
@@ -756,7 +756,7 @@
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
             this.menuStrip1.Size = new System.Drawing.Size(974, 33);
-            this.menuStrip1.TabIndex = 24;
+            this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "Fichier";
             // 
             // toolStripMenuItem1
