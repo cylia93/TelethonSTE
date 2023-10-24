@@ -539,16 +539,11 @@ namespace TelethonSTE
                 donateurCourant = gestionnaire.trouverPersonne(getNomDonateur, getPrenomDonateur, nom, prenom, gestionnaire.ListDonateurs);
             }
 
-            if (donateurCourant == null)
-            {
-                MessageBox.Show("Donateur non trouve");
-                resetInfoDonateur();
-                return;
-            }
-
-                afficherInfoDonateur();
-
-                txtBoxMain.Text += "Donateur trouve: " + donateurCourant.ToString();
+                if (donateurCourant != null)
+                {
+                    afficherInfoDonateur();
+                    txtBoxMain.Text += "Donateur courant: " + donateurCourant.ToString();
+                }
             }
             catch (Exception ex)
             {
@@ -608,11 +603,6 @@ namespace TelethonSTE
             }
         }
 
-        private void ajouterToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             resetFieldsPrix();
@@ -620,6 +610,93 @@ namespace TelethonSTE
             resetInfoDon();
             resetInfoDonateur();
             txtBoxMain.Clear();
+        }
+
+        private void retirerDonateur_Click(object sender, EventArgs e)
+        {
+            Reponse_Prix customDialog = new Reponse_Prix();
+            customDialog.InfoSurlesPrix = "Indiquez l'indentifiant du donateur a supprimer, puis fermez la fenetre:";
+            customDialog.ShowDialog();
+
+            String reponse = customDialog.TxtReponsePrix;
+
+            customDialog.Dispose();
+
+            Func<Donateur, string> getIDDonateur = donateur => donateur.ID;
+
+            Donateur donateurTrouve = gestionnaire.trouverID(getIDDonateur, reponse, gestionnaire.ListDonateurs);
+
+            if (donateurTrouve == null)
+            {
+                MessageBox.Show("Ce donateur n'a pas ete trouve.", "Annulation Suppression");
+                return;
+            }
+
+            DialogResult repons = MessageBox.Show("Etes-vous sur de vouloir supprimer ce donateur?\r\n" + donateurTrouve.ToString(), "Attention", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (repons == DialogResult.Yes)
+            {
+                gestionnaire.ListDonateurs.Remove(donateurTrouve);
+                MessageBox.Show("Donateur supprime.", "Suppression donateur");
+                btnRefresh_Click(sender, e);
+            }
+        }
+
+        private void retirerCommanditaire_Click(object sender, EventArgs e)
+        {
+            Reponse_Prix customDialog = new Reponse_Prix();
+            customDialog.InfoSurlesPrix = "Indiquez l'indentifiant du prix a supprimer, puis fermez la fenetre:";
+            customDialog.ShowDialog();
+
+            String reponse = customDialog.TxtReponsePrix;
+
+            customDialog.Dispose();
+
+            Func<Commanditaire, string> getIDCommanditaire = commanditaire => commanditaire.IDComm;
+
+            Commanditaire commanditaireTrouve = gestionnaire.trouverID(getIDCommanditaire, reponse, gestionnaire.ListCommanditaires);
+
+            if (commanditaireTrouve == null)
+            {
+                MessageBox.Show("Ce commanditaire n'a pas ete trouve.", "Annulation Suppression");
+                return;
+            }
+
+            DialogResult repons = MessageBox.Show("Etes-vous sur de vouloir supprimer ce commanditaire?\r\n" + commanditaireTrouve.ToString(), "Attention", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (repons == DialogResult.Yes)
+            {
+                gestionnaire.ListCommanditaires.Remove(commanditaireTrouve);
+                MessageBox.Show("Commanditaire supprime.", "Suppression commanditaire");
+                btnRefresh_Click(sender, e);
+            }
+        }
+
+        private void retirerPrix_Click(object sender, EventArgs e)
+        {
+            Reponse_Prix customDialog = new Reponse_Prix();
+            customDialog.InfoSurlesPrix = "Indiquez l'indentifiant du prix a supprimer, puis fermez la fenetre:";
+            customDialog.ShowDialog();
+
+            String reponse = customDialog.TxtReponsePrix;
+
+            customDialog.Dispose();
+
+            Func<Prix, string> getIDPrix = prix => prix.IdPrix;
+
+            Prix prixTrouve = gestionnaire.trouverID(getIDPrix, reponse, gestionnaire.ListPrix);
+
+            if (prixTrouve == null)
+            {
+                MessageBox.Show("Ce prix n'a pas ete trouve.", "Annulation Suppression");
+                return;
+            }
+
+            DialogResult repons = MessageBox.Show("Etes-vous sur de vouloir supprimer ce prix?\r\n" + prixTrouve.ToString(), "Attention", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (repons == DialogResult.Yes)
+            {
+                gestionnaire.ListPrix.Remove(prixTrouve);
+                MessageBox.Show("Prix supprime.", "Suppression Prix");
+                btnRefresh_Click(sender, e);
+            }
         }
     }
 }

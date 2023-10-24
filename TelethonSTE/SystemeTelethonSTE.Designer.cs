@@ -779,28 +779,30 @@
             this.ajouterToolStripMenuItem.Name = "ajouterToolStripMenuItem";
             this.ajouterToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.ajouterToolStripMenuItem.Text = "Supprimer...";
-            this.ajouterToolStripMenuItem.Click += new System.EventHandler(this.ajouterToolStripMenuItem_Click);
             // 
             // nouveauDonateurToolStripMenuItem
             // 
             this.nouveauDonateurToolStripMenuItem.Name = "nouveauDonateurToolStripMenuItem";
             this.nouveauDonateurToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.D)));
-            this.nouveauDonateurToolStripMenuItem.Size = new System.Drawing.Size(352, 34);
-            this.nouveauDonateurToolStripMenuItem.Text = "Dernier donateur";
+            this.nouveauDonateurToolStripMenuItem.Size = new System.Drawing.Size(293, 34);
+            this.nouveauDonateurToolStripMenuItem.Text = "Donateur";
+            this.nouveauDonateurToolStripMenuItem.Click += new System.EventHandler(this.retirerDonateur_Click);
             // 
             // nouveauCommanditaireToolStripMenuItem
             // 
             this.nouveauCommanditaireToolStripMenuItem.Name = "nouveauCommanditaireToolStripMenuItem";
             this.nouveauCommanditaireToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.C)));
-            this.nouveauCommanditaireToolStripMenuItem.Size = new System.Drawing.Size(352, 34);
-            this.nouveauCommanditaireToolStripMenuItem.Text = "Dernier commanditaire";
+            this.nouveauCommanditaireToolStripMenuItem.Size = new System.Drawing.Size(293, 34);
+            this.nouveauCommanditaireToolStripMenuItem.Text = "Commanditaire";
+            this.nouveauCommanditaireToolStripMenuItem.Click += new System.EventHandler(this.retirerCommanditaire_Click);
             // 
             // nouveauPrixToolStripMenuItem
             // 
             this.nouveauPrixToolStripMenuItem.Name = "nouveauPrixToolStripMenuItem";
             this.nouveauPrixToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.P)));
-            this.nouveauPrixToolStripMenuItem.Size = new System.Drawing.Size(352, 34);
-            this.nouveauPrixToolStripMenuItem.Text = "Dernier prix";
+            this.nouveauPrixToolStripMenuItem.Size = new System.Drawing.Size(293, 34);
+            this.nouveauPrixToolStripMenuItem.Text = "Prix";
+            this.nouveauPrixToolStripMenuItem.Click += new System.EventHandler(this.retirerPrix_Click);
             // 
             // quitterToolStripMenuItem
             // 
