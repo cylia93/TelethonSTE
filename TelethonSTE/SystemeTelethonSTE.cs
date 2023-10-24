@@ -185,6 +185,20 @@ namespace TelethonSTE
 
             try
             {
+                bool IDExistant = false;
+
+                foreach (Donateur d in gestionnaire.ListDonateurs)
+                {
+                    if (d.ID.Equals(txtIDDonateur.Text.ToUpper()))
+                    {
+                        IDExistant = true;
+                        donateurCourant = d;
+                        break;
+                    }
+                }
+
+                if (!IDExistant) btnAjoutDonateur_Click(sender, e);
+
                 if (donateurCourant != null) {
 
                     afficherInfoDonateur();
@@ -286,7 +300,6 @@ namespace TelethonSTE
                 txtBoxMain.Text = gestionnaire.ListDonateurs.Last().ToString();
 
                 MessageBox.Show("Donateur ajouter avec succes.", "Ajout Info Donateur");
-                resetInfoDonateur();
             }
             catch (Exception ex)
             {
