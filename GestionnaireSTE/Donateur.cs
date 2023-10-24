@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CsvHelper.Configuration.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,36 +27,42 @@ namespace GestionnaireSTE
             this.numeroCarte = numeroCarte;
             this.dateExpiration = dateExpiration;
         }
+
+        [Name("idDonateur")]
         public String ID
         {
             get { return idDonateur; }
             set { this.idDonateur = value; }
         }
 
+        [Name("adresse")]
         public String Adresse
         {
             get { return adresse; }
             set { this.adresse = value; }
         }
 
+        [Name("telephone")]
         public String Telephone
         {
             get { return telephone; }
             set { this.telephone = value; }
         }
 
+        [Name("numeroCarte")]
         public String NumeroDeCarte
         {
             get { return numeroCarte; }
             set { this.numeroCarte = value; }
         }
 
+        [Name("typeDeCarte")]
         public char TypeDeCarte
         {
             get { return typeDeCarte; }
         }
 
-
+        [Name("dateExpiration")]
         public String DateExpiration
         {
             get { return dateExpiration; }

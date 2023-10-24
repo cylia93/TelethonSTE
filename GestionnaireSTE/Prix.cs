@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CsvHelper.Configuration.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -44,41 +45,49 @@ namespace GestionnaireSTE
             this.qnte_Disponible -= qte;
         }
 
+        [Name("idPrix")]
         public string IdPrix
         {
             get { return this.idPrix; }
             set { this.idPrix = value; }
         }
 
+        [Name("description")]
         public string Description
         {
             get { return this.description; }
             set { this.description = value; }
         }
+
+        [Name("valeur")]
         public double Valeur
         {
             get { return this.valeur; }
             set { this.valeur = value; }
         }
 
+        [Name("donMinimum")]
         public double DonMinimum
         {
             get { return this.donMinimum; }
             set { this.donMinimum = value; }
         }
 
+        [Name("qnte_Originale")]
         public int Qnte_Originale
         {
             get { return this.qnte_Originale; }
             set { this.qnte_Originale = value; }
         }
 
+        [Name("qnte_Disponible")]
         public int Qnte_Disponible
         {
             get { return this.qnte_Disponible; }
             set { this.qnte_Disponible = value; }
         }
 
+        [Name("idCommanditaire")]
         public string IdCommenditaire
         {
             get { return this.idCommenditaire; }
