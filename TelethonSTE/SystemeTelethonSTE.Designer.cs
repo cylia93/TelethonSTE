@@ -262,10 +262,10 @@
             this.groupBox1.Controls.Add(this.lblDateExpiration);
             this.groupBox1.Controls.Add(this.lblNumero);
             this.groupBox1.Controls.Add(this.gbTypeCarte);
-            this.groupBox1.Location = new System.Drawing.Point(314, 22);
+            this.groupBox1.Location = new System.Drawing.Point(319, 39);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(389, 199);
+            this.groupBox1.Size = new System.Drawing.Size(384, 191);
             this.groupBox1.TabIndex = 16;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Carte de credit";
@@ -279,7 +279,7 @@
             // 
             // txtNumeroCarte
             // 
-            this.txtNumeroCarte.Location = new System.Drawing.Point(164, 98);
+            this.txtNumeroCarte.Location = new System.Drawing.Point(164, 106);
             this.txtNumeroCarte.Name = "txtNumeroCarte";
             this.txtNumeroCarte.Size = new System.Drawing.Size(200, 27);
             this.txtNumeroCarte.TabIndex = 9;
@@ -296,7 +296,7 @@
             // lblNumero
             // 
             this.lblNumero.AutoSize = true;
-            this.lblNumero.Location = new System.Drawing.Point(17, 106);
+            this.lblNumero.Location = new System.Drawing.Point(22, 109);
             this.lblNumero.Name = "lblNumero";
             this.lblNumero.Size = new System.Drawing.Size(70, 19);
             this.lblNumero.TabIndex = 1;
@@ -510,35 +510,35 @@
             // 
             // txtDescriptionPrix
             // 
-            this.txtDescriptionPrix.Location = new System.Drawing.Point(533, 113);
+            this.txtDescriptionPrix.Location = new System.Drawing.Point(533, 145);
             this.txtDescriptionPrix.Name = "txtDescriptionPrix";
             this.txtDescriptionPrix.Size = new System.Drawing.Size(145, 27);
             this.txtDescriptionPrix.TabIndex = 25;
             // 
             // txtValPrix
             // 
-            this.txtValPrix.Location = new System.Drawing.Point(533, 146);
+            this.txtValPrix.Location = new System.Drawing.Point(533, 182);
             this.txtValPrix.Name = "txtValPrix";
             this.txtValPrix.Size = new System.Drawing.Size(145, 27);
             this.txtValPrix.TabIndex = 26;
             // 
             // txtQteInfoPrix
             // 
-            this.txtQteInfoPrix.Location = new System.Drawing.Point(533, 179);
+            this.txtQteInfoPrix.Location = new System.Drawing.Point(533, 223);
             this.txtQteInfoPrix.Name = "txtQteInfoPrix";
             this.txtQteInfoPrix.Size = new System.Drawing.Size(145, 27);
             this.txtQteInfoPrix.TabIndex = 27;
             // 
             // txtMinDonPrix
             // 
-            this.txtMinDonPrix.Location = new System.Drawing.Point(533, 212);
+            this.txtMinDonPrix.Location = new System.Drawing.Point(533, 261);
             this.txtMinDonPrix.Name = "txtMinDonPrix";
             this.txtMinDonPrix.Size = new System.Drawing.Size(145, 27);
             this.txtMinDonPrix.TabIndex = 28;
             // 
             // txtIDInfoPrix
             // 
-            this.txtIDInfoPrix.Location = new System.Drawing.Point(533, 80);
+            this.txtIDInfoPrix.Location = new System.Drawing.Point(533, 105);
             this.txtIDInfoPrix.Name = "txtIDInfoPrix";
             this.txtIDInfoPrix.Size = new System.Drawing.Size(145, 27);
             this.txtIDInfoPrix.TabIndex = 24;
@@ -547,7 +547,7 @@
             // 
             this.lblInfoPrix.AutoSize = true;
             this.lblInfoPrix.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInfoPrix.Location = new System.Drawing.Point(418, 37);
+            this.lblInfoPrix.Location = new System.Drawing.Point(404, 61);
             this.lblInfoPrix.Name = "lblInfoPrix";
             this.lblInfoPrix.Size = new System.Drawing.Size(142, 19);
             this.lblInfoPrix.TabIndex = 16;
@@ -555,21 +555,21 @@
             // 
             // txtNomCommanditaire
             // 
-            this.txtNomCommanditaire.Location = new System.Drawing.Point(170, 169);
+            this.txtNomCommanditaire.Location = new System.Drawing.Point(170, 221);
             this.txtNomCommanditaire.Name = "txtNomCommanditaire";
             this.txtNomCommanditaire.Size = new System.Drawing.Size(145, 27);
             this.txtNomCommanditaire.TabIndex = 23;
             // 
             // txtPrenomCommanditaire
             // 
-            this.txtPrenomCommanditaire.Location = new System.Drawing.Point(170, 129);
+            this.txtPrenomCommanditaire.Location = new System.Drawing.Point(170, 163);
             this.txtPrenomCommanditaire.Name = "txtPrenomCommanditaire";
             this.txtPrenomCommanditaire.Size = new System.Drawing.Size(145, 27);
             this.txtPrenomCommanditaire.TabIndex = 22;
             // 
             // txtIDCommanditaire
             // 
-            this.txtIDCommanditaire.Location = new System.Drawing.Point(170, 83);
+            this.txtIDCommanditaire.Location = new System.Drawing.Point(170, 105);
             this.txtIDCommanditaire.Name = "txtIDCommanditaire";
             this.txtIDCommanditaire.Size = new System.Drawing.Size(145, 27);
             this.txtIDCommanditaire.TabIndex = 21;
@@ -577,7 +577,7 @@
             // lblDescription
             // 
             this.lblDescription.AutoSize = true;
-            this.lblDescription.Location = new System.Drawing.Point(418, 116);
+            this.lblDescription.Location = new System.Drawing.Point(404, 153);
             this.lblDescription.Name = "lblDescription";
             this.lblDescription.Size = new System.Drawing.Size(95, 19);
             this.lblDescription.TabIndex = 12;
@@ -586,7 +586,7 @@
             // lblValeurPrix
             // 
             this.lblValeurPrix.AutoSize = true;
-            this.lblValeurPrix.Location = new System.Drawing.Point(418, 146);
+            this.lblValeurPrix.Location = new System.Drawing.Point(404, 190);
             this.lblValeurPrix.Name = "lblValeurPrix";
             this.lblValeurPrix.Size = new System.Drawing.Size(86, 19);
             this.lblValeurPrix.TabIndex = 11;
@@ -595,7 +595,7 @@
             // llbQuantite
             // 
             this.llbQuantite.AutoSize = true;
-            this.llbQuantite.Location = new System.Drawing.Point(418, 177);
+            this.llbQuantite.Location = new System.Drawing.Point(404, 226);
             this.llbQuantite.Name = "llbQuantite";
             this.llbQuantite.Size = new System.Drawing.Size(72, 19);
             this.llbQuantite.TabIndex = 10;
@@ -604,7 +604,7 @@
             // lblDonMinimum
             // 
             this.lblDonMinimum.AutoSize = true;
-            this.lblDonMinimum.Location = new System.Drawing.Point(418, 212);
+            this.lblDonMinimum.Location = new System.Drawing.Point(404, 269);
             this.lblDonMinimum.Name = "lblDonMinimum";
             this.lblDonMinimum.Size = new System.Drawing.Size(109, 19);
             this.lblDonMinimum.TabIndex = 9;
@@ -613,7 +613,7 @@
             // blbIDInfoPrix
             // 
             this.blbIDInfoPrix.AutoSize = true;
-            this.blbIDInfoPrix.Location = new System.Drawing.Point(418, 83);
+            this.blbIDInfoPrix.Location = new System.Drawing.Point(404, 108);
             this.blbIDInfoPrix.Name = "blbIDInfoPrix";
             this.blbIDInfoPrix.Size = new System.Drawing.Size(31, 19);
             this.blbIDInfoPrix.TabIndex = 8;
@@ -662,7 +662,7 @@
             // lblNomCommanditaire
             // 
             this.lblNomCommanditaire.AutoSize = true;
-            this.lblNomCommanditaire.Location = new System.Drawing.Point(72, 177);
+            this.lblNomCommanditaire.Location = new System.Drawing.Point(72, 226);
             this.lblNomCommanditaire.Name = "lblNomCommanditaire";
             this.lblNomCommanditaire.Size = new System.Drawing.Size(48, 19);
             this.lblNomCommanditaire.TabIndex = 3;
@@ -671,7 +671,7 @@
             // lblPrenomCommanditaire
             // 
             this.lblPrenomCommanditaire.AutoSize = true;
-            this.lblPrenomCommanditaire.Location = new System.Drawing.Point(72, 132);
+            this.lblPrenomCommanditaire.Location = new System.Drawing.Point(72, 171);
             this.lblPrenomCommanditaire.Name = "lblPrenomCommanditaire";
             this.lblPrenomCommanditaire.Size = new System.Drawing.Size(68, 19);
             this.lblPrenomCommanditaire.TabIndex = 2;
@@ -680,7 +680,7 @@
             // lblIDCommanditaire
             // 
             this.lblIDCommanditaire.AutoSize = true;
-            this.lblIDCommanditaire.Location = new System.Drawing.Point(72, 83);
+            this.lblIDCommanditaire.Location = new System.Drawing.Point(72, 113);
             this.lblIDCommanditaire.Name = "lblIDCommanditaire";
             this.lblIDCommanditaire.Size = new System.Drawing.Size(31, 19);
             this.lblIDCommanditaire.TabIndex = 1;
@@ -690,7 +690,7 @@
             // 
             this.lblInfoCommanditaire.AutoSize = true;
             this.lblInfoCommanditaire.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInfoCommanditaire.Location = new System.Drawing.Point(72, 37);
+            this.lblInfoCommanditaire.Location = new System.Drawing.Point(72, 61);
             this.lblInfoCommanditaire.Name = "lblInfoCommanditaire";
             this.lblInfoCommanditaire.Size = new System.Drawing.Size(226, 19);
             this.lblInfoCommanditaire.TabIndex = 0;
@@ -741,7 +741,7 @@
             // rafraichirToolStripMenuItem
             // 
             this.rafraichirToolStripMenuItem.Name = "rafraichirToolStripMenuItem";
-            this.rafraichirToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.rafraichirToolStripMenuItem.Size = new System.Drawing.Size(170, 26);
             this.rafraichirToolStripMenuItem.Text = "&Rafraichir";
             this.rafraichirToolStripMenuItem.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
@@ -752,7 +752,7 @@
             this.nouveauCommanditaireToolStripMenuItem,
             this.nouveauPrixToolStripMenuItem});
             this.ajouterToolStripMenuItem.Name = "ajouterToolStripMenuItem";
-            this.ajouterToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.ajouterToolStripMenuItem.Size = new System.Drawing.Size(170, 26);
             this.ajouterToolStripMenuItem.Text = "Supprimer...";
             // 
             // nouveauDonateurToolStripMenuItem
@@ -782,7 +782,7 @@
             // quitterToolStripMenuItem
             // 
             this.quitterToolStripMenuItem.Name = "quitterToolStripMenuItem";
-            this.quitterToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.quitterToolStripMenuItem.Size = new System.Drawing.Size(170, 26);
             this.quitterToolStripMenuItem.Text = "&Quitter";
             this.quitterToolStripMenuItem.Click += new System.EventHandler(this.btnQuiter_Click);
             // 
