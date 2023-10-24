@@ -69,6 +69,7 @@ namespace TelethonSTE
         public SystemeTelethonSTE()
         {
             InitializeComponent();
+           /* this.FormBorderStyle = FormBorderStyle.FixedSingle;*/
 
             // On popule toutes les listes de l'instance gestionnaire :
 

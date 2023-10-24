@@ -17,6 +17,7 @@ namespace TelethonSTE
         public Login()
         {
             InitializeComponent();
+            /*this.FormBorderStyle = FormBorderStyle.FixedSingle; */
         }
 
         private void bTnOK_Click(object sender, EventArgs e)
