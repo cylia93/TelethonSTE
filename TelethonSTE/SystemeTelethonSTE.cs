@@ -310,6 +310,7 @@ namespace TelethonSTE
                 if (commanditaireCourant != null)
                 {
                     MessageBox.Show("Ajout impossible: ce commanditaire existe deja.", "Ajout commanditaire");
+                    resetFieldsCommanditaire();
                     return;
                 }
 
@@ -320,8 +321,6 @@ namespace TelethonSTE
                 txtBoxMain.Text = gestionnaire.ListCommanditaires.Last().ToString();
 
                 MessageBox.Show("Commanditaire ajouter avec succes.", "Ajout commanditaire");
-                resetFieldsPrix();
-                resetFieldsCommanditaire();
             }
 
             catch (FormatException ex)
@@ -332,10 +331,6 @@ namespace TelethonSTE
             {
                 MessageBox.Show(ex.Message, "Erreur lors de l'ajout du commanditaire");
             } 
-            finally
-            { 
-                resetFieldsCommanditaire(); 
-            }
         }
 
         private void btnAfficherCommanditaire_Click(object sender, EventArgs e)
@@ -391,6 +386,20 @@ namespace TelethonSTE
         {
             try
             {
+                bool IDExistant = false;
+
+                foreach(Commanditaire c in gestionnaire.ListCommanditaires)
+                {
+                    if (c.IDComm.Equals(txtIDCommanditaire.Text.ToUpper()))
+                    {
+                        IDExistant = true;
+                        commanditaireCourant = c;
+                        break;
+                    }
+                }
+                
+                if(!IDExistant) btnAjoutCommanditaire_Click(sender, e);
+
                 if (this.commanditaireCourant == null)
                 {
                     MessageBox.Show("Ajout impossible: commanditaire non trouve.", "Ajout prix");
