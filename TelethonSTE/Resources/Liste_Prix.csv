@@ -1,0 +1,11 @@
+idPrix,description,valeur,donMinimum,qnte_Originale,qnte_Disponible,idCommanditaire
+1A,Jeu vidéos,80,60,30,20,3C
+2B,Jeu de cartes,15,50,15,12,9I
+3C,Repas pour deux,100,90,20,18,7G
+4D,Barbecue,150,80,40,30,6F
+5E,Téléviseur,300,200,10,8,8H
+6F,Livre,20,50,35,25,5E
+7G,Tablette,200,100,12,11,2B
+8H,Casque audio,70,60,28,25,1A
+9I,Caméra,250,120,18,15,4D
+10J,Ensemble de cuisine,120,100,50,40,10J

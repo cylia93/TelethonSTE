@@ -100,6 +100,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Liste_Commanditaires.csv" />
+    <None Include="Resources\Liste_Donateurs.csv" />
+    <None Include="Resources\Liste_Dons.csv" />
+    <None Include="Resources\Liste_Prix.csv" />
     <None Include="Resources\telethon_logo.jpg" />
   </ItemGroup>
   <ItemGroup>
