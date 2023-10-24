@@ -413,7 +413,7 @@ namespace TelethonSTE
                     Int32.TryParse(qnte_Disponible_str, out int qnte_Disponible) ? qnte_Disponible : 0,
                      idCommenditaire);
 
-                txtBoxMain.Text = "Prix ajoute avec succes.";
+                MessageBox.Show("Prix ajoute avec succes.", "Ajout prix");
                 resetFieldsPrix();
                 resetFieldsCommanditaire();
             }
