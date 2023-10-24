@@ -767,8 +767,8 @@
             this.ajouterToolStripMenuItem,
             this.quitterToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(74, 29);
-            this.toolStripMenuItem1.Text = "Ficher";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(78, 29);
+            this.toolStripMenuItem1.Text = "Fichier";
             // 
             // ajouterToolStripMenuItem
             // 
@@ -778,7 +778,7 @@
             this.nouveauPrixToolStripMenuItem});
             this.ajouterToolStripMenuItem.Name = "ajouterToolStripMenuItem";
             this.ajouterToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
-            this.ajouterToolStripMenuItem.Text = "&Supprimer...";
+            this.ajouterToolStripMenuItem.Text = "Supprimer...";
             this.ajouterToolStripMenuItem.Click += new System.EventHandler(this.ajouterToolStripMenuItem_Click);
             // 
             // nouveauDonateurToolStripMenuItem
@@ -814,6 +814,7 @@
             this.rafraichirToolStripMenuItem.Name = "rafraichirToolStripMenuItem";
             this.rafraichirToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.rafraichirToolStripMenuItem.Text = "&Rafraichir";
+            this.rafraichirToolStripMenuItem.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // SystemeTelethonSTE
             // 

@@ -115,20 +115,6 @@ namespace TelethonSTE
                     }
                 }
             }
-
-            //// Test Ecriture :
-            //Commanditaire newCommanditaire = new Commanditaire("NewFirstName", "NewLastName", "NewID");
-
-            //using (var writer = new StreamWriter(fichier_Commanditaires, true)) // 'true' for appending to an existing file
-            //using (var csv = new CsvWriter(writer, new CsvConfiguration(CultureInfo.InvariantCulture)))
-            //{
-            //    // Write the new Commanditaire to the CSV file
-            //    csv.WriteRecord(newCommanditaire);
-            //    csv.NextRecord(); // add a newline caracter;
-            //    csv.WriteRecord(newCommanditaire);
-            //    csv.NextRecord(); // add a newline caracter;
-            //}
-
         }
 
         private void btnAffPrix_Click(object sender, EventArgs e)
@@ -493,6 +479,33 @@ namespace TelethonSTE
             DialogResult repons = MessageBox.Show("Desirez-vous réellement quitter cette application ?", "Attention", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (repons == DialogResult.Yes)
             {
+                // On enregistre les nouvelles valeurs des listes de gestionnaire dans leurs fichiers respectifs :
+
+                using (var writer = new StreamWriter(fichier_Commanditaires, false))
+                using (var csv = new CsvWriter(writer, new CsvConfiguration(CultureInfo.InvariantCulture)))
+                {
+                    csv.WriteRecords(gestionnaire.ListCommanditaires);
+                }
+
+                using (var writer = new StreamWriter(fichier_Donateurs, false))
+                using (var csv = new CsvWriter(writer, new CsvConfiguration(CultureInfo.InvariantCulture)))
+                {
+                    csv.WriteRecords(gestionnaire.ListDonateurs);
+                }
+
+                using (var writer = new StreamWriter(fichier_Dons, false))
+                using (var csv = new CsvWriter(writer, new CsvConfiguration(CultureInfo.InvariantCulture)))
+                {
+                    csv.WriteRecords(gestionnaire.ListDons);
+                }
+
+                using (var writer = new StreamWriter(fichier_Prix, false))
+                using (var csv = new CsvWriter(writer, new CsvConfiguration(CultureInfo.InvariantCulture)))
+                {
+                    csv.WriteRecords(gestionnaire.ListPrix);
+                }
+
+
                 Environment.Exit(0);
             }
         }
@@ -593,6 +606,20 @@ namespace TelethonSTE
             {
                 MessageBox.Show(ex.Message, "Erreur Affichage Don");
             }
+        }
+
+        private void ajouterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            resetFieldsPrix();
+            resetFieldsCommanditaire();
+            resetInfoDon();
+            resetInfoDonateur();
+            txtBoxMain.Clear();
         }
     }
 }
