@@ -18,6 +18,7 @@ using System.IO;
 using CsvHelper.Configuration;
 using CsvHelper.Configuration.Attributes;
 
+
 namespace TelethonSTE
 {
     public partial class SystemeTelethonSTE : Form
@@ -135,11 +136,11 @@ namespace TelethonSTE
                         foreach (Prix item in gestionnaire.ListPrix)
                         {
                             if (item.DonMinimum <= montantDuDon)
-                                infoSurlesPrix += "ID: " + item.IdPrix + " , Description: " + item.Description + " , quantite disponible : " + item.Qnte_Disponible + " unites\r\n";
+                                infoSurlesPrix += "ID: " + item.IdPrix + " , Description: " + item.Description + " , quantité disponible : " + item.Qnte_Disponible + " unités\r\n";
                         }
 
                         Reponse_Prix customDialog = new Reponse_Prix();
-                        customDialog.InfoSurlesPrix = "Choissississez un prix parmis la liste proposee (Renseignez l'ID uniquement puis fermez la fenetre). Si le donateur ne veut pas de prix, ne rien renseignez:\r\n\r\n" + infoSurlesPrix;
+                        customDialog.InfoSurlesPrix = "Choississez un prix parmis la liste proposée (Renseignez l'ID uniquement puis fermez la fenêtre). Si le donateur ne veut pas de prix, ne rien renseigner:\r\n\r\n" + infoSurlesPrix;
                         customDialog.ShowDialog();
 
                         txtIDPrix.Text = customDialog.TxtReponsePrix.Length == 0 ? "N/A" : customDialog.TxtReponsePrix;
@@ -153,7 +154,7 @@ namespace TelethonSTE
                     }
                 } else
                 {
-                    MessageBox.Show("Le montant du don renseigne doit etre une valeur positive.","Erreur Afficher Prix");
+                    MessageBox.Show("Le montant du don renseigné doit être une valeur positive.","Erreur Afficher Prix");
                 }               
             }
             catch (Exception ex)
@@ -195,7 +196,7 @@ namespace TelethonSTE
 
                     if (!Double.TryParse(txtMntDon.Text.Trim().ToLower(), out montantDuDon))
                     {
-                        MessageBox.Show("Le montant doit etre specifie", "Erreur Ajout Don");
+                        MessageBox.Show("Le montant doit être specifié", "Erreur Ajout Don");
                         return;
                     }
 
@@ -213,17 +214,17 @@ namespace TelethonSTE
 
                         if (montantDuDon < prixPropose.DonMinimum)
                         {
-                            throw new FormatException("Ce don n'est pas elligible pour ce prix.");
+                            throw new FormatException("Ce don n'est pas éligible pour ce prix.");
                         }
 
                         if (!Int32.TryParse(txtQtePrix.Text.Trim().ToLower(), out quantiteDemandee))
                         {
-                            throw new FormatException("Vous devez saisir une quantite valide.");
+                            throw new FormatException("Vous devez saisir une quantité valide.");
                         }
 
                         if (prixPropose.Qnte_Disponible - quantiteDemandee < 0)
                         {
-                            throw new FormatException("Il n'y a pas assez d'unites pour ce prix.");
+                            throw new FormatException("Il n'y a pas assez d'unités pour ce prix.");
                         }
                     }
 
@@ -232,7 +233,7 @@ namespace TelethonSTE
                     // Si l'ajout est reussi, alors on deduit le nombre de prix attribues :
                     if (!idPrixCourant.Equals("N/A")) prixPropose.Deduire(quantiteDemandee);
 
-                    MessageBox.Show("Don ajoute avec succes", "Ajout Don");
+                    MessageBox.Show("Don ajouté avec succès", "Ajout Don");
                     resetInfoDon();
                     resetInfoDonateur();
                     resetInfoAttrPrix();
@@ -285,7 +286,7 @@ namespace TelethonSTE
 
                 txtBoxMain.Text = gestionnaire.ListDonateurs.Last().ToString();
 
-                MessageBox.Show("Donateur ajouter avec succes.", "Ajout Info Donateur");
+                MessageBox.Show("Donateur ajouter avec succès.", "Ajout Info Donateur");
             }
             catch (Exception ex)
             {
@@ -319,7 +320,7 @@ namespace TelethonSTE
 
                 txtBoxMain.Text = gestionnaire.ListCommanditaires.Last().ToString();
 
-                MessageBox.Show("Commanditaire ajouter avec succes.", "Ajout commanditaire");
+                MessageBox.Show("Commanditaire ajouter avec succès.", "Ajout commanditaire");
             }
 
             catch (FormatException ex)
@@ -363,7 +364,7 @@ namespace TelethonSTE
 
                 if (commanditaireCourant == null)
                 {
-                    txtBoxMain.Text += "Aucun commanditaire selectionne actuellement.";
+                    txtBoxMain.Text += "Aucun commanditaire sélectionné actuellement.";
                     resetFieldsCommanditaire();
                     return;
                 }
@@ -372,7 +373,7 @@ namespace TelethonSTE
                 txtNomCommanditaire.Text = commanditaireCourant.Surnom;
                 txtPrenomCommanditaire.Text = commanditaireCourant.Prenom;
 
-                txtBoxMain.Text += "Commanditaire trouve: " + commanditaireCourant.ToString();
+                txtBoxMain.Text += "Commanditaire trouvé: " + commanditaireCourant.ToString();
             }
             catch (Exception ex)
             {
@@ -401,7 +402,7 @@ namespace TelethonSTE
 
                 if (this.commanditaireCourant == null)
                 {
-                    MessageBox.Show("Ajout impossible: commanditaire non trouve.", "Ajout prix");
+                    MessageBox.Show("Ajout impossible: commanditaire non trouvé.", "Ajout prix");
                     return;
                 }
 
@@ -427,7 +428,7 @@ namespace TelethonSTE
                     Int32.TryParse(qnte_Disponible_str, out int qnte_Disponible) ? qnte_Disponible : 0,
                      idCommenditaire.ToUpper());
 
-                MessageBox.Show("Prix ajoute avec succes.", "Ajout prix");
+                MessageBox.Show("Prix ajouté avec succès.", "Ajout prix");
                 resetFieldsPrix();
                 resetFieldsCommanditaire();
             }
@@ -476,7 +477,7 @@ namespace TelethonSTE
 
         private void btnQuiter_Click(object sender, EventArgs e)
         {
-            DialogResult repons = MessageBox.Show("Desirez-vous réellement quitter cette application ?", "Attention", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult repons = MessageBox.Show("Désirez-vous réellement quitter cette application?", "Attention", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (repons == DialogResult.Yes)
             {
                 // On enregistre les nouvelles valeurs des listes de gestionnaire dans leurs fichiers respectifs :
@@ -547,7 +548,7 @@ namespace TelethonSTE
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Erreur lors de l'ajout du commanditaire");
+                MessageBox.Show(ex.Message, "Erreur lors de l'ajout du donateur");
                 resetInfoDonateur();
             }
         }
@@ -615,7 +616,7 @@ namespace TelethonSTE
         private void retirerDonateur_Click(object sender, EventArgs e)
         {
             Reponse_Prix customDialog = new Reponse_Prix();
-            customDialog.InfoSurlesPrix = "Indiquez l'indentifiant du donateur a supprimer, puis fermez la fenetre:";
+            customDialog.InfoSurlesPrix = "Indiquez l'identifiant du donateur à supprimer, puis fermez la fenetre:";
             customDialog.ShowDialog();
 
             String reponse = customDialog.TxtReponsePrix;
@@ -628,15 +629,15 @@ namespace TelethonSTE
 
             if (donateurTrouve == null)
             {
-                MessageBox.Show("Ce donateur n'a pas ete trouve.", "Annulation Suppression");
+                MessageBox.Show("Ce donateur n'a pas été trouvé.", "Annulation Suppression");
                 return;
             }
 
-            DialogResult repons = MessageBox.Show("Etes-vous sur de vouloir supprimer ce donateur?\r\n" + donateurTrouve.ToString(), "Attention", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult repons = MessageBox.Show("Êtes-vous sur de vouloir supprimer ce donateur?\r\n" + donateurTrouve.ToString(), "Attention", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (repons == DialogResult.Yes)
             {
                 gestionnaire.ListDonateurs.Remove(donateurTrouve);
-                MessageBox.Show("Donateur supprime.", "Suppression donateur");
+                MessageBox.Show("Donateur supprimé.", "Suppression donateur");
                 btnRefresh_Click(sender, e);
             }
         }
@@ -644,7 +645,7 @@ namespace TelethonSTE
         private void retirerCommanditaire_Click(object sender, EventArgs e)
         {
             Reponse_Prix customDialog = new Reponse_Prix();
-            customDialog.InfoSurlesPrix = "Indiquez l'indentifiant du prix a supprimer, puis fermez la fenetre:";
+            customDialog.InfoSurlesPrix = "Indiquez l'identifiant du commanditaire à supprimer, puis fermez la fenêtre:";
             customDialog.ShowDialog();
 
             String reponse = customDialog.TxtReponsePrix;
@@ -657,15 +658,15 @@ namespace TelethonSTE
 
             if (commanditaireTrouve == null)
             {
-                MessageBox.Show("Ce commanditaire n'a pas ete trouve.", "Annulation Suppression");
+                MessageBox.Show("Ce commanditaire n'a pas été trouvé.", "Annulation Suppression");
                 return;
             }
 
-            DialogResult repons = MessageBox.Show("Etes-vous sur de vouloir supprimer ce commanditaire?\r\n" + commanditaireTrouve.ToString(), "Attention", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult repons = MessageBox.Show("Êtes-vous sur de vouloir supprimer ce commanditaire?\r\n" + commanditaireTrouve.ToString(), "Attention", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (repons == DialogResult.Yes)
             {
                 gestionnaire.ListCommanditaires.Remove(commanditaireTrouve);
-                MessageBox.Show("Commanditaire supprime.", "Suppression commanditaire");
+                MessageBox.Show("Commanditaire supprimé.", "Suppression commanditaire");
                 btnRefresh_Click(sender, e);
             }
         }
@@ -673,7 +674,7 @@ namespace TelethonSTE
         private void retirerPrix_Click(object sender, EventArgs e)
         {
             Reponse_Prix customDialog = new Reponse_Prix();
-            customDialog.InfoSurlesPrix = "Indiquez l'indentifiant du prix a supprimer, puis fermez la fenetre:";
+            customDialog.InfoSurlesPrix = "Indiquer l'identifiant du prix à supprimer, puis fermer la fenêtre:";
             customDialog.ShowDialog();
 
             String reponse = customDialog.TxtReponsePrix;
@@ -686,15 +687,15 @@ namespace TelethonSTE
 
             if (prixTrouve == null)
             {
-                MessageBox.Show("Ce prix n'a pas ete trouve.", "Annulation Suppression");
+                MessageBox.Show("Ce prix n'a pas été trouvé.", "Annulation Suppression");
                 return;
             }
 
-            DialogResult repons = MessageBox.Show("Etes-vous sur de vouloir supprimer ce prix?\r\n" + prixTrouve.ToString(), "Attention", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult repons = MessageBox.Show("Êtes-vous sur de vouloir supprimer ce prix?\r\n" + prixTrouve.ToString(), "Attention", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (repons == DialogResult.Yes)
             {
                 gestionnaire.ListPrix.Remove(prixTrouve);
-                MessageBox.Show("Prix supprime.", "Suppression Prix");
+                MessageBox.Show("Prix supprimé.", "Suppression Prix");
                 btnRefresh_Click(sender, e);
             }
         }

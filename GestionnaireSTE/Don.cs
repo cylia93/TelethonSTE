@@ -65,7 +65,7 @@ namespace GestionnaireSTE
         public override string ToString()
         {
             String str = "";
-            str += "#" + this.idDon + ", Montant: " + this.montantDuDon + ", Date: " + this.dateDuDon +
+            str += "#" + this.idDon + ", Montant: " + this.montantDuDon + "$, Date: " + this.dateDuDon +
                 ", Donateur: #" + this.idDonateurDon;
 
             if (!this.idPrixDon.Equals("N/A")) 

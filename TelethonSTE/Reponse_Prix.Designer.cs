@@ -37,7 +37,7 @@
             // txtReponsePrix
             // 
             this.txtReponsePrix.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.txtReponsePrix.Location = new System.Drawing.Point(164, 171);
+            this.txtReponsePrix.Location = new System.Drawing.Point(164, 170);
             this.txtReponsePrix.Name = "txtReponsePrix";
             this.txtReponsePrix.Size = new System.Drawing.Size(151, 26);
             this.txtReponsePrix.TabIndex = 0;
@@ -66,8 +66,8 @@
             this.tableLayoutPanel1.MaximumSize = new System.Drawing.Size(480, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 82.41758F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 17.58242F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 81.68317F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 18.31683F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(480, 202);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
