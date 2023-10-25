@@ -26,7 +26,7 @@ namespace GestionnaireSTE
 
         public override string ToString()
         {
-            return base.ToString() + ", "+ " Identification " + this.IDCommanditaire+ "\r\n\r\n";
+            return base.ToString() + ", "+ " #" + this.IDCommanditaire+ "\r\n\r\n";
         }
     }
 }
