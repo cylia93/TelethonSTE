@@ -279,7 +279,8 @@ namespace TelethonSTE
                     }
                 }
                 this.numeroCarte = txtNumeroCarte.Text.Trim().ToLower();
-                this.dateExpiration = dateTimeExpiration.Value.ToShortDateString();
+                Console.WriteLine("Exp: " + dateTimeExpiration.Value.ToString("yyyy-MM-dd"));
+                this.dateExpiration = dateTimeExpiration.Value.ToString("yyyy-MM-dd");
 
                 gestionnaire.AjouterDonateur(convMajuscule.ToTitleCase(prenom), convMajuscule.ToTitleCase(surnom), idDonateur.ToUpper(), adresse, telephone, typeDeCarte, numeroCarte, dateExpiration);
 
