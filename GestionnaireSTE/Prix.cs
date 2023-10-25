@@ -36,7 +36,7 @@ namespace GestionnaireSTE
 
             if(this.qnte_Disponible == 0)
             {
-                throw new Exception("Ce prix est epuise.");
+                throw new Exception("Ce prix est épuisé.");
             }
             if (this.qnte_Disponible - qte < 0)
             {
@@ -97,7 +97,7 @@ namespace GestionnaireSTE
         public override string ToString()
         {
             return this.description + ", #" + this.idPrix + ", Valeur " + this.valeur +
-                "$, Qte init. " + this.qnte_Originale + ", Qte dispo. " + this.qnte_Disponible + ", Don min. "+ this.donMinimum + "$, Commanditaire #" + this.idCommenditaire + "\r\n\r\n";
+                "$, Qté init. " + this.qnte_Originale + ", Qté dispo. " + this.qnte_Disponible + ", Don min. "+ this.donMinimum + "$, Commanditaire #" + this.idCommenditaire + "\r\n\r\n";
         }
     }
 }

@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace TelethonSTE
 {
-    public partial class Reponse_Prix : Form
+    public partial class Fenetre_Input : Form
     {
-        public Reponse_Prix()
+        public Fenetre_Input()
         {
             InitializeComponent();
         }
@@ -23,10 +23,10 @@ namespace TelethonSTE
             set { lblInfo.Text = value; }
         }
 
-        public string TxtReponsePrix
+        public string TxtReponse
         {
-            get { return txtReponsePrix.Text; }
-            set { txtReponsePrix.Text = value; }
+            get { return txtReponse.Text; }
+            set { txtReponse.Text = value; }
         }
 
         private void lblInfo_Click(object sender, EventArgs e)

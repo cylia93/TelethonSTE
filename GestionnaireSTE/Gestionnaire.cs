@@ -45,26 +45,26 @@ namespace GestionnaireSTE
             {
                 if (idDonateur == donateurs[i].ID)
                 {
-                    throw new Exception("Un donateur avec cet ID existe deja.");
+                    throw new Exception("Un donateur avec cet ID existe déja.");
                 }
             }
 
             if (prenom == "" || surnom == "" || idDonateur == "" || address == "" || phone == "" || carte == ' ' || numCarte == "" || exp == "")
             {
-                throw new FormatException("Un champ est vide, veuillez completer tous les champs.");
+                throw new FormatException("Un champ est vide, veuillez compléter tous les champs.");
             }
 
             if (ContientCharacteresSpeciaux(prenom) || ContientCharacteresSpeciaux(surnom) || ContientCharacteresSpeciaux(idDonateur) || ContientCharacteresSpeciaux(address) || ContientCharacteresSpeciaux(phone) || ContientCharacteresSpeciaux(numCarte))
             {
-                throw new FormatException("Les caracteres speciaux ne sont pas permis.");
+                throw new FormatException("Les caractères spéciaux ne sont pas permis.");
             }
             if (numCarte.Length != 16)
             {
-                throw new FormatException("Le numero de la carte doit contenir 16 chiffres.");
+                throw new FormatException("Le numéro de la carte doit contenir 16 chiffres.");
             }
             if (!Double.TryParse(numCarte, out double numeroDeCarte))
             {
-                throw new FormatException("La carte de credit doit etre une valeur numerique.");
+                throw new FormatException("La carte de crédit doit être une valeur numérique.");
             }
 
             // On valide que la carte de credit proposee est valide :
@@ -76,7 +76,7 @@ namespace GestionnaireSTE
 
             if (monthsDifference < 1)
             {
-                throw new FormatException("La date d'expiration de votre carte de credit doit etre d'au moins 1 mois apres la date d'aujourd'hui.");
+                throw new FormatException("Votre carte de crédit doit être valide pour encore au moins 1 mois.");
             }
 
 
@@ -94,16 +94,16 @@ namespace GestionnaireSTE
             {
                 if (idComm == commanditaires[i].IDComm)
                 {
-                    throw new Exception("Un commanditaire avec cet ID existe deja");
+                    throw new Exception("Un commanditaire avec cet ID existe déja");
                 }
             }
             if (prenom == "" || surnom == "" || idComm == "")
             {
-                throw new FormatException("Un champ est vide, veuillez completer tous les champs");
+                throw new FormatException("Un champ est vide, veuillez compléter tous les champs");
             }
             if (ContientCharacteresSpeciaux(prenom) || ContientCharacteresSpeciaux(surnom) || ContientCharacteresSpeciaux(idComm))
             {
-                throw new FormatException("Les caracteres speciaux ne sont pas permis.");
+                throw new FormatException("Les caractères spéciaux ne sont pas permis.");
             }
             Commanditaire commanditaire = new Commanditaire(prenom, surnom, idComm);
             commanditaires.Add(commanditaire);
@@ -115,22 +115,22 @@ namespace GestionnaireSTE
             {
                 if (idP == steprix[i].IdPrix)
                 {
-                    throw new Exception("Un prix avec cet ID existe deja.");
+                    throw new Exception("Un prix avec cet ID existe déja.");
                 }
             }
 
             if (idP == "" || desc == "" ||  idC == "")
             {
-                throw new FormatException("Un champ est vide, veuillez completer tous les champs.");
+                throw new FormatException("Un champ est vide, veuillez compléter tous les champs.");
             }
             if (ContientCharacteresSpeciaux(idP) || ContientCharacteresSpeciaux(desc) || ContientCharacteresSpeciaux(idC))
             {
-                throw new FormatException("Les caracteres speciaux ne sont pas permis.");
+                throw new FormatException("Les caractères spéciaux ne sont pas permis.");
             }
 
             if ( val == 0 || donMin == 0 || qteOr == 0)
             {
-                throw new FormatException("Vous devez saisir une chiffre pour la valeur du prix, le don minimum pour l'obtention de ce prix, et son nombre d'unite (quantite).");
+                throw new FormatException("Vous devez saisir un chiffre pour la valeur du prix, le don minimum pour l'obtention de ce prix, et son nombre d'unité (quantité).");
             }
 
             if ( val < 0 || donMin < 0)
@@ -139,7 +139,7 @@ namespace GestionnaireSTE
             }
             if (qteOr <= 0)
             {
-                throw new FormatException("Vous devez donne au moins 1 prix - quantite invalide.");
+                throw new FormatException("Vous devez donner au moins 1 prix - quantité invalide.");
             }
 
             Prix prix = new Prix(idP, desc, val, donMin, qteOr, qteDisp, idC);
@@ -152,16 +152,16 @@ namespace GestionnaireSTE
             {
                 if (idDon == dons[i].IDDon)
                 {
-                    throw new Exception("Un don avec cet ID existe deja");
+                    throw new Exception("Un don avec cet ID existe déja");
                 }
             }
             if (idDon == "" || dateDuDon == "" || idDonateur == "" || montantDuDon < 0 || idPrix == "")
             {
-                throw new FormatException("Un champ est vide, veuillez completer tous les champs");
+                throw new FormatException("Un champ est vide, veuillez compléter tous les champs");
             }
             if (ContientCharacteresSpeciaux(idDon) || ContientCharacteresSpeciaux(idDonateur))
             {
-                throw new FormatException("Les caracteres speciaux ne sont pas permis.");
+                throw new FormatException("Les caractères spéciaux ne sont pas permis.");
             }
 
             Don don = new Don(idDon, dateDuDon, idDonateur, montantDuDon, idPrix);
@@ -201,7 +201,7 @@ namespace GestionnaireSTE
 
         public string AfficherPrix(double montant)
         {
-            string listePrix = "La liste des prix elligibles pour ce don :\r\n\r\n";
+            string listePrix = "La liste des prix éligibles pour ce don :\r\n\r\n";
             foreach (Prix prix in steprix)
             {
                 if(montant >= prix.DonMinimum && prix.Qnte_Disponible > 0)
@@ -260,7 +260,7 @@ namespace GestionnaireSTE
             return true;
         }
 
-        // Methodes utilitaires :
+        // Méthodes utilitaires :
 
         public T trouverID<T>(Func<T, string> getID, string id, List<T> values) where T : class
         {
