@@ -165,7 +165,6 @@ namespace TelethonSTE
             }
         }
         
-
         private void btnAjoutDon_Click(object sender, EventArgs e)
         {
             String idPrixCourant = "";
@@ -263,7 +262,6 @@ namespace TelethonSTE
             }
         }
 
-
         private void btnAjoutDonateur_Click(object sender, EventArgs e)
         {
             try
@@ -354,14 +352,14 @@ namespace TelethonSTE
 
             try
             {
-                if (!String.IsNullOrEmpty(idCommanditaire) && String.IsNullOrEmpty(nom) && String.IsNullOrEmpty(prenom))
+                if (!String.IsNullOrEmpty(idCommanditaire))
                 {
                     // Trouver le commanditaire par son ID :
                     Func<Commanditaire, string> getIDCommanditaire = commanditaire => commanditaire.IDComm;
 
                     commanditaireCourant = gestionnaire.trouverID(getIDCommanditaire, idCommanditaire, gestionnaire.ListCommanditaires);
                 }
-                if (String.IsNullOrEmpty(idCommanditaire) && !String.IsNullOrEmpty(nom) && !String.IsNullOrEmpty(prenom))
+                if (!String.IsNullOrEmpty(nom) && !String.IsNullOrEmpty(prenom))
                 {
                     // Trouver le commanditaire par son nom et prenom :
                     Func<Commanditaire, string> getNomCommanditaire = commanditaire => commanditaire.Surnom;
@@ -532,14 +530,14 @@ namespace TelethonSTE
 
             try
             {
-                if (!String.IsNullOrEmpty(idDonateur) && String.IsNullOrEmpty(nom) && String.IsNullOrEmpty(prenom))
+                if (!String.IsNullOrEmpty(idDonateur))
             {
                 // Trouver le donateur par son ID :
                 Func<Donateur, string> getIDDonateur = donateur => donateur.ID;
 
                 donateurCourant = gestionnaire.trouverID(getIDDonateur, idDonateur, gestionnaire.ListDonateurs);
             }
-            if (String.IsNullOrEmpty(idDonateur) && !String.IsNullOrEmpty(nom) && !String.IsNullOrEmpty(prenom))
+            if (!String.IsNullOrEmpty(nom) && !String.IsNullOrEmpty(prenom))
             {
                 // Trouver le donateur par son nom et prenom :
                 Func<Donateur, string> getNomDonateur = donateur => donateur.Surnom;
@@ -555,6 +553,7 @@ namespace TelethonSTE
                 }else
                 {
                     txtBoxMain.Text += "Aucun donateur sélectionné actuellement.\r\n";
+                    resetInfoDonateur();
                     return;
                 }
 
