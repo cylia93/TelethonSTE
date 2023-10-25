@@ -78,11 +78,11 @@
     <Compile Include="Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reponse_Prix.cs">
+    <Compile Include="Fenetre_Input.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Reponse_Prix.Designer.cs">
-      <DependentUpon>Reponse_Prix.cs</DependentUpon>
+    <Compile Include="Fenetre_Input.Designer.cs">
+      <DependentUpon>Fenetre_Input.cs</DependentUpon>
     </Compile>
     <Compile Include="SystemeTelethonSTE.cs">
       <SubType>Form</SubType>
@@ -95,8 +95,8 @@
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reponse_Prix.resx">
-      <DependentUpon>Reponse_Prix.cs</DependentUpon>
+    <EmbeddedResource Include="Fenetre_Input.resx">
+      <DependentUpon>Fenetre_Input.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SystemeTelethonSTE.resx">
       <DependentUpon>SystemeTelethonSTE.cs</DependentUpon>

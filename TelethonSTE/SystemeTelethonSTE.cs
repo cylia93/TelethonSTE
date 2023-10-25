@@ -139,11 +139,11 @@ namespace TelethonSTE
                                 infoSurlesPrix += "ID: " + item.IdPrix + " , Description: " + item.Description + " , quantité disponible : " + item.Qnte_Disponible + " unités\r\n";
                         }
 
-                        Reponse_Prix customDialog = new Reponse_Prix();
+                        Fenetre_Input customDialog = new Fenetre_Input();
                         customDialog.InfoSurlesPrix = "Choississez un prix parmis la liste proposée (Renseignez l'ID uniquement puis fermez la fenêtre). Si le donateur ne veut pas de prix, ne rien renseigner:\r\n\r\n" + infoSurlesPrix;
                         customDialog.ShowDialog();
 
-                        txtIDPrix.Text = customDialog.TxtReponsePrix.Length == 0 ? "N/A" : customDialog.TxtReponsePrix;
+                        txtIDPrix.Text = customDialog.TxtReponse.Length == 0 ? "N/A" : customDialog.TxtReponse;
 
                         customDialog.Dispose();                    
                     } else
@@ -610,16 +610,17 @@ namespace TelethonSTE
             resetFieldsCommanditaire();
             resetInfoDon();
             resetInfoDonateur();
+            resetInfoAttrPrix();
             txtBoxMain.Clear();
         }
 
         private void retirerDonateur_Click(object sender, EventArgs e)
         {
-            Reponse_Prix customDialog = new Reponse_Prix();
-            customDialog.InfoSurlesPrix = "Indiquez l'identifiant du donateur à supprimer, puis fermez la fenetre:";
+            Fenetre_Input customDialog = new Fenetre_Input();
+            customDialog.InfoSurlesPrix = "Indiquez l'identifiant du donateur à supprimer, puis fermez la fenêtre:";
             customDialog.ShowDialog();
 
-            String reponse = customDialog.TxtReponsePrix;
+            String reponse = customDialog.TxtReponse;
 
             customDialog.Dispose();
 
@@ -644,11 +645,11 @@ namespace TelethonSTE
 
         private void retirerCommanditaire_Click(object sender, EventArgs e)
         {
-            Reponse_Prix customDialog = new Reponse_Prix();
+            Fenetre_Input customDialog = new Fenetre_Input();
             customDialog.InfoSurlesPrix = "Indiquez l'identifiant du commanditaire à supprimer, puis fermez la fenêtre:";
             customDialog.ShowDialog();
 
-            String reponse = customDialog.TxtReponsePrix;
+            String reponse = customDialog.TxtReponse;
 
             customDialog.Dispose();
 
@@ -673,11 +674,11 @@ namespace TelethonSTE
 
         private void retirerPrix_Click(object sender, EventArgs e)
         {
-            Reponse_Prix customDialog = new Reponse_Prix();
+            Fenetre_Input customDialog = new Fenetre_Input();
             customDialog.InfoSurlesPrix = "Indiquer l'identifiant du prix à supprimer, puis fermer la fenêtre:";
             customDialog.ShowDialog();
 
-            String reponse = customDialog.TxtReponsePrix;
+            String reponse = customDialog.TxtReponse;
 
             customDialog.Dispose();
 
