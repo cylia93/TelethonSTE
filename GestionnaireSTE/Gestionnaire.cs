@@ -49,9 +49,14 @@ namespace GestionnaireSTE
                 }
             }
 
-            if (prenom == "" || surnom == "" || idDonateur == "" || address == "" || phone == "" || carte == ' ' || numCarte == "" || exp == "")
+            if (prenom == "" || surnom == "" || idDonateur == "" || address == "" || phone == "" || numCarte == "" || exp == "")
             {
                 throw new FormatException("Un champ est vide, veuillez compléter tous les champs.");
+            }
+
+            if (carte == ' ')
+            {
+                throw new FormatException("Vous devez préciser le type de carte de crédit du donateur.");
             }
 
             if (ContientCharacteresSpeciaux(prenom) || ContientCharacteresSpeciaux(surnom) || ContientCharacteresSpeciaux(idDonateur) || ContientCharacteresSpeciaux(address) || ContientCharacteresSpeciaux(phone) || ContientCharacteresSpeciaux(numCarte))

@@ -37,21 +37,20 @@
             // txtReponse
             // 
             this.txtReponse.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.txtReponse.Location = new System.Drawing.Point(299, 162);
+            this.txtReponse.Location = new System.Drawing.Point(174, 104);
             this.txtReponse.Name = "txtReponse";
-            this.txtReponse.Size = new System.Drawing.Size(152, 39);
+            this.txtReponse.Size = new System.Drawing.Size(152, 26);
             this.txtReponse.TabIndex = 0;
             // 
             // lblInfo
             // 
             this.lblInfo.AutoSize = true;
-            this.lblInfo.Location = new System.Drawing.Point(5, 0);
+            this.lblInfo.Location = new System.Drawing.Point(3, 0);
             this.lblInfo.MaximumSize = new System.Drawing.Size(480, 0);
             this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(59, 30);
+            this.lblInfo.Size = new System.Drawing.Size(39, 20);
             this.lblInfo.TabIndex = 1;
             this.lblInfo.Text = "Text";
-            this.lblInfo.Click += new System.EventHandler(this.lblInfo_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -82,6 +81,7 @@
             this.Name = "Fenetre_Input";
             this.Padding = new System.Windows.Forms.Padding(10);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Fenetre_Input_KeyDown);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);

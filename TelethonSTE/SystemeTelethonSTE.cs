@@ -47,7 +47,7 @@ namespace TelethonSTE
         String idDonateur;
         String adresse;
         String telephone;
-        char typeDeCarte;
+        char typeDeCarte =' ';
         String numeroCarte;
         String dateExpiration;
         string prenom;
@@ -142,9 +142,10 @@ namespace TelethonSTE
 
                         Fenetre_Input customDialog = new Fenetre_Input();
                         customDialog.InfoSurlesPrix = "Choississez un prix parmis la liste proposée (Renseignez l'ID uniquement puis fermez la fenêtre). Si le donateur ne veut pas de prix, ne rien renseigner:\r\n\r\n" + infoSurlesPrix;
+
                         customDialog.ShowDialog();
 
-                        txtIDPrix.Text = customDialog.TxtReponse.Length == 0 ? "N/A" : customDialog.TxtReponse;
+                            txtIDPrix.Text = customDialog.TxtReponse.Length == 0 ? "N/A" : customDialog.TxtReponse;
 
                         customDialog.Dispose();                    
                     } else
@@ -213,6 +214,12 @@ namespace TelethonSTE
                         Func<Prix, string> getIDPrix = prix => prix.IdPrix;
                         prixPropose = gestionnaire.trouverID(getIDPrix, idPrixCourant, gestionnaire.ListPrix);
 
+                        if(prixPropose == null)
+                        {
+                            MessageBox.Show("Prix non trouvé: veuillez vérifier l'identifiant.", "Ajout Don");
+                            return;
+                        }
+
                         if (montantDuDon < prixPropose.DonMinimum)
                         {
                             throw new FormatException("Ce don n'est pas éligible pour ce prix.");
@@ -279,7 +286,6 @@ namespace TelethonSTE
                     }
                 }
                 this.numeroCarte = txtNumeroCarte.Text.Trim().ToLower();
-                Console.WriteLine("Exp: " + dateTimeExpiration.Value.ToString("yyyy-MM-dd"));
                 this.dateExpiration = dateTimeExpiration.Value.ToString("yyyy-MM-dd");
 
                 gestionnaire.AjouterDonateur(convMajuscule.ToTitleCase(prenom), convMajuscule.ToTitleCase(surnom), idDonateur.ToUpper(), adresse, telephone, typeDeCarte, numeroCarte, dateExpiration);
@@ -366,7 +372,7 @@ namespace TelethonSTE
 
                 if (commanditaireCourant == null)
                 {
-                    txtBoxMain.Text += "Aucun commanditaire sélectionné actuellement.";
+                    txtBoxMain.Text += "Aucun commanditaire sélectionné actuellement.\r\n";
                     resetFieldsCommanditaire();
                     return;
                 }
@@ -546,7 +552,12 @@ namespace TelethonSTE
                 {
                     afficherInfoDonateur();
                     txtBoxMain.Text += "Donateur courant: " + donateurCourant.ToString();
+                }else
+                {
+                    txtBoxMain.Text += "Aucun donateur sélectionné actuellement.\r\n";
+                    return;
                 }
+
             }
             catch (Exception ex)
             {
@@ -619,12 +630,14 @@ namespace TelethonSTE
         private void retirerDonateur_Click(object sender, EventArgs e)
         {
             Fenetre_Input customDialog = new Fenetre_Input();
-            customDialog.InfoSurlesPrix = "Indiquez l'identifiant du donateur à supprimer, puis fermez la fenêtre:";
+            customDialog.InfoSurlesPrix = "Indiquez l'identifiant du donateur à supprimer, puis fermez la fenêtre:\r\n";
             customDialog.ShowDialog();
 
             String reponse = customDialog.TxtReponse;
 
             customDialog.Dispose();
+
+            if (String.IsNullOrEmpty(reponse)) return;
 
             Func<Donateur, string> getIDDonateur = donateur => donateur.ID;
 
@@ -636,7 +649,7 @@ namespace TelethonSTE
                 return;
             }
 
-            DialogResult repons = MessageBox.Show("Êtes-vous sur de vouloir supprimer ce donateur?\r\n" + donateurTrouve.ToString(), "Attention", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult repons = MessageBox.Show("Êtes-vous sur de vouloir supprimer ce donateur?\r\n\r\n" + donateurTrouve.ToString(), "Attention", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (repons == DialogResult.Yes)
             {
                 gestionnaire.ListDonateurs.Remove(donateurTrouve);
@@ -648,12 +661,14 @@ namespace TelethonSTE
         private void retirerCommanditaire_Click(object sender, EventArgs e)
         {
             Fenetre_Input customDialog = new Fenetre_Input();
-            customDialog.InfoSurlesPrix = "Indiquez l'identifiant du commanditaire à supprimer, puis fermez la fenêtre:";
+            customDialog.InfoSurlesPrix = "Indiquez l'identifiant du commanditaire à supprimer, puis fermez la fenêtre:\r\n\r\n";
             customDialog.ShowDialog();
 
             String reponse = customDialog.TxtReponse;
 
             customDialog.Dispose();
+
+            if (String.IsNullOrEmpty(reponse)) return;
 
             Func<Commanditaire, string> getIDCommanditaire = commanditaire => commanditaire.IDComm;
 
@@ -665,7 +680,7 @@ namespace TelethonSTE
                 return;
             }
 
-            DialogResult repons = MessageBox.Show("Êtes-vous sur de vouloir supprimer ce commanditaire?\r\n" + commanditaireTrouve.ToString(), "Attention", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult repons = MessageBox.Show("Êtes-vous sur de vouloir supprimer ce commanditaire?\r\n\r\n" + commanditaireTrouve.ToString(), "Attention", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (repons == DialogResult.Yes)
             {
                 gestionnaire.ListCommanditaires.Remove(commanditaireTrouve);
@@ -677,12 +692,14 @@ namespace TelethonSTE
         private void retirerPrix_Click(object sender, EventArgs e)
         {
             Fenetre_Input customDialog = new Fenetre_Input();
-            customDialog.InfoSurlesPrix = "Indiquer l'identifiant du prix à supprimer, puis fermer la fenêtre:";
+            customDialog.InfoSurlesPrix = "Indiquer l'identifiant du prix à supprimer, puis fermer la fenêtre:\r\n";
             customDialog.ShowDialog();
 
             String reponse = customDialog.TxtReponse;
 
             customDialog.Dispose();
+
+            if (String.IsNullOrEmpty(reponse)) return;
 
             Func<Prix, string> getIDPrix = prix => prix.IdPrix;
 
@@ -694,7 +711,7 @@ namespace TelethonSTE
                 return;
             }
 
-            DialogResult repons = MessageBox.Show("Êtes-vous sur de vouloir supprimer ce prix?\r\n" + prixTrouve.ToString(), "Attention", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult repons = MessageBox.Show("Êtes-vous sur de vouloir supprimer ce prix?\r\n\r\n" + prixTrouve.ToString(), "Attention", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (repons == DialogResult.Yes)
             {
                 gestionnaire.ListPrix.Remove(prixTrouve);

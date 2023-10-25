@@ -15,6 +15,9 @@ namespace TelethonSTE
         public Fenetre_Input()
         {
             InitializeComponent();
+
+            // Attach the Shown event handler to the form
+            this.Shown += Fenetre_Input_Shown;
         }
 
         public string InfoSurlesPrix
@@ -29,9 +32,18 @@ namespace TelethonSTE
             set { txtReponse.Text = value; }
         }
 
-        private void lblInfo_Click(object sender, EventArgs e)
+        private void Fenetre_Input_Shown(object sender, EventArgs e)
         {
+            this.Focus();
+        }
 
+        private void Fenetre_Input_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
         }
     }
 }

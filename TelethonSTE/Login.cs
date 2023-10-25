@@ -34,7 +34,7 @@ namespace TelethonSTE
                 if (utilisateur == "STE" && motPasse == "admin")
                 {
                     // Si les valeurs saisies sont valides, nous souhaitons la bienvenue à l'utilisateur.
-                    MessageBox.Show("Bienvenue utilisateur. Les informations saisies sont valides.", "Bienvenue", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Bienvenue  au système de gestion du Téléthon", "Accès validé", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Hide();
                     new SystemeTelethonSTE().Show();
 
